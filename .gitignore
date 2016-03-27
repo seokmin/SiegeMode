@@ -22,6 +22,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 SiegeMode/cocos2d/
+SiegeMode/bin/
+SiegeMode\proj.win32\Debug.win32\
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -280,3 +282,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+SiegeMode/proj.win32/Debug.win32/
+*.VC.opendb

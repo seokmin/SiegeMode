@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{a2842abb-3f0f-4b9d-984c-676bbc7be310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit">
+      <UniqueIdentifier>{8dfef2bb-6a7a-4759-998a-d730d55faf77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit\Foot">
+      <UniqueIdentifier>{70ae1817-e59e-4544-ab57-4db5ad4e97b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\pch.cpp" />
+    <ClCompile Include="..\Classes\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitTest.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Foot.cpp">
+      <Filter>Actor\Unit\Foot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\InputManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\pch.h" />
+    <ClInclude Include="..\Classes\Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitTest.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Foot.h">
+      <Filter>Actor\Unit\Foot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\InputManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
