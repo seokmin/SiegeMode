@@ -70,26 +70,11 @@ bool BattleScene::init()
 
 	auto testUnit = UnitTest::create();
 	testUnit->setPosition(visibleSize.width/2, visibleSize.height/2);
-	testUnit->initWithSpriteFrameName("swordman_walk_1.png");
 	this->addChild(testUnit);
-	testUnit->getTexture()->setAliasTexParameters();
-	testUnit->setScale(3.0f);
-	auto testUnit2 = UnitTest::create();
-	testUnit2->setPosition(visibleSize.width / 2+100, visibleSize.height / 2);
-	testUnit2->initWithSpriteFrameName("swordman_walk_1.png");
-	this->addChild(testUnit2);
-	testUnit2->getTexture()->setAliasTexParameters();
-	testUnit2->setScale(3.0f);
-	auto testUnit3 = UnitTest::create();
-	testUnit3->setPosition(visibleSize.width / 2- 100,visibleSize.height / 2);
-	testUnit3->initWithSpriteFrameName("swordman_walk_1.png");
-	this->addChild(testUnit3);
-	testUnit3->getTexture()->setAliasTexParameters();
-	testUnit3->setScale(3.0f);
 
+	auto asdf = Sprite::createWithSpriteFrameName("swordman_walk_1.png");
+	auto aaa = asdf->getContentSize();
 	InputManager::getInstance()->addTouchEvent(testUnit);
-	InputManager::getInstance()->addTouchEvent(testUnit2);
-	InputManager::getInstance()->addTouchEvent(testUnit3);
 // 
 // 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
 // 	auto testListener = EventListenerTouchOneByOne::create();

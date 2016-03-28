@@ -109,6 +109,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>unitSelector1_d.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{31,8}</string>
+                <key>spriteSourceSize</key>
+                <string>{31,8}</string>
+                <key>textureRect</key>
+                <string>{{155,1},{31,8}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>unitSelector1_u.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{31,7}</string>
+                <key>spriteSourceSize</key>
+                <string>{31,7}</string>
+                <key>textureRect</key>
+                <string>{{155,11},{31,7}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -121,9 +151,9 @@
             <key>realTextureFileName</key>
             <string>test.png</string>
             <key>size</key>
-            <string>{154,30}</string>
+            <string>{187,30}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6c3772080093109e73d817cd4657f43a:cea976b2485f5a532ef7d0754c46cccb:e01b1eaa4864c3c88b22ae111f488115$</string>
+            <string>$TexturePacker:SmartUpdate:c4f3a45f9dfc1556be5f4967ea695166:88959d10a5e169f8100344f18bff8ea2:e01b1eaa4864c3c88b22ae111f488115$</string>
             <key>textureFileName</key>
             <string>test.png</string>
         </dict>

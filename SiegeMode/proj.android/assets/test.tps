@@ -207,6 +207,8 @@
             <key type="filename">swordman/swordman_walk_5.png</key>
             <key type="filename">swordman/swordman_walk_6.png</key>
             <key type="filename">unit/unitSelector1.png</key>
+            <key type="filename">unit/unitSelector1_d.png</key>
+            <key type="filename">unit/unitSelector1_u.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
