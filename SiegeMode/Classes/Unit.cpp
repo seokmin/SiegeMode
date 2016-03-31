@@ -15,7 +15,9 @@ bool Unit::init()
 
 bool Unit::touchCallback(Touch* touch, Event* event)
 {
-	if (this->Actor::touchCallback(touch, event))
+	this->refreshStroke();
+
+	/*if (this->Actor::touchCallback(touch, event))
 	{
 		if (_selected)
 		{
@@ -38,7 +40,8 @@ bool Unit::touchCallback(Touch* touch, Event* event)
 		Point pos = event->getCurrentTarget()->convertToNodeSpace(touch->getLocation());
 		this->stopAllActions();
 		this->runAction(MoveTo::create(1.f, touch->getLocation()));
-	}
+	}*/
+	return true;
 
 }
 

@@ -10,13 +10,16 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor">
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{c5362d74-6c6d-4028-b7d7-0dd84a5cca22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Actor">
       <UniqueIdentifier>{a2842abb-3f0f-4b9d-984c-676bbc7be310}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Unit">
+    <Filter Include="FrameWork\Actor\Unit">
       <UniqueIdentifier>{8dfef2bb-6a7a-4759-998a-d730d55faf77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Unit\Foot">
+    <Filter Include="FrameWork\Actor\Unit\Unit Template">
       <UniqueIdentifier>{70ae1817-e59e-4544-ab57-4db5ad4e97b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -32,18 +35,24 @@
     </ClCompile>
     <ClCompile Include="..\Classes\pch.cpp" />
     <ClCompile Include="..\Classes\Actor.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Unit.cpp">
-      <Filter>Actor\Unit</Filter>
+      <Filter>FrameWork\Actor</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UnitTest.cpp">
-      <Filter>Actor\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Foot.cpp">
-      <Filter>Actor\Unit\Foot</Filter>
+      <Filter>FrameWork\Actor\Unit</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\InputManager.cpp" />
+    <ClCompile Include="..\Classes\UnitMovement.cpp">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitArmor.cpp">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActorComponent.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -57,18 +66,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\pch.h" />
     <ClInclude Include="..\Classes\Actor.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Unit.h">
-      <Filter>Actor\Unit</Filter>
+      <Filter>FrameWork\Actor</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UnitTest.h">
-      <Filter>Actor\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Foot.h">
-      <Filter>Actor\Unit\Foot</Filter>
+      <Filter>FrameWork\Actor\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\InputManager.h" />
+    <ClInclude Include="..\Classes\UnitMovement.h">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitArmor.h">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActorComponent.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

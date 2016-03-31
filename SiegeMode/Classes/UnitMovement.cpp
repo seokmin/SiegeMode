@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "Foot.h"
+#include "UnitMovement.h"
 
-bool Foot::init()
+bool UnitMovement::init()
 {
 	/*
 	* 부모 클래스의 init()도 예의상 호출해준다.
 	*/
-	if (!this->Node::init())
+	if (!this->ActorComponent::init())
 		return false;
 	return true;
 }

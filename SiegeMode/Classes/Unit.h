@@ -1,5 +1,8 @@
 #pragma once
 #include "Actor.h"
+
+
+
 class Unit :
 	public Actor
 {
@@ -15,13 +18,20 @@ protected:
 	void	setCursor();
 	inline void	setToAlias() { this->getTexture()->setAliasTexParameters(); }
 	void		addActionItem(const std::string actionName, Action* action);
+
 private:
 	Actor*		_cursorUp = nullptr;
 	Actor*		_cursorDown = nullptr;
 	bool		_selected = false;
 
-
+	enum UNIT_ATTR_MOVETYPE {
+		MOVETYPE_LAND,
+		MOVETYPE_AIR
+	};
+	CC_SYNTHESIZE(UNIT_ATTR_MOVETYPE , _moveType, MoveType);
+	
 	CC_SYNTHESIZE(std::string*, _cursorNameUp, CursorNameUp);
+
 	CC_SYNTHESIZE(std::string*, _cursorNameDown, CursorNameDown);
 	std::map<const std::string, Action*> _actionList;
 
