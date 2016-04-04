@@ -15,9 +15,7 @@ public:
 	CREATE_FUNC(Unit);
 
 protected:
-	void	setCursor();
 	inline void	setToAlias() { this->getTexture()->setAliasTexParameters(); }
-	void		addActionItem(const std::string actionName, Action* action);
 
 private:
 	Actor*		_cursorUp = nullptr;

@@ -12,11 +12,11 @@ public:
 	virtual bool	init();
 
 	virtual bool	touchCallback(Touch* touch, Event* event);
-
+	void			setSpriteFromFileName(const char* fileName);
 	CREATE_FUNC(Actor);
 	void refreshStroke();
 private:
 
-	std::array<Sprite*, 4> _strokeArray;
-	Sprite* asdf;
+	std::array<Sprite*, 8>	_strokeArray;
+	const float				_strokeSize = 1.f;
 };

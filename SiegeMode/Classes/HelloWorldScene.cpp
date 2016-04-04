@@ -23,7 +23,7 @@ bool BattleScene::init()
 {
 	//////////////////////////////
 	// 1. super init first
-	if (!LayerColor::initWithColor(ccc4(120, 120, 120, 255)))
+	if (!LayerColor::initWithColor(ccc4(120, 120, 120, 120)))
 	{
 		return false;
 	}
@@ -55,8 +55,8 @@ bool BattleScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("test.plist");
-
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
+	
 
 
 	auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);

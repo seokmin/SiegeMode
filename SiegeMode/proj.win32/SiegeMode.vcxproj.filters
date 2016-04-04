@@ -84,6 +84,7 @@
     <ClInclude Include="..\Classes\ActorComponent.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\definition.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
