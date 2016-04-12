@@ -49,6 +49,16 @@ bool BattleScene::init()
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
+	// set background image
+	auto backgroundSpr = Sprite::create("SpriteSource/background/background1.png");
+	backgroundSpr->setAnchorPoint(Vec2(0, 0));
+	this->addChild(backgroundSpr,1);
+	backgroundSpr->getTexture()->setAliasTexParameters();
+	auto testUI = Sprite::create("SpriteSource/UI/testui.png");
+	testUI->getTexture()->setAliasTexParameters();
+	testUI->setAnchorPoint(Vec2(0, 0));
+	this->addChild(testUI, 3);
+
 	/////////////////////////////
 	// 3. add your codes below...
 
@@ -66,11 +76,11 @@ bool BattleScene::init()
 		origin.y + visibleSize.height - label->getContentSize().height));
 
 	// add the label as a child to this layer
-	this->addChild(label, 1);
+	this->addChild(label, 3);
 
 	auto testUnit = UnitTest::create();
-	testUnit->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	this->addChild(testUnit);
+	testUnit->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 100);
+	this->addChild(testUnit,2);
 
 //  	auto rt = RenderTexture::create(640, 400);
 //  	BlendFunc blend;

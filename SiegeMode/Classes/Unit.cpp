@@ -8,7 +8,7 @@ bool Unit::init()
 	*/
 	if (!this->Actor::init())
 		return false;
-	this->setScale(3.f);
+	this->setScale(2.f);
 
 	return true;
 }

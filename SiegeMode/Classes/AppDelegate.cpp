@@ -2,10 +2,11 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(1280, 800);
-static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
+static cocos2d::Size designResolutionSize = cocos2d::Size(1280, 720);
+static cocos2d::Size resolutionSize1 = cocos2d::Size(480, 270);
+static cocos2d::Size resolutionSize2 = cocos2d::Size(1280, 720);
+static cocos2d::Size resolutionSize3 = cocos2d::Size(1920, 1080);
+static cocos2d::Size resolutionSize4 = cocos2d::Size(2560, 1440);
 
 AppDelegate::AppDelegate() {
 
@@ -53,23 +54,27 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
     Size frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
-    if (frameSize.height > mediumResolutionSize.height)
-    {        
-        director->setContentScaleFactor(MIN(largeResolutionSize.height/designResolutionSize.height, largeResolutionSize.width/designResolutionSize.width));
-    }
-    // if the frame's height is larger than the height of small size.
-    else if (frameSize.height > smallResolutionSize.height)
-    {        
-        director->setContentScaleFactor(MIN(mediumResolutionSize.height/designResolutionSize.height, mediumResolutionSize.width/designResolutionSize.width));
-    }
-    // if the frame's height is smaller than the height of medium size.
-    else
-    {        
-        director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
-    }
+//     if (frameSize.height > resolutionSize3.height)
+//     {        
+//         director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize4.height, designResolutionSize.width / resolutionSize4.width));
+//     }
+//     // if the frame's height is larger than the height of small size.
+//     else if (frameSize.height > resolutionSize2.height)
+//     {        
+//         director->setContentScaleFactor(MIN(designResolutionSize.height/ resolutionSize3.height, designResolutionSize.width/resolutionSize3.width));
+//     }
+// 	else if (frameSize.height > resolutionSize1.height)
+// 	{
+// 		director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize2.height, designResolutionSize.width / resolutionSize2.width));
+// 	}
+//     // if the frame's height is smaller than the height of medium size.
+//     else
+//     {        
+//         director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize1.height, designResolutionSize.width / resolutionSize1.width));
+//     }
 
     register_all_packages();
 

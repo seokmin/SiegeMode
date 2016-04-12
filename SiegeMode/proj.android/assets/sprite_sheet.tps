@@ -200,6 +200,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">SpriteSource/background/background1.png</key>
             <key type="filename">SpriteSource/dummy/dummy1.png</key>
             <key type="filename">SpriteSource/dummy/dummy2.png</key>
             <key type="filename">SpriteSource/dummy/dummy3.png</key>
