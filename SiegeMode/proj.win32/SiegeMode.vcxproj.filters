@@ -41,12 +41,6 @@
       <Filter>FrameWork\Actor\Unit</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\InputManager.cpp" />
-    <ClCompile Include="..\Classes\UnitMovement.cpp">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitArmor.cpp">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
     </ClCompile>
@@ -72,12 +66,6 @@
       <Filter>FrameWork\Actor\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\InputManager.h" />
-    <ClInclude Include="..\Classes\UnitMovement.h">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitArmor.h">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
     </ClInclude>

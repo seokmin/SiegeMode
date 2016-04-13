@@ -19,11 +19,3 @@ InputManager* InputManager::getInstance()
 
 	return _instance;
 }
-
-void InputManager::addTouchEvent(Actor* target)
-{
-	auto listener = EventListenerTouchOneByOne::create();
-	//listener->setSwallowTouches(true);
-	listener->onTouchBegan = CC_CALLBACK_2(Actor::touchCallback, target);
-	_dispatcher->addEventListenerWithSceneGraphPriority(listener, target);
-}

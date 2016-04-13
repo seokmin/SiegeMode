@@ -20,13 +20,14 @@ bool Actor::init()
 	return true;
 }
 
-bool Actor::touchCallback(Touch* touch, Event* event)
+bool Actor::screenTouchCallback(Touch* touch, Event* event)
 {
 	auto target = event->getCurrentTarget();
 	Point pos = target->convertToNodeSpace(touch->getLocation());
 	Rect rect = Rect(0, 0, target->getContentSize().width, target->getContentSize().height);
 	if (!rect.containsPoint(pos))
 		return false;
+
 	return true;
 }
 
@@ -87,3 +88,4 @@ void Actor::refreshStroke()
 	_strokeArray[6]->setPosition(Vec2(0, +strokeSizeInPixel));
 	_strokeArray[7]->setPosition(Vec2(0, -strokeSizeInPixel));
 }
+

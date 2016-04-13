@@ -7,7 +7,14 @@ class InputManager
 public:
 	static InputManager* getInstance();
 
-	void				addTouchEvent(Actor* target);
+	template<typename T>
+	void				addTouchEvent(T* target)
+	{
+		auto listener = EventListenerTouchOneByOne::create();
+		//listener->setSwallowTouches(true);
+		listener->onTouchBegan = CC_CALLBACK_2(T::touchCallback, target);
+		_dispatcher->addEventListenerWithSceneGraphPriority(listener, target);
+	}
 
 private:
 	InputManager() {};

@@ -16,31 +16,6 @@ bool Unit::init()
 bool Unit::touchCallback(Touch* touch, Event* event)
 {
 	this->refreshStroke();
-
-	/*if (this->Actor::touchCallback(touch, event))
-	{
-		if (_selected)
-		{
-			_cursorUp->setVisible(false);
-			_cursorDown->setVisible(false);
-			_selected = false;
-			return true;
-		}
-		//처음 선택하는 경우
-		_cursorUp->setVisible(true);
-		_cursorDown->setVisible(true);
-		_selected = true;
-		return true;
-	}
-
-
-	//다른 곳을 눌렀을 경우
-	if (_selected)
-	{
-		Point pos = event->getCurrentTarget()->convertToNodeSpace(touch->getLocation());
-		this->stopAllActions();
-		this->runAction(MoveTo::create(1.f, touch->getLocation()));
-	}*/
 	return true;
 
 }

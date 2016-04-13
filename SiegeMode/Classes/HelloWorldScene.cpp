@@ -69,7 +69,7 @@ bool BattleScene::init()
 	
 
 
-	auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
 
 	// position the label on the center of the screen
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
