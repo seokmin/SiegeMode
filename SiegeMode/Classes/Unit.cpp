@@ -20,11 +20,6 @@ void Unit::changeState(UnitState* state)
 	this->addChild(state);
 }
 
-void Unit::attack()
-{
-
-}
-
 void Unit::update(float delta)
 {
 	_state->RunState(this);

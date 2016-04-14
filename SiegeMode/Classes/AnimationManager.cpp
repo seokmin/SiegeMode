@@ -22,7 +22,7 @@ void AnimationManager::addAnimation(std::string actorName, std::string animName,
 	if (_animationMap.at(actorName + animName) != nullptr)
 	{
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		Beep(1000, 100);
+		//Beep(1000, 100);
 #endif
 		return;
 	}
