@@ -3,10 +3,6 @@
 #include "HelloWorldScene.h"
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(1280, 720);
-static cocos2d::Size resolutionSize1 = cocos2d::Size(480, 270);
-static cocos2d::Size resolutionSize2 = cocos2d::Size(1280, 720);
-static cocos2d::Size resolutionSize3 = cocos2d::Size(1920, 1080);
-static cocos2d::Size resolutionSize4 = cocos2d::Size(2560, 1440);
 
 AppDelegate::AppDelegate() {
 
@@ -55,7 +51,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
-    Size frameSize = glview->getFrameSize();
+    //Size frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
 //     if (frameSize.height > resolutionSize3.height)
 //     {        

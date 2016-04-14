@@ -10,18 +10,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork">
-      <UniqueIdentifier>{c5362d74-6c6d-4028-b7d7-0dd84a5cca22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\Actor">
-      <UniqueIdentifier>{a2842abb-3f0f-4b9d-984c-676bbc7be310}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\Actor\Unit">
-      <UniqueIdentifier>{8dfef2bb-6a7a-4759-998a-d730d55faf77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\Actor\Unit\Unit Template">
-      <UniqueIdentifier>{70ae1817-e59e-4544-ab57-4db5ad4e97b2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,18 +22,17 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\pch.cpp" />
-    <ClCompile Include="..\Classes\Actor.cpp">
-      <Filter>FrameWork\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitTest.cpp">
-      <Filter>FrameWork\Actor\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\InputManager.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ActorComponent.cpp">
-      <Filter>FrameWork</Filter>
+    <ClCompile Include="..\Classes\AnimationManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Swordman.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_Walk.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,20 +46,22 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\pch.h" />
-    <ClInclude Include="..\Classes\Actor.h">
-      <Filter>FrameWork\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitTest.h">
-      <Filter>FrameWork\Actor\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\InputManager.h" />
-    <ClInclude Include="..\Classes\Unit.h">
-      <Filter>FrameWork\Actor\Unit\Unit Template</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ActorComponent.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\definition.h" />
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Swordman.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_Walk.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

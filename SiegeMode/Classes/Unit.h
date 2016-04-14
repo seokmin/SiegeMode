@@ -1,36 +1,30 @@
 #pragma once
-#include "Actor.h"
 
-
+class UnitState;
 
 class Unit :
-	public Actor
+	public Sprite
 {
 public:
-	virtual bool init();
-
-	bool		touchCallback(Touch* touch, Event* event);
-	Action*		getActionItem(const std::string& actionName);
-
+	bool			init();
 	CREATE_FUNC(Unit);
+	virtual void	tick();
 
-protected:
-	inline void	setToAlias() { this->getTexture()->setAliasTexParameters(); }
+	template<typename T>
+	static Unit* createWithFactory()
+	{
+		auto inst = dynamic_cast<Unit*>(T::create());
+		if (inst) return inst;
+		return nullptr;
+	}
+	void			changeState(UnitState* state);
 
+	CC_SYNTHESIZE(UnitState*, _state, State);
+	CC_SYNTHESIZE(std::string, _unitName, UnitName);
+	CC_SYNTHESIZE(float, _attackRange, AttackRange);
+	CC_SYNTHESIZE(float, _attackSpeed, AttackSpeed);
+	CC_SYNTHESIZE(float, _moveSpeed, MoveSpeed);
+	CC_SYNTHESIZE(Unit*, _attackTarget, AttackTarget);
+	virtual void		attack();
 private:
-	Actor*		_cursorUp = nullptr;
-	Actor*		_cursorDown = nullptr;
-	bool		_selected = false;
-
-	enum UNIT_ATTR_MOVETYPE {
-		MOVETYPE_LAND,
-		MOVETYPE_AIR
-	};
-	CC_SYNTHESIZE(UNIT_ATTR_MOVETYPE , _moveType, MoveType);
-	
-	CC_SYNTHESIZE(std::string*, _cursorNameUp, CursorNameUp);
-
-	CC_SYNTHESIZE(std::string*, _cursorNameDown, CursorNameDown);
-	std::map<const std::string, Action*> _actionList;
-
 };

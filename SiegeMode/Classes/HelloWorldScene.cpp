@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "HelloWorldScene.h"
-#include "UnitTest.h"
-#include "InputManager.h"
+
+#include "Swordman.h"
 
 Scene* BattleScene::createScene()
 {
@@ -23,7 +23,7 @@ bool BattleScene::init()
 {
 	//////////////////////////////
 	// 1. super init first
-	if (!LayerColor::initWithColor(ccc4(120, 120, 120, 120)))
+	if (!LayerColor::initWithColor(Color4B(120, 120, 120, 120)))
 	{
 		return false;
 	}
@@ -65,7 +65,7 @@ bool BattleScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
+	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
 	
 
 
@@ -78,9 +78,9 @@ bool BattleScene::init()
 	// add the label as a child to this layer
 	this->addChild(label, 3);
 
-	auto testUnit = UnitTest::create();
-	testUnit->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 100);
-	this->addChild(testUnit,2);
+	auto swordman = Swordman::create();
+	swordman->setPosition(Vec2(300, 300));
+	this->addChild(swordman,3);
 
 //  	auto rt = RenderTexture::create(640, 400);
 //  	BlendFunc blend;
@@ -91,9 +91,6 @@ bool BattleScene::init()
 //  		testUnit->visit();
 //  	rt->end();
 //  	addChild(rt);
-
-
-	InputManager::getInstance()->addTouchEvent(testUnit);
 	// 
 	// 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
 	// 	auto testListener = EventListenerTouchOneByOne::create();

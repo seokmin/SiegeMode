@@ -1,5 +1,4 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#pragma once
 
 class BattleScene : public LayerColor
 {
@@ -19,5 +18,3 @@ public:
 private:
 
 };
-
-#endif // __HELLOWORLD_SCENE_H__

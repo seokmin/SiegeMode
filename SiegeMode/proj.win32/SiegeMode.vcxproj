@@ -149,28 +149,27 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\ActorComponent.cpp" />
+    <ClCompile Include="..\Classes\AnimationManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\Actor.cpp" />
-    <ClCompile Include="..\Classes\InputManager.cpp" />
     <ClCompile Include="..\Classes\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\Classes\Swordman.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
-    <ClCompile Include="..\Classes\UnitTest.cpp" />
+    <ClCompile Include="..\Classes\UnitState_Walk.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\ActorComponent.h" />
+    <ClInclude Include="..\Classes\AnimationManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\definition.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="..\Classes\Actor.h" />
-    <ClInclude Include="..\Classes\InputManager.h" />
     <ClInclude Include="..\Classes\pch.h" />
+    <ClInclude Include="..\Classes\Swordman.h" />
     <ClInclude Include="..\Classes\Unit.h" />
-    <ClInclude Include="..\Classes\UnitTest.h" />
+    <ClInclude Include="..\Classes\UnitState.h" />
+    <ClInclude Include="..\Classes\UnitState_Walk.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

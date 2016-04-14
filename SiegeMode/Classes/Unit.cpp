@@ -1,26 +1,31 @@
 #include "pch.h"
 #include "Unit.h"
+#include "UnitState.h"
 
 bool Unit::init()
 {
-	/*
-	* 부모 클래스의 init()도 예의상 호출해준다.
-	*/
-	if (!this->Actor::init())
-		return false;
 	this->setScale(2.f);
-
 	return true;
 }
 
-bool Unit::touchCallback(Touch* touch, Event* event)
+void Unit::tick()
 {
-	this->refreshStroke();
-	return true;
-
+	this->getState()->RunState(this);
 }
 
-cocos2d::Action* Unit::getActionItem(const std::string& actionName)
+void Unit::changeState(UnitState* state)
 {
-	return this->_actionList[actionName];
+	if (_state)
+	{
+		this->getState()->EndState(this);
+		this->removeChild(_state,1);
+	}
+	this->setState(state);
+	this->getState()->StartState(this);
+	this->addChild(state);
+}
+
+void Unit::attack()
+{
+
 }
