@@ -10,7 +10,8 @@ public:
 
 	static AnimationManager*	getInstance();
 private:
-	std::unordered_map<std::string, Animation*> _animationMap;
+	
+	Map<std::string, Animation*> _animationMap;
 	AnimationManager();
 	static AnimationManager* _instance;
 

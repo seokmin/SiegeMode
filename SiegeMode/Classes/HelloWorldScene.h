@@ -12,6 +12,8 @@ public:
     
 	bool onSprTouchBegan(Touch* touch, Event* event);
 
+
+	void update(float delta);
     // implement the "static create()" method manually
     CREATE_FUNC(BattleScene);
 

@@ -7,6 +7,4 @@ class Swordman :
 public:
 	bool	init();
 	CREATE_FUNC(Swordman);
-
-	void tick();
 };

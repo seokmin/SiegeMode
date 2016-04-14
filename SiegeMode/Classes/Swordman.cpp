@@ -22,8 +22,3 @@ bool Swordman::init()
 	this->changeState(UnitState_Walk::create());
 	return true;
 }
-
-void Swordman::tick()
-{
-
-}

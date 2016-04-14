@@ -8,11 +8,6 @@ bool Unit::init()
 	return true;
 }
 
-void Unit::tick()
-{
-	this->getState()->RunState(this);
-}
-
 void Unit::changeState(UnitState* state)
 {
 	if (_state)
@@ -28,4 +23,9 @@ void Unit::changeState(UnitState* state)
 void Unit::attack()
 {
 
+}
+
+void Unit::update(float delta)
+{
+	_state->RunState(this);
 }

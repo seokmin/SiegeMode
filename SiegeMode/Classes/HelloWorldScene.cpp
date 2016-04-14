@@ -78,9 +78,6 @@ bool BattleScene::init()
 	// add the label as a child to this layer
 	this->addChild(label, 3);
 
-	auto swordman = Swordman::create();
-	swordman->setPosition(Vec2(300, 300));
-	this->addChild(swordman,3);
 
 //  	auto rt = RenderTexture::create(640, 400);
 //  	BlendFunc blend;
@@ -91,13 +88,13 @@ bool BattleScene::init()
 //  		testUnit->visit();
 //  	rt->end();
 //  	addChild(rt);
-	// 
-	// 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
-	// 	auto testListener = EventListenerTouchOneByOne::create();
-	// 	testListener->setSwallowTouches(true);
-	// 	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
-	// 	dispatcher->addEventListenerWithSceneGraphPriority(testListener, testUnit);
-
+	
+	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+	auto testListener = EventListenerTouchOneByOne::create();
+	testListener->setSwallowTouches(true);
+	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(testListener, this);
+	this->scheduleUpdate();
 	return true;
 }
 
@@ -115,8 +112,18 @@ bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 {
 	auto target = event->getCurrentTarget();
 	Point pos = target->convertToNodeSpace(touch->getLocation());
-	Rect rect = Rect(0, 0, target->getContentSize().width, target->getContentSize().height);
-	//if(rect.containsPoint(pos))
-	target->setPosition(0, 0);
+	Rect rect = Rect(0, 100, target->getContentSize().width, 320);
+	if (rect.containsPoint(pos))
+	{
+		auto swordman = Swordman::create();
+		swordman->setPosition(pos);
+		this->addChild(swordman,2);
+		swordman->scheduleUpdate();
+	}
 	return false;
+}
+
+void BattleScene::update(float delta)
+{
+
 }

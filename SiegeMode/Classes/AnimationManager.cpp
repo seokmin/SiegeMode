@@ -10,15 +10,16 @@ AnimationManager* AnimationManager::_instance = nullptr;
 
 Animation* AnimationManager::getAnimation(std::string actorName, std::string animName)
 {
-	auto rtnAnim = _animationMap.count(actorName+animName);
-	if (rtnAnim == 1)
+	auto rtnAnim = _animationMap.at(actorName+animName);
+	if (rtnAnim != nullptr)
 		return _animationMap.at(actorName+animName);
+	//여기 들어왔으면 버그
 	return nullptr;
 }
 
 void AnimationManager::addAnimation(std::string actorName, std::string animName, float interval, std::initializer_list<std::string> frameName)
 {
-	if (_animationMap.count(actorName + animName) != 0)
+	if (_animationMap.at(actorName + animName) != nullptr)
 	{
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		Beep(1000, 100);
@@ -36,7 +37,7 @@ void AnimationManager::addAnimation(std::string actorName, std::string animName,
 	{
 		i->getSpriteFrame()->getTexture()->setAliasTexParameters();
 	}
-	_animationMap.emplace(actorName+animName,anim);
+	_animationMap.insert(actorName+animName,anim);
 }
 
 AnimationManager* AnimationManager::getInstance()

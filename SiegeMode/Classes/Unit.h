@@ -8,7 +8,7 @@ class Unit :
 public:
 	bool			init();
 	CREATE_FUNC(Unit);
-	virtual void	tick();
+	virtual void		update(float delta);
 
 	template<typename T>
 	static Unit* createWithFactory()
