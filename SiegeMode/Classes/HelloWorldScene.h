@@ -11,7 +11,7 @@ public:
     void menuCloseCallback(Ref* pSender);
     
 	bool onSprTouchBegan(Touch* touch, Event* event);
-
+	bool onMouseTouchBegan(EventMouse* event);
 
 	void update(float delta);
     // implement the "static create()" method manually

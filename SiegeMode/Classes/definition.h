@@ -1,8 +1,7 @@
 #pragma once
 
-namespace settings {
-
-	const std::string PATHNAME_SPRITE_FOLDER = "SpriteSource";
-
-	const std::string PATHNAME_SPRITE_SWORDMAN = "swordman";
-}
+enum PLAYER_KIND
+{
+	PLAYER_RED,
+	PLAYER_BLUE
+};

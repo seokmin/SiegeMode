@@ -2,8 +2,11 @@
 #include "Unit.h"
 #include "UnitState.h"
 
-bool Unit::init()
+bool Unit::init(PLAYER_KIND playerKind)
 {
+	this->Sprite::init();
+	this->setFlippedX(playerKind == PLAYER_BLUE);
+	this->_ownerPlayer = playerKind;
 	this->setScale(2.f);
 	return true;
 }

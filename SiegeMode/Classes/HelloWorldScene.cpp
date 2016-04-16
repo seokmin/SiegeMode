@@ -90,9 +90,17 @@ bool BattleScene::init()
 //  	addChild(rt);
 	
 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+
+
+#if (CC_TARGET_PLATFORM==CC_PLATFORM_WIN32)
+	auto testListener = EventListenerMouse::create();
+	testListener->onMouseDown = CC_CALLBACK_1(BattleScene::onMouseTouchBegan, this);
+#else
 	auto testListener = EventListenerTouchOneByOne::create();
 	testListener->setSwallowTouches(true);
 	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
+#endif
+
 	dispatcher->addEventListenerWithSceneGraphPriority(testListener, this);
 	this->scheduleUpdate();
 	return true;
@@ -110,16 +118,32 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 
 bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 {
+	static bool isRed = true;
 	auto target = event->getCurrentTarget();
 	Point pos = target->convertToNodeSpace(touch->getLocation());
-	Rect rect = Rect(0, 100, target->getContentSize().width, 320);
+	Rect rect = Rect(0, 100, this->getContentSize().width, 320);
 	if (rect.containsPoint(pos))
 	{
-		auto swordman = Swordman::create();
+		auto swordman = Swordman::create(isRed ? PLAYER_RED : PLAYER_BLUE);
+		isRed = !isRed;
 		swordman->setPosition(pos);
 		this->addChild(swordman,2);
-		swordman->scheduleUpdate();
 	}
+	return false;
+}
+
+bool BattleScene::onMouseTouchBegan(EventMouse* event)
+{
+	Point pos = event->getLocationInView();
+	Rect rect = Rect(0, 100, this->getContentSize().width, 320);
+	if (rect.containsPoint(pos))
+	{
+		PLAYER_KIND pKind = event->getMouseButton() == 0 ? PLAYER_RED : PLAYER_BLUE;
+		auto swordman = Swordman::create(pKind);
+		swordman->setPosition(pos);
+		this->addChild(swordman, 2);
+	}
+
 	return false;
 }
 

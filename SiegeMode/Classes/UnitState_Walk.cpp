@@ -4,11 +4,12 @@
 
 void UnitState_Walk::StartState(Unit* unit)
 {
-	auto animation = AnimationManager::getInstance()->getAnimation(unit->getUnitName(), "walk");
+	auto animation = AnimationManager::getInstance()->getAnimation(unit->getUnitName(), std::string("walk") + (unit->getOwnerPlayer()==PLAYER_RED ? "_red" : "_blue"));
 	auto animate = Animate::create(animation);
 	unit->runAction(RepeatForever::create(animate));
 
-	auto moveAction = MoveBy::create(1.f, Vec2(-unit->getMoveSpeed()*3, 0));
+	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
+	auto moveAction = MoveBy::create(1.f, Vec2(moveDirection * unit->getMoveSpeed(), 0));
 	unit->runAction(RepeatForever::create(moveAction));
 }
 
