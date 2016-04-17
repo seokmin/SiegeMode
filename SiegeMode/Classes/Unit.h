@@ -2,6 +2,7 @@
 
 #include "UnitState.h"
 
+
 //Unit 자식 클래스를 위한 CREATE_FUNC
 #define CREATE_FUNC_UNIT(__TYPE__) \
 static __TYPE__* create(PLAYER_KIND ownerPlayer) \
@@ -45,9 +46,8 @@ public:
 	void				walkTo(Vec2 destination);
 	void				walkBy(Vec2 directionVec);
 	void				stop();
-#ifdef _DEBUG//디버그용 라벨
+	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
-#endif
 private:
 };
 

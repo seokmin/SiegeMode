@@ -7,12 +7,10 @@ bool Unit::init(PLAYER_KIND playerKind)
 {
 	this->Sprite::init();
 	//디버그용 라벨 셋팅
-#ifdef _DEBUG
 	_debugLabel = Label::createWithSystemFont("","",15);
 	_debugLabel->setTextColor(Color4B(255, 0, 0, 255));
 	_debugLabel->setScale(1.f/2.f);
 	this->addChild(_debugLabel);
-#endif
 	//셋팅끝
 
 
