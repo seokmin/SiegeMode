@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "HelloWorldScene.h"
 
-#include "Swordman.h"
+#include "UnitManager.h"
 
 Scene* BattleScene::createScene()
 {
@@ -67,7 +67,7 @@ bool BattleScene::init()
 
 	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
 	
-
+	this->addChild(UnitManager::getInstance()->getUnitList(),2);
 
 	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
 
@@ -124,10 +124,7 @@ bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 	Rect rect = Rect(0, 100, this->getContentSize().width, 320);
 	if (rect.containsPoint(pos))
 	{
-		auto swordman = Swordman::create(isRed ? PLAYER_RED : PLAYER_BLUE);
-		isRed = !isRed;
-		swordman->setPosition(pos);
-		this->addChild(swordman,2);
+		UnitManager::getInstance()->summonUnit("swordman", pos, isRed ? PLAYER_RED : PLAYER_BLUE);
 	}
 	return false;
 }
@@ -139,9 +136,7 @@ bool BattleScene::onMouseTouchBegan(EventMouse* event)
 	if (rect.containsPoint(pos))
 	{
 		PLAYER_KIND pKind = event->getMouseButton() == 0 ? PLAYER_RED : PLAYER_BLUE;
-		auto swordman = Swordman::create(pKind);
-		swordman->setPosition(pos);
-		this->addChild(swordman, 2);
+		UnitManager::getInstance()->summonUnit("swordman", pos, pKind);
 	}
 
 	return false;

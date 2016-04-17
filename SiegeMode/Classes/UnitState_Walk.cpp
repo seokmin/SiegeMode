@@ -1,27 +1,30 @@
 #include "pch.h"
 #include "UnitState_Walk.h"
 #include "AnimationManager.h"
+#include "UnitState_Approach.h"
+#include "Unit.h"
 
-void UnitState_Walk::StartState(Unit* unit)
+void UnitState_Walk::startState(Unit* unit)
 {
-	auto animation = AnimationManager::getInstance()->getAnimation(unit->getUnitName(), std::string("walk") + (unit->getOwnerPlayer()==PLAYER_RED ? "_red" : "_blue"));
-	auto animate = Animate::create(animation);
-	unit->runAction(RepeatForever::create(animate));
-
 	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
-	auto moveAction = MoveBy::create(1.f, Vec2(moveDirection * unit->getMoveSpeed(), 0));
-	unit->runAction(RepeatForever::create(moveAction));
+	unit->walkBy(Vec2(moveDirection, 0));
+	unit->getDebugLabel()->setString("walking!");
 }
 
-void UnitState_Walk::RunState(Unit* unit)
+void UnitState_Walk::runState(Unit* unit)
 {
-	if (unit->getPositionX() < 10)
+	//너무멀리가면 죽음.테스트코드
+	if (unit->getPositionX() < 0)
+		unit->kill();
+	auto nearestTarget = unit->scanNearestTarget();
+	if (nearestTarget && nearestTarget->getPosition().getDistance(unit->getPosition()) <= unit->getAttackRange())
 	{
-		unit->removeFromParentAndCleanup(true);
+		unit->setAttackTarget(nearestTarget);
+		unit->changeState<UnitState_Approach>();
 	}
 }
 
-void UnitState_Walk::EndState(Unit* unit)
+void UnitState_Walk::endState(Unit* unit)
 {
-
+	unit->stop();
 }

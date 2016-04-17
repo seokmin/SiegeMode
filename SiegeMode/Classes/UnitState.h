@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Unit.h"
+class Unit;
 
-class UnitState : public Node
+class UnitState : public Component
 {
 public:
-	virtual void StartState(Unit* unit) = 0;
-	virtual void RunState(Unit* unit) = 0;
-	virtual void EndState(Unit* unit) = 0;
+	virtual void startState(Unit* unit) = 0;
+	virtual void runState(Unit* unit) = 0;
+	virtual void endState(Unit* unit) = 0;
 };

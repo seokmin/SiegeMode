@@ -113,6 +113,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <Link>
+      <ImageHasSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ImageHasSafeExceptionHandlers>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -157,6 +160,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </ClCompile>
     <ClCompile Include="..\Classes\Swordman.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\UnitManager.cpp" />
+    <ClCompile Include="..\Classes\UnitState_Approach.cpp" />
     <ClCompile Include="..\Classes\UnitState_Walk.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -168,7 +173,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\pch.h" />
     <ClInclude Include="..\Classes\Swordman.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="..\Classes\UnitManager.h" />
     <ClInclude Include="..\Classes\UnitState.h" />
+    <ClInclude Include="..\Classes\UnitState_Approach.h" />
     <ClInclude Include="..\Classes\UnitState_Walk.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

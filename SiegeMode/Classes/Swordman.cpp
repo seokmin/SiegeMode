@@ -8,7 +8,9 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 	_attackSpeed = 1.f;
-	_moveSpeed = 30.0;
+	_moveSpeed = 30.f;
+	_attackRange = 30.f;
+	_sightRange = 50.f;
 
 	this->setUnitName("swordman");
 	this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
@@ -22,7 +24,7 @@ bool Swordman::init(PLAYER_KIND playerKind)
 			std::string("SpriteSource/swordman/swordman_walk_4_red.png"),
 			std::string("SpriteSource/swordman/swordman_walk_5_red.png"),
 			std::string("SpriteSource/swordman/swordman_walk_6_red.png") }
-			);
+		);
 	}
 	else
 	{
@@ -37,6 +39,6 @@ bool Swordman::init(PLAYER_KIND playerKind)
 		);
 	}
 
-	this->changeState(UnitState_Walk::create());
+	this->changeState<UnitState_Walk>();
 	return true;
 }
