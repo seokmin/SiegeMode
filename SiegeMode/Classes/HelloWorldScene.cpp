@@ -125,6 +125,7 @@ bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 	if (rect.containsPoint(pos))
 	{
 		UnitManager::getInstance()->summonUnit("swordman", pos, isRed ? PLAYER_RED : PLAYER_BLUE);
+		isRed = !isRed;
 	}
 	return false;
 }
