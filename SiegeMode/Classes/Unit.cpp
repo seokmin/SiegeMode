@@ -7,14 +7,14 @@ bool Unit::init(PLAYER_KIND playerKind)
 {
 	this->Sprite::init();
 	//디버그용 라벨 셋팅
-	_debugLabel = Label::createWithSystemFont("","",15);
+	_debugLabel = Label::createWithSystemFont("", "", 15);
 	_debugLabel->setTextColor(Color4B(255, 0, 0, 255));
-	_debugLabel->setScale(1.f/2.f);
+	_debugLabel->setScale(1.f / 2.f);
 	this->addChild(_debugLabel);
 	//셋팅끝
 
 
-	
+
 	this->setFlippedX(playerKind == PLAYER_BLUE);
 	this->_ownerPlayer = playerKind;
 	this->setScale(2.f);
@@ -48,7 +48,7 @@ void Unit::kill()
 			DelayTime::create(0.01f),
 			CallFunc::create(
 				[=]() {removeFromParentAndCleanup(true); }
-			),nullptr));
+	), nullptr));
 }
 
 /**
@@ -65,7 +65,8 @@ void Unit::walkTo(Vec2 destination)
 	this->runAction(moveAction);
 }
 
-void Unit::walkBy(Vec2 directionVec)
+//duration에 0을 넣으면 무한반복
+void Unit::walkBy(Vec2 directionVec, float duration)
 {
 	directionVec = directionVec.getNormalized();
 
@@ -73,8 +74,16 @@ void Unit::walkBy(Vec2 directionVec)
 	auto animate = Animate::create(animation);
 	this->runAction(RepeatForever::create(animate));
 
-	auto moveAction = MoveBy::create(/*GameSpeed*/1.f, directionVec * _moveSpeed);
-	this->runAction(RepeatForever::create(moveAction));
+	if (duration == 0.f)
+	{
+		auto moveAction = MoveBy::create(/*GameSpeed*/1.f, directionVec * _moveSpeed);
+		this->runAction(RepeatForever::create(moveAction));
+	}
+	else
+	{
+		auto moveAction = MoveBy::create(/*GameSpeed*/1.f * duration, directionVec * _moveSpeed * duration);
+		this->runAction(moveAction);
+	}
 }
 
 void Unit::stop()
@@ -84,5 +93,5 @@ void Unit::stop()
 
 void Unit::update(float delta)
 {
-	_state->runState(this);
+	_state->runState(this, delta);
 }

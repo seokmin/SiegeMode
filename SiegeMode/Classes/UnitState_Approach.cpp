@@ -6,12 +6,11 @@
 void UnitState_Approach::startState(Unit* unit)
 {
 	unit->getDebugLabel()->setString("Approaching!!");
-	unit->walkTo(unit->getAttackTarget()->getPosition());
 }
 
-void UnitState_Approach::runState(Unit* unit)
+void UnitState_Approach::runState(Unit* unit, float delta)
 {
-	;
+	unit->walkBy(unit->getAttackTarget()->getPosition() - unit->getPosition(),delta);
 }
 
 void UnitState_Approach::endState(Unit* unit)

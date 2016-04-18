@@ -7,11 +7,11 @@
 void UnitState_Walk::startState(Unit* unit)
 {
 	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
-	unit->walkBy(Vec2(moveDirection, 0));
+	unit->walkBy(Vec2(moveDirection, 0), 0.f);
 	unit->getDebugLabel()->setString("walking!");
 }
 
-void UnitState_Walk::runState(Unit* unit)
+void UnitState_Walk::runState(Unit* unit, float delta)
 {
 	//너무멀리가면 죽음.테스트코드
 	if (unit->getPositionX() < 0)

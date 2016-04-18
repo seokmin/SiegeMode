@@ -26,9 +26,9 @@ class Unit :
 	public Sprite
 {
 public:
-	bool init(PLAYER_KIND playerKind);
+	virtual bool init(PLAYER_KIND playerKind);
 	CREATE_FUNC_UNIT(Unit);
-	virtual void		update(float delta);
+	virtual void		update(float delta) override;
 	template<typename T_STATE>
 	void				changeState();
 
@@ -44,7 +44,7 @@ public:
 	Unit*				scanNearestTarget();
 	void				kill();
 	void				walkTo(Vec2 destination);
-	void				walkBy(Vec2 directionVec);
+	void				walkBy(Vec2 directionVec, float duration);
 	void				stop();
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
