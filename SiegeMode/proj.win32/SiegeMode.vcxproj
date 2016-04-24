@@ -162,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Unit.cpp" />
     <ClCompile Include="..\Classes\UnitManager.cpp" />
     <ClCompile Include="..\Classes\UnitState_Approach.cpp" />
+    <ClCompile Include="..\Classes\UnitState_Attack.cpp" />
     <ClCompile Include="..\Classes\UnitState_Walk.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -176,6 +177,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\UnitManager.h" />
     <ClInclude Include="..\Classes\UnitState.h" />
     <ClInclude Include="..\Classes\UnitState_Approach.h" />
+    <ClInclude Include="..\Classes\UnitState_Attack.h" />
     <ClInclude Include="..\Classes\UnitState_Walk.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

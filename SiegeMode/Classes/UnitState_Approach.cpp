@@ -5,12 +5,15 @@
 
 void UnitState_Approach::startState(Unit* unit)
 {
+	unit->startAnimate("walk");
 	unit->getDebugLabel()->setString("Approaching!!");
 }
 
 void UnitState_Approach::runState(Unit* unit, float delta)
 {
-	unit->walkBy(unit->getAttackTarget()->getPosition() - unit->getPosition(),delta);
+	auto normalVec = (unit->getAttackTarget()->getPosition() - unit->getPosition()).getNormalized();
+	normalVec *= delta * unit->getMoveSpeed();
+	unit->setPosition(unit->getPosition() + normalVec);
 }
 
 void UnitState_Approach::endState(Unit* unit)

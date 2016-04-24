@@ -7,7 +7,8 @@
 void UnitState_Walk::startState(Unit* unit)
 {
 	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
-	unit->walkBy(Vec2(moveDirection, 0), 0.f);
+	unit->startAnimate("walk");
+	unit->moveBy(Vec2(moveDirection, 0), 0.f);
 	unit->getDebugLabel()->setString("walking!");
 }
 

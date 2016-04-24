@@ -22,6 +22,11 @@ static __TYPE__* create(PLAYER_KIND ownerPlayer) \
     } \
 }
 
+enum ACTION_KIND {
+	ACTION_ANIMATE,
+	ACTION_MOVE
+};
+
 class Unit :
 	public Sprite
 {
@@ -40,12 +45,17 @@ public:
 	CC_SYNTHESIZE(float, _moveSpeed, MoveSpeed);
 	CC_SYNTHESIZE(float, _sightRange, SightRange);
 	CC_SYNTHESIZE(Unit*, _attackTarget, AttackTarget);
+	CC_SYNTHESIZE(unsigned, _health, Health);
+	CC_SYNTHESIZE(unsigned, _attackPower, AttackPower);
 	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
 	Unit*				scanNearestTarget();
 	void				kill();
-	void				walkTo(Vec2 destination);
-	void				walkBy(Vec2 directionVec, float duration);
+	void				moveTo(Vec2 destination);
+	void				moveBy(Vec2 directionVec, float duration);
 	void				stop();
+	void				startAnimate(std::string animName);
+	void				attackOnce();
+	void beHit(unsigned attackPower);
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
 private:

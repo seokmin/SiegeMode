@@ -40,6 +40,9 @@
     <ClCompile Include="..\Classes\UnitState_Approach.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_Attack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -72,6 +75,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UnitState_Approach.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_Attack.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

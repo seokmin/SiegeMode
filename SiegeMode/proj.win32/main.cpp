@@ -3,7 +3,7 @@
 #include "AppDelegate.h"
 
 #ifdef _DEBUG
-//#include <vld.h>
+#include <vld.h>
 #endif
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
