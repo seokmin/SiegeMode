@@ -48,14 +48,15 @@ public:
 	CC_SYNTHESIZE(unsigned, _health, Health);
 	CC_SYNTHESIZE(unsigned, _attackPower, AttackPower);
 	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
+	CC_SYNTHESIZE(float, _attackDelay, AttackDelay);
 	Unit*				scanNearestTarget();
 	void				kill();
 	void				moveTo(Vec2 destination);
 	void				moveBy(Vec2 directionVec, float duration);
 	void				stop();
-	void				startAnimate(std::string animName);
-	void				attackOnce();
-	void beHit(unsigned attackPower);
+	void				startAnimate(std::string animName, bool isRepeatForever);
+	virtual void		attackOnce();
+	void				beHit(unsigned attackPower);
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
 private:

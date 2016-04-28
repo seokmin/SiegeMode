@@ -3,17 +3,28 @@
 #include "AnimationManager.h"
 #include "UnitState_Approach.h"
 #include "Unit.h"
+#include "UnitState_Walk.h"
 
 void UnitState_Attack::startState(Unit* unit)
 {
-	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
-	unit->startAnimate("walk");
-	unit->moveBy(Vec2(moveDirection, 0), 0.f);
-	unit->getDebugLabel()->setString("walking!");
+
 }
 
 void UnitState_Attack::runState(Unit* unit, float delta)
 {
+	if (unit->getAttackTarget() == nullptr)
+	{
+		unit->changeState<UnitState_Walk>();
+		return;
+	}
+
+	_elapsedTimeFromLastAttack += delta;
+
+	if (_elapsedTimeFromLastAttack >= unit->getAttackSpeed())
+	{
+		unit->attackOnce();
+		_elapsedTimeFromLastAttack = 0.0;
+	}
 
 }
 

@@ -94,18 +94,24 @@ void Unit::stop()
 	this->stopAllActions();
 }
 
-void Unit::startAnimate(std::string animName)
+void Unit::startAnimate(std::string animName, bool isRepeatForever)
 {
 	this->stopAllActionsByTag(ACTION_ANIMATE);
 	auto animation = AnimationManager::getInstance()->getAnimation(_unitName, animName + (_ownerPlayer == PLAYER_RED ? "_red" : "_blue"));
 	auto animate = Animate::create(animation);
 	animate->setTag(ACTION_ANIMATE);
-	this->runAction(RepeatForever::create(animate));
+
+	if (isRepeatForever)
+		this->runAction(RepeatForever::create(animate));
+	else
+		this->runAction(animate);
 }
 
 void Unit::attackOnce()
 {
-	_attackTarget->beHit(_attackPower);
+	startAnimate("attack", false);
+	this->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, _attackTarget, _attackPower)),nullptr));
+/*	_attackTarget->beHit(_attackPower);*/
 }
 
 void Unit::beHit(unsigned attackPower)

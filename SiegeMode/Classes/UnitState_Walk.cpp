@@ -7,7 +7,7 @@
 void UnitState_Walk::startState(Unit* unit)
 {
 	auto moveDirection = unit->getOwnerPlayer() == PLAYER_RED ? -1 : 1;
-	unit->startAnimate("walk");
+	unit->startAnimate("walk", true);
 	unit->moveBy(Vec2(moveDirection, 0), 0.f);
 	unit->getDebugLabel()->setString("walking!");
 }
@@ -18,7 +18,7 @@ void UnitState_Walk::runState(Unit* unit, float delta)
 	if (unit->getPositionX() < 0)
 		unit->kill();
 	auto nearestTarget = unit->scanNearestTarget();
-	if (nearestTarget && nearestTarget->getPosition().getDistance(unit->getPosition()) <= unit->getAttackRange())
+	if (nearestTarget && nearestTarget->getPosition().getDistance(unit->getPosition()) <= unit->getSightRange())
 	{
 		unit->setAttackTarget(nearestTarget);
 		unit->changeState<UnitState_Approach>();

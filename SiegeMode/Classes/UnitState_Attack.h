@@ -9,4 +9,6 @@ public:
 	void startState(Unit* unit) override;
 	void runState(Unit* unit, float delta) override;
 	void endState(Unit* unit) override;
+private:
+	double	_elapsedTimeFromLastAttack = 0.0;
 };
