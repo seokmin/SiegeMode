@@ -3,18 +3,24 @@
 #include "AnimationManager.h"
 #include "UnitState_Approach.h"
 #include "Unit.h"
-#include "UnitState_Walk.h"
+#include "UnitState_WalkAndSeek.h"
 
 void UnitState_Attack::startState(Unit* unit)
 {
-
+	unit->getDebugLabel()->setString("Attacking!!");
+	if (unit->getAttackTarget() == nullptr)
+	{
+		unit->changeState<UnitState_WalkAndSeek>();
+		return;
+	}
+	unit->attackOnce();
 }
 
 void UnitState_Attack::runState(Unit* unit, float delta)
 {
 	if (unit->getAttackTarget() == nullptr)
 	{
-		unit->changeState<UnitState_Walk>();
+		unit->changeState<UnitState_WalkAndSeek>();
 		return;
 	}
 
@@ -30,5 +36,5 @@ void UnitState_Attack::runState(Unit* unit, float delta)
 
 void UnitState_Attack::endState(Unit* unit)
 {
-	unit->stop();
+	//unit->stop();
 }

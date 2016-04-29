@@ -13,7 +13,7 @@ bool Unit::init(PLAYER_KIND playerKind)
 	this->addChild(_debugLabel);
 	//셋팅끝
 
-
+	_isDead = false;
 
 	this->setFlippedX(playerKind == PLAYER_BLUE);
 	this->_ownerPlayer = playerKind;
@@ -43,12 +43,14 @@ Unit* Unit::scanNearestTarget()
 
 void Unit::kill()
 {
-	runAction(
-		Sequence::create(
-			DelayTime::create(0.01f),
-			CallFunc::create(
-				[=]() {removeFromParentAndCleanup(true); }
-	), nullptr));
+	// 	runAction(
+	// 		Sequence::create(
+	// 			DelayTime::create(0.01f),
+	// 			CallFunc::create(
+	// 				[=]() {removeFromParentAndCleanup(true); }
+	// 	), nullptr));
+	removeFromParentAndCleanup(true);
+	_isDead = true;
 }
 
 /**
@@ -56,29 +58,29 @@ void Unit::kill()
 */
 void Unit::moveTo(Vec2 destination)
 {
-	this->stopAllActionsByTag(ACTION_MOVE);
+	this->stopMove();
 	auto distance = destination.getDistance(this->getPosition());
 	auto moveAction = MoveTo::create(/*GameSpeed*/1.f * distance / _moveSpeed, destination);
+	moveAction->setTag(ACTION_MOVE);
 	this->runAction(moveAction);
 }
 
 //duration에 0을 넣으면 무한반복
 void Unit::moveBy(Vec2 directionVec, float duration)
 {
-	runAction(
-		Sequence::create(
-			DelayTime::create(duration + 0.01f),
-			CallFunc::create(
-				[=]() {stopAllActionsByTag(ACTION_MOVE); }
-	), nullptr));
+	if (duration != 0.f)
+		runAction(
+			Sequence::create(
+				DelayTime::create(duration + 0.01f),
+				CallFunc::create(CC_CALLBACK_0(Unit::stopMove, this)), nullptr));
 
 	directionVec = directionVec.getNormalized();
 
 	if (duration == 0.f)
 	{
-		auto moveAction = MoveBy::create(/*GameSpeed*/1.f, directionVec * _moveSpeed);
+		auto moveAction = RepeatForever::create(MoveBy::create(/*GameSpeed*/1.f, directionVec * _moveSpeed));
 		moveAction->setTag(ACTION_MOVE);
-		this->runAction(RepeatForever::create(moveAction));
+		this->runAction(moveAction);
 	}
 	else
 	{
@@ -86,32 +88,37 @@ void Unit::moveBy(Vec2 directionVec, float duration)
 		moveAction->setTag(ACTION_MOVE);
 		this->runAction(moveAction);
 	}
-	
+
 }
 
-void Unit::stop()
+void Unit::stopMove()
 {
-	this->stopAllActions();
+	this->stopAllActionsByTag(ACTION_MOVE);
+}
+
+void Unit::stopAnimation()
+{
+	this->stopAllActionsByTag(ACTION_ANIMATE);
 }
 
 void Unit::startAnimate(std::string animName, bool isRepeatForever)
 {
 	this->stopAllActionsByTag(ACTION_ANIMATE);
 	auto animation = AnimationManager::getInstance()->getAnimation(_unitName, animName + (_ownerPlayer == PLAYER_RED ? "_red" : "_blue"));
-	auto animate = Animate::create(animation);
+	Action* animate;
+	if (isRepeatForever)
+		animate = RepeatForever::create(Animate::create(animation));
+	else
+		animate = Animate::create(animation);
 	animate->setTag(ACTION_ANIMATE);
 
-	if (isRepeatForever)
-		this->runAction(RepeatForever::create(animate));
-	else
-		this->runAction(animate);
+	this->runAction(animate);
 }
 
 void Unit::attackOnce()
 {
 	startAnimate("attack", false);
-	this->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, _attackTarget, _attackPower)),nullptr));
-/*	_attackTarget->beHit(_attackPower);*/
+	_attackTarget->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, _attackTarget, _attackPower)), nullptr));
 }
 
 void Unit::beHit(unsigned attackPower)
@@ -124,4 +131,21 @@ void Unit::beHit(unsigned attackPower)
 void Unit::update(float delta)
 {
 	_state->runState(this, delta);
+}
+
+Unit* Unit::getAttackTarget()
+{
+	if (_attackTarget->getIsDead() == true)
+	{
+		_attackTarget->release();
+		_attackTarget = nullptr;
+	}
+	return _attackTarget;
+}
+
+void Unit::setAttackTarget(Unit* target)
+{
+	CC_SAFE_RETAIN(target);
+	CC_SAFE_RELEASE(_attackTarget);
+	_attackTarget = target;
 }

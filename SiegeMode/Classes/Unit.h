@@ -23,8 +23,10 @@ static __TYPE__* create(PLAYER_KIND ownerPlayer) \
 }
 
 enum ACTION_KIND {
+	ACTION_ERROR,
 	ACTION_ANIMATE,
-	ACTION_MOVE
+	ACTION_MOVE,
+	ACTION_NOT_CALLFUNC
 };
 
 class Unit :
@@ -38,25 +40,32 @@ public:
 	void				changeState();
 
 
+	Unit*				_attackTarget = nullptr;
+	Unit*				getAttackTarget();
+	void				setAttackTarget(Unit* target);
+
 	CC_SYNTHESIZE(UnitState*, _state, State);
 	CC_SYNTHESIZE(std::string, _unitName, UnitName);
 	CC_SYNTHESIZE(float, _attackRange, AttackRange);
 	CC_SYNTHESIZE(float, _attackSpeed, AttackSpeed);
 	CC_SYNTHESIZE(float, _moveSpeed, MoveSpeed);
 	CC_SYNTHESIZE(float, _sightRange, SightRange);
-	CC_SYNTHESIZE(Unit*, _attackTarget, AttackTarget);
 	CC_SYNTHESIZE(unsigned, _health, Health);
 	CC_SYNTHESIZE(unsigned, _attackPower, AttackPower);
 	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
 	CC_SYNTHESIZE(float, _attackDelay, AttackDelay);
+	CC_SYNTHESIZE(bool, _isDead, IsDead);
+	
 	Unit*				scanNearestTarget();
 	void				kill();
 	void				moveTo(Vec2 destination);
 	void				moveBy(Vec2 directionVec, float duration);
-	void				stop();
+	void				stopMove();
+	void				stopAnimation();
 	void				startAnimate(std::string animName, bool isRepeatForever);
 	virtual void		attackOnce();
 	void				beHit(unsigned attackPower);
+	virtual void		onExit() override { Node::onExit(); }
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
 private:

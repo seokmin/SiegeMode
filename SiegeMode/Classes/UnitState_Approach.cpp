@@ -3,6 +3,7 @@
 #include "AnimationManager.h"
 #include "Unit.h"
 #include "UnitState_Attack.h"
+#include "UnitState_WalkAndSeek.h"
 
 void UnitState_Approach::startState(Unit* unit)
 {
@@ -12,16 +13,22 @@ void UnitState_Approach::startState(Unit* unit)
 
 void UnitState_Approach::runState(Unit* unit, float delta)
 {
+	if (unit->getAttackTarget() == nullptr)
+	{
+		unit->changeState<UnitState_WalkAndSeek>();
+		return;
+	}
+
 	auto normalVec = (unit->getAttackTarget()->getPosition() - unit->getPosition()).getNormalized();
 	normalVec *= delta * unit->getMoveSpeed();
 	unit->setPosition(unit->getPosition() + normalVec);
 
 	if (unit->getPosition().distance(unit->getAttackTarget()->getPosition()) <= unit->getAttackRange())
 		unit->changeState<UnitState_Attack>();
-
 }
 
 void UnitState_Approach::endState(Unit* unit)
 {
-	unit->stop();
+	unit->stopAnimation();
+	unit->stopMove();
 }

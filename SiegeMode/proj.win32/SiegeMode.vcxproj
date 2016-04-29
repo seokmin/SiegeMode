@@ -163,7 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\UnitManager.cpp" />
     <ClCompile Include="..\Classes\UnitState_Approach.cpp" />
     <ClCompile Include="..\Classes\UnitState_Attack.cpp" />
-    <ClCompile Include="..\Classes\UnitState_Walk.cpp" />
+    <ClCompile Include="..\Classes\UnitState_WalkAndSeek.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +178,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\UnitState.h" />
     <ClInclude Include="..\Classes\UnitState_Approach.h" />
     <ClInclude Include="..\Classes\UnitState_Attack.h" />
-    <ClInclude Include="..\Classes\UnitState_Walk.h" />
+    <ClInclude Include="..\Classes\UnitState_WalkAndSeek.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +197,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ResourceCompile Include="game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

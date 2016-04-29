@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Swordman.h"
-#include "UnitState_Walk.h"
+#include "UnitState_WalkAndSeek.h"
 #include "AnimationManager.h"
 
 bool Swordman::init(PLAYER_KIND playerKind)
@@ -66,6 +66,6 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	}
 
 
-	this->changeState<UnitState_Walk>();
+	this->changeState<UnitState_WalkAndSeek>();
 	return true;
 }
