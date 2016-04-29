@@ -12,6 +12,8 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	_attackRange = 30.f;
 	_sightRange = 50.f;
 	_attackDelay = 0.4f;
+	_attackPower = 10;
+	_health = 50;
 
 	this->setUnitName("swordman");
 	this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
@@ -44,24 +46,22 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	{
 		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "attack_red", 0.1f,
 		{
-			std::string("SpriteSource/swordman/swordman_walk_1_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_2_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_3_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_4_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_5_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_6_red.png") }
+			std::string("SpriteSource/swordman/swordman_attack_1_red.png"),
+			std::string("SpriteSource/swordman/swordman_attack_2_red.png"),
+			std::string("SpriteSource/swordman/swordman_attack_3_red.png"),
+			std::string("SpriteSource/swordman/swordman_attack_4_red.png"),
+			std::string("SpriteSource/swordman/swordman_attack_5_red.png"), }
 		);
 	}
 	else
 	{
 		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "attack_blue", 0.1f,
 		{
-			std::string("SpriteSource/swordman/swordman_walk_1_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_2_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_3_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_4_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_5_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_6_blue.png") }
+			std::string("SpriteSource/swordman/swordman_attack_1_blue.png"),
+			std::string("SpriteSource/swordman/swordman_attack_2_blue.png"),
+			std::string("SpriteSource/swordman/swordman_attack_3_blue.png"),
+			std::string("SpriteSource/swordman/swordman_attack_4_blue.png"),
+			std::string("SpriteSource/swordman/swordman_attack_5_blue.png"), }
 		);
 	}
 
