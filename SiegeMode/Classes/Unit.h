@@ -50,7 +50,7 @@ public:
 	CC_SYNTHESIZE(float, _attackSpeed, AttackSpeed);
 	CC_SYNTHESIZE(float, _moveSpeed, MoveSpeed);
 	CC_SYNTHESIZE(float, _sightRange, SightRange);
-	CC_SYNTHESIZE(unsigned, _health, Health);
+	CC_SYNTHESIZE(int, _health, Health);
 	CC_SYNTHESIZE(unsigned, _attackPower, AttackPower);
 	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
 	CC_SYNTHESIZE(float, _attackDelay, AttackDelay);

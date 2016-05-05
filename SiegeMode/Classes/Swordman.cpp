@@ -12,7 +12,7 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	_attackRange = 30.f;
 	_sightRange = 50.f;
 	_attackDelay = 0.4f;
-	_attackPower = 10;
+	_attackPower = 20;
 	_health = 50;
 
 	this->setUnitName("swordman");

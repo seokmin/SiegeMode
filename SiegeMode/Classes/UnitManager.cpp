@@ -14,12 +14,14 @@ UnitManager* UnitManager::getInstance()
 
 void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ownerPlayer)
 {
+	static int tagid = 0;
 	Unit* newUnit = nullptr;
 	if (unitName == "swordman")
 	{
 		newUnit = Swordman::create(ownerPlayer);
 	}
 
+	newUnit->setTag(++tagid);
 	newUnit->setPosition(position);
 	_unitList->addChild(newUnit);
 }

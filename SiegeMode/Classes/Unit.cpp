@@ -49,8 +49,13 @@ void Unit::kill()
 	// 			CallFunc::create(
 	// 				[=]() {removeFromParentAndCleanup(true); }
 	// 	), nullptr));
-	removeFromParentAndCleanup(true);
-	_isDead = true;
+	if (!_isDead)
+	{
+		this->getAttackTarget();
+		this->unscheduleUpdate();
+		removeFromParentAndCleanup(true);
+		_isDead = true;
+	}
 }
 
 /**
@@ -135,7 +140,7 @@ void Unit::update(float delta)
 
 Unit* Unit::getAttackTarget()
 {
-	if (_attackTarget->getIsDead() == true)
+	if (_attackTarget && _attackTarget->getIsDead() == true)
 	{
 		_attackTarget->release();
 		_attackTarget = nullptr;
