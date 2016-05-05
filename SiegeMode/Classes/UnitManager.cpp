@@ -14,7 +14,7 @@ UnitManager* UnitManager::getInstance()
 
 void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ownerPlayer)
 {
-	static int tagid = 0;
+	static int tagid = 1;
 	Unit* newUnit = nullptr;
 	if (unitName == "swordman")
 	{
@@ -24,6 +24,16 @@ void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ow
 	newUnit->setTag(++tagid);
 	newUnit->setPosition(position);
 	_unitList->addChild(newUnit);
+}
+
+void UnitManager::killUnitByTag(int tag)
+{
+
+}
+
+Unit* UnitManager::getUnitByTag(int tag)
+{
+	return static_cast<Unit*>(_unitList->getChildByTag(tag));
 }
 
 UnitManager::UnitManager()

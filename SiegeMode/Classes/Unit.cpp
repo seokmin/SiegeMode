@@ -51,7 +51,6 @@ void Unit::kill()
 	// 	), nullptr));
 	if (!_isDead)
 	{
-		this->getAttackTarget();
 		this->unscheduleUpdate();
 		removeFromParentAndCleanup(true);
 		_isDead = true;
@@ -123,7 +122,7 @@ void Unit::startAnimate(std::string animName, bool isRepeatForever)
 void Unit::attackOnce()
 {
 	startAnimate("attack", false);
-	_attackTarget->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, _attackTarget, _attackPower)), nullptr));
+	getAttackTarget()->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, getAttackTarget(), _attackPower)), nullptr));
 }
 
 void Unit::beHit(unsigned attackPower)
@@ -138,19 +137,14 @@ void Unit::update(float delta)
 	_state->runState(this, delta);
 }
 
+//if failed, it will return nullptr
 Unit* Unit::getAttackTarget()
 {
-	if (_attackTarget && _attackTarget->getIsDead() == true)
-	{
-		_attackTarget->release();
-		_attackTarget = nullptr;
-	}
-	return _attackTarget;
+	return UnitManager::getInstance()->getUnitByTag(_tagAttackTarget);
 }
 
-void Unit::setAttackTarget(Unit* target)
+void Unit::setAttackTarget(int targetTag)
 {
-	CC_SAFE_RETAIN(target);
-	CC_SAFE_RELEASE(_attackTarget);
-	_attackTarget = target;
+	if (UnitManager::getInstance()->getUnitByTag(targetTag))
+		_tagAttackTarget = targetTag;
 }

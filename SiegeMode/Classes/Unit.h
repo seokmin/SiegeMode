@@ -40,9 +40,9 @@ public:
 	void				changeState();
 
 
-	Unit*				_attackTarget = nullptr;
+	int					_tagAttackTarget = -1;
 	Unit*				getAttackTarget();
-	void				setAttackTarget(Unit* target);
+	void setAttackTarget(int targetTag);
 
 	CC_SYNTHESIZE(UnitState*, _state, State);
 	CC_SYNTHESIZE(std::string, _unitName, UnitName);

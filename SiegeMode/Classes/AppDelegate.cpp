@@ -2,7 +2,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(1280, 720);
+static cocos2d::Size designResolutionSize = cocos2d::Size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 AppDelegate::AppDelegate() {
 

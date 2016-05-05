@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unit">
+      <UniqueIdentifier>{be144e82-690c-4c83-a260-6eb01bde012f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -22,16 +25,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\pch.cpp" />
-    <ClCompile Include="..\Classes\Unit.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AnimationManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Swordman.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UnitState_Approach.cpp">
@@ -42,6 +36,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UnitState_WalkAndSeek.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bowman.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Swordman.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitManager.cpp">
+      <Filter>Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,19 +62,10 @@
     </ClInclude>
     <ClInclude Include="..\Classes\pch.h" />
     <ClInclude Include="..\Classes\definition.h" />
-    <ClInclude Include="..\Classes\Unit.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AnimationManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Swordman.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\UnitState.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitManager.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UnitState_Approach.h">
@@ -79,6 +76,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UnitState_WalkAndSeek.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bowman.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Swordman.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitManager.h">
+      <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
