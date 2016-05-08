@@ -3,7 +3,7 @@
 #include "UnitState_WalkAndSeek.h"
 #include "AnimationManager.h"
 
-bool ::init(PLAYER_KIND playerKind)
+bool Bowman::init(PLAYER_KIND playerKind)
 {
 	if (!Unit::init(playerKind))
 		return false;
