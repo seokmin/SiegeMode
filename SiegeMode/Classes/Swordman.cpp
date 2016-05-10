@@ -18,53 +18,14 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	this->setUnitName("swordman");
 	this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
 	if (this->getOwnerPlayer() == PLAYER_RED)
-	{
-		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "walk_red", 0.1f, 
-		{
-			std::string("SpriteSource/swordman/swordman_walk_1_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_2_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_3_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_4_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_5_red.png"),
-			std::string("SpriteSource/swordman/swordman_walk_6_red.png") }
-		);
-	}
+		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/swordman/swordman_walk_red.png", 32, 29, 6);
 	else
-	{
-		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "walk_blue", 0.1f,
-		{
-			std::string("SpriteSource/swordman/swordman_walk_1_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_2_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_3_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_4_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_5_blue.png"),
-			std::string("SpriteSource/swordman/swordman_walk_6_blue.png") }
-		);
-	}
+		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/swordman/swordman_walk_blue.png", 32, 29, 6);
 
 	if (this->getOwnerPlayer() == PLAYER_RED)
-	{
-		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "attack_red", 0.1f,
-		{
-			std::string("SpriteSource/swordman/swordman_attack_1_red.png"),
-			std::string("SpriteSource/swordman/swordman_attack_2_red.png"),
-			std::string("SpriteSource/swordman/swordman_attack_3_red.png"),
-			std::string("SpriteSource/swordman/swordman_attack_4_red.png"),
-			std::string("SpriteSource/swordman/swordman_attack_5_red.png"), }
-		);
-	}
+		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.1f, "SpriteSource/swordman/swordman_attack_red.png", 43, 30, 6);
 	else
-	{
-		AnimationManager::getInstance()->addAnimation(this->getUnitName(), "attack_blue", 0.1f,
-		{
-			std::string("SpriteSource/swordman/swordman_attack_1_blue.png"),
-			std::string("SpriteSource/swordman/swordman_attack_2_blue.png"),
-			std::string("SpriteSource/swordman/swordman_attack_3_blue.png"),
-			std::string("SpriteSource/swordman/swordman_attack_4_blue.png"),
-			std::string("SpriteSource/swordman/swordman_attack_5_blue.png"), }
-		);
-	}
-
+		AnimationManager::getInstance()->addAnimation(_unitName, "attack_blue", 0.1f, "SpriteSource/swordman/swordman_attack_blue.png", 43, 30, 6);
 
 	this->changeState<UnitState_WalkAndSeek>();
 	return true;

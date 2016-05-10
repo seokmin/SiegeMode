@@ -40,6 +40,30 @@ void AnimationManager::addAnimation(std::string actorName, std::string animName,
 	_animationMap.insert(actorName+animName,anim);
 }
 
+void AnimationManager::addAnimation(std::string actorName, std::string animName, float interval, std::string fileName, unsigned width, unsigned height, unsigned frameCount)
+{
+	if (_animationMap.at(actorName + animName) != nullptr)
+	{
+		return;
+	}
+	Vector<SpriteFrame*> animFrames(frameCount);
+	for (auto i = 1; i <= frameCount; ++i)
+	{
+		auto frame = SpriteFrame::create(fileName, Rect((i - 1)*width, 0, width, height));
+		animFrames.pushBack(frame);
+	}
+
+	auto anim = Animation::createWithSpriteFrames(animFrames,interval);
+	anim->setDelayPerUnit(interval);
+
+
+	for (auto i : anim->getFrames())
+	{
+		i->getSpriteFrame()->getTexture()->setAliasTexParameters();
+	}
+	_animationMap.insert(actorName + animName, anim);
+}
+
 AnimationManager* AnimationManager::getInstance()
 {
 	if (_instance == nullptr)
