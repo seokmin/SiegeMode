@@ -16,7 +16,7 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	_health = 50;
 
 	this->setUnitName("swordman");
-	this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
+	//this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
 	if (this->getOwnerPlayer() == PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/swordman/swordman_walk_red.png", 32, 29, 6);
 	else

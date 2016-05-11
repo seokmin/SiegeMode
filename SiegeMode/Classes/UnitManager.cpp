@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "UnitManager.h"
 #include "Swordman.h"
+#include "Bowman.h"
 
 
 UnitManager* UnitManager::_instance = nullptr;
@@ -19,6 +20,10 @@ void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ow
 	if (unitName == "swordman")
 	{
 		newUnit = Swordman::create(ownerPlayer);
+	}
+	else if (unitName == "bowman")
+	{
+		newUnit = Bowman::create(ownerPlayer);
 	}
 
 	newUnit->setTag(++tagid);

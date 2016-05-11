@@ -136,8 +136,17 @@ bool BattleScene::onMouseTouchBegan(EventMouse* event)
 	Rect rect = Rect(0, 100, this->getContentSize().width, 320);
 	if (rect.containsPoint(pos))
 	{
-		PLAYER_KIND pKind = event->getMouseButton() == 0 ? PLAYER_RED : PLAYER_BLUE;
-		UnitManager::getInstance()->summonUnit("swordman", pos, pKind);
+		static PLAYER_KIND currentPlayer = PLAYER_RED;
+		if (event->getMouseButton() == 0)
+			currentPlayer = PLAYER_RED;
+		else if (event->getMouseButton() == 1)
+			currentPlayer = PLAYER_BLUE;
+		else
+		{
+			UnitManager::getInstance()->summonUnit("bowman", pos, currentPlayer);
+			return false;
+		}
+		UnitManager::getInstance()->summonUnit("swordman", pos, currentPlayer);
 	}
 
 	return false;
