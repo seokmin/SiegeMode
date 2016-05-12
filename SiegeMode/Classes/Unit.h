@@ -34,7 +34,6 @@ class Unit :
 {
 public:
 	virtual bool init(PLAYER_KIND playerKind);
-	CREATE_FUNC_UNIT(Unit);
 	virtual void		update(float delta) override;
 	template<typename T_STATE>
 	void				changeState();
@@ -55,16 +54,18 @@ public:
 	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
 	CC_SYNTHESIZE(float, _attackDelay, AttackDelay);
 	CC_SYNTHESIZE(bool, _isDead, IsDead);
-	
+	CC_SYNTHESIZE(float, _attackAccuracy, AttackAccuracy);
+
 	Unit*				scanNearestTarget();
-	void				kill();
-	void				moveTo(Vec2 destination);
-	void				moveBy(Vec2 directionVec, float duration);
+	virtual void		kill();
+	virtual void		moveTo(Vec2 destination);
+	virtual void		moveBy(Vec2 directionVec, float duration);
 	void				stopMove();
 	void				stopAnimation();
 	void				startAnimate(std::string animName, bool isRepeatForever);
 	virtual void		attackOnce();
-	void				beHit(unsigned attackPower);
+	virtual void		beHit(unsigned attackPower);
+	void				scheduleBeHit(unsigned attackPower, float delay);
 	virtual void		onExit() override { Node::onExit(); }
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);

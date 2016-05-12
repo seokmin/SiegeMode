@@ -10,11 +10,11 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	_attackSpeed = 1.f;
 	_moveSpeed = 30.f;
 	_attackRange = 30.f;
-	_sightRange = 50.f;
-	_attackDelay = 0.4f;
+	_sightRange = 100.f;
+	_attackDelay = 0.1f;
 	_attackPower = 20;
 	_health = 50;
-
+	_attackAccuracy = 1.f;
 	this->setUnitName("swordman");
 	//this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
 	if (this->getOwnerPlayer() == PLAYER_RED)
@@ -29,4 +29,22 @@ bool Swordman::init(PLAYER_KIND playerKind)
 
 	this->changeState<UnitState_WalkAndSeek>();
 	return true;
+}
+
+void Swordman::moveTo(Vec2 destination)
+{
+	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	Unit::moveTo(destination);
+}
+
+void Swordman::moveBy(Vec2 directionVec, float duration)
+{
+	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	Unit::moveBy(directionVec, duration);
+}
+
+void Swordman::attackOnce()
+{
+	this->setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
+	Unit::attackOnce();
 }

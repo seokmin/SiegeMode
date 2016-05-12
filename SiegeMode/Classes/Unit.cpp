@@ -119,17 +119,20 @@ void Unit::startAnimate(std::string animName, bool isRepeatForever)
 	this->runAction(animate);
 }
 
-void Unit::attackOnce()
-{
-	startAnimate("attack", false);
-	getAttackTarget()->runAction(Sequence::create(DelayTime::create(_attackDelay), CallFuncN::create(CC_CALLBACK_0(Unit::beHit, getAttackTarget(), _attackPower)), nullptr));
-}
-
 void Unit::beHit(unsigned attackPower)
 {
 	_health -= attackPower;
+	runAction(Sequence::create(TintTo::create(0.03f,Color3B::RED),TintTo::create(0.1f,Color3B::WHITE) ,nullptr));
 	if (_health <= 0)
 		this->kill();
+}
+
+void Unit::scheduleBeHit(unsigned attackPower, float delay)
+{
+	runAction(Sequence::create(
+		DelayTime::create(delay), CallFuncN::create(
+			CC_CALLBACK_0(Unit::beHit, this, attackPower)
+		), nullptr));
 }
 
 void Unit::update(float delta)
@@ -147,4 +150,11 @@ void Unit::setAttackTarget(int targetTag)
 {
 	if (UnitManager::getInstance()->getUnitByTag(targetTag))
 		_tagAttackTarget = targetTag;
+}
+
+void Unit::attackOnce()
+{
+	startAnimate("attack", false);
+	if (RandomHelper::random_real(0.f, 1.f) <= _attackAccuracy)
+		getAttackTarget()->scheduleBeHit(_attackPower, _attackDelay);
 }
