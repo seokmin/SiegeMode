@@ -9,11 +9,13 @@ bool Bowman::init(PLAYER_KIND playerKind)
 		return false;
 	_attackSpeed = 1.f;
 	_moveSpeed = 30.f;
-	_attackRange = 150.f;
-	_sightRange = 200.f;
+	_attackRange = 450.f;
+	_sightRange = 500.f;
 	_attackDelay = 0.4f;
-	_attackPower = 20;
-	_health = 50;
+	_attackPower = 12;
+	_health = 30;
+	_attackAccuracy = 0.75f;
+	_arrowSpeed = 1500.f;
 
 	this->setUnitName("bowman");
 	if (this->getOwnerPlayer() == PLAYER_RED)
@@ -28,4 +30,53 @@ bool Bowman::init(PLAYER_KIND playerKind)
 
 	this->changeState<UnitState_WalkAndSeek>();
 	return true;
+}
+
+void Bowman::attackOnce()
+{
+	this->setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
+
+	runAction(Sequence::create(
+		DelayTime::create(_attackDelay), CallFuncN::create(
+			CC_CALLBACK_0(Bowman::shootArrow, this, getAttackTarget()->getPosition())), nullptr));
+
+	startAnimate("attack", false);
+
+	_arrowTime = _position.getDistance(getAttackTarget()->getPosition()) / _arrowSpeed;
+	if (RandomHelper::random_real(0.f, 1.f) <= _attackAccuracy)
+		getAttackTarget()->scheduleBeHit(_attackPower, _attackDelay + _arrowTime);
+}
+void Bowman::moveTo(Vec2 destination)
+{
+	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	Unit::moveTo(destination);
+}
+
+void Bowman::shootArrow(Vec2 targetPos)
+{
+	targetPos += Vec2(0, 30);
+	Sprite* arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
+	addChild(arrow);
+
+	if (_ownerPlayer == PLAYER_RED)
+		arrow->setPosition(0,10);
+	else
+		arrow->setPosition(0, 10);
+
+	arrow->setAnchorPoint(Vec2(0.5f,0.5f));
+	arrow->getTexture()->setAliasTexParameters();
+	arrow->setGlobalZOrder(100);
+	arrow->setRotation(360.f - ccpToAngle(targetPos -_position) * 180.f / 3.141592f);
+	
+	auto toPoint = (targetPos - _position) / 2 + Vec2(20,0);
+// 	if (_ownerPlayer == PLAYER_RED)
+// 		toPoint += Vec2(20, 0);
+	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime,toPoint),DelayTime::create(0.05f),RemoveSelf::create(true),nullptr));
+	arrow->retain();
+}
+
+void Bowman::moveBy(Vec2 directionVec, float duration)
+{
+	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	Unit::moveBy(directionVec, duration);
 }
