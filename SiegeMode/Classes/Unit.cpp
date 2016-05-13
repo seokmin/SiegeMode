@@ -29,13 +29,17 @@ Unit* Unit::scanNearestTarget()
 	Unit* nearestUnit = nullptr;
 	for (auto i : unitList->getChildren())
 	{
-		if (static_cast<Unit*>(i)->getOwnerPlayer() == this->getOwnerPlayer())
+		auto currentTargetUnit = static_cast<Unit*>(i);
+		if (currentTargetUnit->getOwnerPlayer() == this->getOwnerPlayer())
+			continue;
+		auto a = _ownerPlayer == PLAYER_RED ? 1 : -1;
+		if (a*currentTargetUnit->getPositionX() > a*getPositionX())
 			continue;
 		auto distance = i->getPosition().getDistance(this->getPosition());
 		if (minDistance > distance)
 		{
 			minDistance = distance;
-			nearestUnit = static_cast<Unit*>(i);
+			nearestUnit = currentTargetUnit;
 		}
 	}
 	return nearestUnit;
@@ -122,7 +126,8 @@ void Unit::startAnimate(std::string animName, bool isRepeatForever)
 void Unit::beHit(unsigned attackPower)
 {
 	_health -= attackPower;
-	runAction(Sequence::create(TintTo::create(0.03f,Color3B::RED),TintTo::create(0.1f,Color3B::WHITE) ,nullptr));
+	runAction(Sequence::create(TintTo::create(0.03f, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE), nullptr));
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/hit.wav");
 	if (_health <= 0)
 		this->kill();
 }
@@ -137,6 +142,7 @@ void Unit::scheduleBeHit(unsigned attackPower, float delay)
 
 void Unit::update(float delta)
 {
+	setLocalZOrder(-_position.y);
 	_state->runState(this, delta);
 }
 

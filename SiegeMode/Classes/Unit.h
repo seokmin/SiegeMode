@@ -1,7 +1,7 @@
 #pragma once
 
 #include "UnitState.h"
-
+#include "SimpleAudioEngine.h"
 
 //Unit 자식 클래스를 위한 CREATE_FUNC
 #define CREATE_FUNC_UNIT(__TYPE__) \

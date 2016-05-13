@@ -54,25 +54,21 @@ void Bowman::moveTo(Vec2 destination)
 
 void Bowman::shootArrow(Vec2 targetPos)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bow_release.wav");
 	targetPos += Vec2(0, 30);
 	Sprite* arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
-	addChild(arrow);
+	auto parent = getParent()->getParent();
+	parent->addChild(arrow);
+	
+	arrow->setPosition(getPosition() + Vec2(0, 10));
 
-	if (_ownerPlayer == PLAYER_RED)
-		arrow->setPosition(0,10);
-	else
-		arrow->setPosition(0, 10);
-
-	arrow->setAnchorPoint(Vec2(0.5f,0.5f));
 	arrow->getTexture()->setAliasTexParameters();
 	arrow->setGlobalZOrder(100);
-	arrow->setRotation(360.f - ccpToAngle(targetPos -_position) * 180.f / 3.141592f);
-	
-	auto toPoint = (targetPos - _position) / 2 + Vec2(20,0);
-// 	if (_ownerPlayer == PLAYER_RED)
-// 		toPoint += Vec2(20, 0);
-	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime,toPoint),DelayTime::create(0.05f),RemoveSelf::create(true),nullptr));
-	arrow->retain();
+	arrow->setRotation(360.f - ccpToAngle(targetPos - _position) * 180.f / 3.141592f);
+	arrow->setScale(1.5f);
+
+	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime, targetPos), DelayTime::create(0.05f), RemoveSelf::create(true), nullptr));
+
 }
 
 void Bowman::moveBy(Vec2 directionVec, float duration)

@@ -13,7 +13,8 @@ void UnitState_Approach::startState(Unit* unit)
 
 void UnitState_Approach::runState(Unit* unit, float delta)
 {
-	if (unit->getAttackTarget() == nullptr)
+	auto a = unit->getOwnerPlayer() == PLAYER_RED ? 1 : -1;
+	if (unit->getAttackTarget() == nullptr || a*unit->getAttackTarget()->getPositionX() > a*unit->getPositionX())
 	{
 		unit->changeState<UnitState_WalkAndSeek>();
 		return;

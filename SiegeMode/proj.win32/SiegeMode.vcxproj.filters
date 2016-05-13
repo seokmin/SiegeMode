@@ -21,9 +21,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\pch.cpp" />
     <ClCompile Include="..\Classes\AnimationManager.cpp">
       <Filter>src</Filter>
@@ -49,15 +46,15 @@
     <ClCompile Include="..\Classes\UnitManager.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BattleScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\pch.h" />
@@ -88,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UnitManager.h">
       <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleScene.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

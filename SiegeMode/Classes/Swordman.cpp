@@ -45,6 +45,7 @@ void Swordman::moveBy(Vec2 directionVec, float duration)
 
 void Swordman::attackOnce()
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/stab.wav");
 	this->setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
 	Unit::attackOnce();
 }

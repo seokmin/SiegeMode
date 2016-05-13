@@ -155,7 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AnimationManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bowman.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\BattleScene.cpp" />
     <ClCompile Include="..\Classes\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -172,7 +172,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Bowman.h" />
     <ClInclude Include="..\Classes\definition.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\BattleScene.h" />
     <ClInclude Include="..\Classes\pch.h" />
     <ClInclude Include="..\Classes\Swordman.h" />
     <ClInclude Include="..\Classes\Unit.h" />

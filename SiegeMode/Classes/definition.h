@@ -6,5 +6,10 @@ enum PLAYER_KIND
 	PLAYER_BLUE
 };
 
+#define ZORDER_BACKGROUND	0
+#define ZORDER_UNIT			1
+#define ZORDER_EFFECT		2
+#define ZORDER_UI			3
+
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720

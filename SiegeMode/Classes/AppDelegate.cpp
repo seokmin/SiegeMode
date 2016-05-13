@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "BattleScene.h"
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
