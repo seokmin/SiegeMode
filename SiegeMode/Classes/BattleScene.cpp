@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "BattleScene.h"
-
 #include "UnitManager.h"
+#include "SimpleAudioEngine.h"
+#include "SummonButton.h"
 
 Scene* BattleScene::createScene()
 {
@@ -52,12 +53,8 @@ bool BattleScene::init()
 	// set background image
 	auto backgroundSpr = Sprite::create("SpriteSource/background/backgroundHigher.png");
 	backgroundSpr->setAnchorPoint(Vec2(0, 0));
-	this->addChild(backgroundSpr,1);
+	this->addChild(backgroundSpr,ZORDER_BACKGROUND);
 	backgroundSpr->getTexture()->setAliasTexParameters();
-	auto testUI = Sprite::create("SpriteSource/UI/testui.png");
-	testUI->getTexture()->setAliasTexParameters();
-	testUI->setAnchorPoint(Vec2(0, 0));
-	this->addChild(testUI, 3);
 
 	/////////////////////////////
 	// 3. add your codes below...
@@ -66,7 +63,11 @@ bool BattleScene::init()
 	// create and initialize a label
 
 	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
-	
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/hit.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/stab.wav");
+
 	this->addChild(UnitManager::getInstance()->getUnitList(),2);
 
 	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
@@ -89,19 +90,19 @@ bool BattleScene::init()
 //  	rt->end();
 //  	addChild(rt);
 	
-	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+// 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+// 
+// 
+// 	auto testListener = EventListenerTouchOneByOne::create();
+// 	testListener->setSwallowTouches(true);
+// 	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
+// 	dispatcher->addEventListenerWithSceneGraphPriority(testListener, this);
 
+	auto btn = SummonButton::create(Vec2(800, 75), "swordman");
+	addChild(btn);
+	auto btn2 = SummonButton::create(Vec2(960, 75), "bowman");
+	addChild(btn2);
 
-#if (CC_TARGET_PLATFORM==CC_PLATFORM_WIN32)
-	auto testListener = EventListenerMouse::create();
-	testListener->onMouseDown = CC_CALLBACK_1(BattleScene::onMouseTouchBegan, this);
-#else
-	auto testListener = EventListenerTouchOneByOne::create();
-	testListener->setSwallowTouches(true);
-	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
-#endif
-
-	dispatcher->addEventListenerWithSceneGraphPriority(testListener, this);
 	this->scheduleUpdate();
 	return true;
 }
@@ -121,7 +122,7 @@ bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 	static bool isRed = true;
 	auto target = event->getCurrentTarget();
 	Point pos = target->convertToNodeSpace(touch->getLocation());
-	Rect rect = Rect(0, 200, this->getContentSize().width, 220);
+	Rect rect = Rect(0, 180, this->getContentSize().width, 200);
 	if (rect.containsPoint(pos))
 	{
 		UnitManager::getInstance()->summonUnit("swordman", pos, isRed ? PLAYER_RED : PLAYER_BLUE);
@@ -130,6 +131,7 @@ bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
 	return false;
 }
 
+/*
 bool BattleScene::onMouseTouchBegan(EventMouse* event)
 {
 	Point pos = event->getLocationInView();
@@ -151,6 +153,7 @@ bool BattleScene::onMouseTouchBegan(EventMouse* event)
 
 	return false;
 }
+*/
 
 void BattleScene::update(float delta)
 {
