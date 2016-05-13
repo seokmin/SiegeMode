@@ -103,6 +103,7 @@ bool BattleScene::init()
 	auto btn2 = SummonButton::create(Vec2(960, 75), "bowman");
 	addChild(btn2);
 
+
 	this->scheduleUpdate();
 	return true;
 }

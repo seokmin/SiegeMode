@@ -21,7 +21,7 @@ bool Bowman::init(PLAYER_KIND playerKind)
 	if (this->getOwnerPlayer() == PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/bowman/bowman_walk_red.png", 30, 28, 6);
 	else
-		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/Bowman/bowman_walk_blue.png", 30, 28, 6);
+		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/bowman/bowman_walk_blue.png", 30, 28, 6);
 
 	if (this->getOwnerPlayer() == PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/bowman/bowman_attack_red.png", 35, 28, 3);
