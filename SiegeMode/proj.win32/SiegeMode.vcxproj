@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bowman.cpp" />
     <ClCompile Include="..\Classes\BattleScene.cpp" />
+    <ClCompile Include="..\Classes\Flagman.cpp" />
     <ClCompile Include="..\Classes\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -165,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\UnitManager.cpp" />
     <ClCompile Include="..\Classes\UnitState_Approach.cpp" />
     <ClCompile Include="..\Classes\UnitState_Attack.cpp" />
+    <ClCompile Include="..\Classes\UnitState_Stay.cpp" />
     <ClCompile Include="..\Classes\UnitState_WalkAndSeek.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -174,6 +176,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Bowman.h" />
     <ClInclude Include="..\Classes\definition.h" />
     <ClInclude Include="..\Classes\BattleScene.h" />
+    <ClInclude Include="..\Classes\Flagman.h" />
     <ClInclude Include="..\Classes\pch.h" />
     <ClInclude Include="..\Classes\SummonButton.h" />
     <ClInclude Include="..\Classes\Swordman.h" />
@@ -182,6 +185,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\UnitState.h" />
     <ClInclude Include="..\Classes\UnitState_Approach.h" />
     <ClInclude Include="..\Classes\UnitState_Attack.h" />
+    <ClInclude Include="..\Classes\UnitState_Stay.h" />
     <ClInclude Include="..\Classes\UnitState_WalkAndSeek.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

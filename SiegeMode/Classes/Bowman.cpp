@@ -3,7 +3,7 @@
 #include "UnitState_WalkAndSeek.h"
 #include "AnimationManager.h"
 
-bool Bowman::init(PLAYER_KIND playerKind)
+bool Bowman::init(DEF::PLAYER_KIND playerKind)
 {
 	if (!Unit::init(playerKind))
 		return false;
@@ -19,13 +19,13 @@ bool Bowman::init(PLAYER_KIND playerKind)
 	_arrowSpeed = 1500.f;
 
 	this->setUnitName("bowman");
-	if (this->getOwnerPlayer() == PLAYER_RED)
+	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/bowman/bowman_walk_red.png", 30, 28, 6);
 	else
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/bowman/bowman_walk_blue.png", 30, 28, 6);
 
-	if (this->getOwnerPlayer() == PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/bowman/bowman_attack_red.png", 35, 28, 3);
+	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
+		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/bowman/bowman_attack_red.png", 35, 28, 5);
 	else
 		AnimationManager::getInstance()->addAnimation(_unitName, "attack_blue", 0.2f, "SpriteSource/bowman/bowman_attack_blue.png", 35, 28, 3);
 
@@ -56,16 +56,19 @@ void Bowman::moveTo(Vec2 destination)
 void Bowman::shootArrow(Vec2 targetPos)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bow_release.wav");
-	targetPos += Vec2(0, 30);
+	auto direction = _ownerPlayer == DEF::PLAYER_RED ? -1 : 1;
+	targetPos += Vec2(direction * 10, 25);
 	Sprite* arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
 	auto parent = getParent()->getParent();
 	parent->addChild(arrow);
 	
-	arrow->setPosition(getPosition() + Vec2(0, 10));
+	arrow->setPosition(getPosition() + Vec2(0, 20));
 
 	arrow->getTexture()->setAliasTexParameters();
-	arrow->setGlobalZOrder(100);
-	arrow->setRotation(360.f - ccpToAngle(targetPos - _position) * 180.f / 3.141592f);
+	arrow->setGlobalZOrder(DEF::ZORDER_UNIT);
+	arrow->setLocalZOrder(1000);
+
+	arrow->setRotation(360.f - (targetPos - _position).getAngle() * 180.f / 3.141592f);
 	arrow->setScale(1.5f);
 
 	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime, targetPos), DelayTime::create(0.05f), RemoveSelf::create(true), nullptr));

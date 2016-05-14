@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Unit.h"
 #include "UnitManager.h"
-#include "AnimationManager.h"1
+#include "AnimationManager.h"
 
-bool Unit::init(PLAYER_KIND playerKind)
+bool Unit::init(DEF::PLAYER_KIND playerKind)
 {
 	this->Sprite::init();
 	//디버그용 라벨 셋팅
@@ -24,7 +24,7 @@ bool Unit::init(PLAYER_KIND playerKind)
 
 	_isDead = false;
 
-	this->setFlippedX(playerKind == PLAYER_BLUE);
+	this->setFlippedX(playerKind == DEF::PLAYER_RED);
 	this->_ownerPlayer = playerKind;
 	this->setScale(2.f);
 	return true;
@@ -41,7 +41,7 @@ Unit* Unit::scanNearestTarget()
 		auto currentTargetUnit = static_cast<Unit*>(i);
 		if (currentTargetUnit->getOwnerPlayer() == this->getOwnerPlayer())
 			continue;
-		auto a = _ownerPlayer == PLAYER_RED ? 1 : -1;
+		auto a = _ownerPlayer == DEF::PLAYER_BLUE ? 1 : -1;
 		if (a*currentTargetUnit->getPositionX() > a*getPositionX())
 			continue;
 		auto distance = i->getPosition().getDistance(this->getPosition());
@@ -121,7 +121,7 @@ void Unit::stopAnimation()
 void Unit::startAnimate(std::string animName, bool isRepeatForever)
 {
 	this->stopAllActionsByTag(ACTION_ANIMATE);
-	auto animation = AnimationManager::getInstance()->getAnimation(_unitName, animName + (_ownerPlayer == PLAYER_RED ? "_red" : "_blue"));
+	auto animation = AnimationManager::getInstance()->getAnimation(_unitName, animName + (_ownerPlayer == DEF::PLAYER_RED ? "_red" : "_blue"));
 	Action* animate;
 	if (isRepeatForever)
 		animate = RepeatForever::create(Animate::create(animation));
@@ -152,7 +152,7 @@ void Unit::scheduleBeHit(unsigned attackPower, float delay)
 
 void Unit::setAnchorPoint(const Vec2& anchor)
 {
-	if (_ownerPlayer == PLAYER_RED)
+	if (_ownerPlayer == DEF::PLAYER_BLUE)
 		Sprite::setAnchorPoint(anchor);
 	else
 		Sprite::setAnchorPoint(Vec2(1.f - anchor.x,anchor.y));

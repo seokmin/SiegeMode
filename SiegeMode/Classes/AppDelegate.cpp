@@ -2,7 +2,7 @@
 #include "AppDelegate.h"
 #include "BattleScene.h"
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(SCREEN_WIDTH, SCREEN_HEIGHT);
+static cocos2d::Size designResolutionSize = cocos2d::Size(DEF::SCREEN_WIDTH, DEF::SCREEN_HEIGHT);
 
 AppDelegate::AppDelegate() {
 

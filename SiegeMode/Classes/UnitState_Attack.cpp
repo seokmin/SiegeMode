@@ -24,7 +24,7 @@ void UnitState_Attack::runState(Unit* unit, float delta)
 	{
 		//Å¸°ÙÀÌ Á×¾ú°Å³ª, ³ª¸¦ Áö³ªÃÆÀ¸¸é ´Ù½Ã °È´Â´Ù.
 
-		auto a = unit->getOwnerPlayer() == PLAYER_RED ? 1 : -1;
+		auto a = unit->getOwnerPlayer() == DEF::PLAYER_BLUE ? 1 : -1;
 		if (unit->getAttackTarget() == nullptr || a*unit->getAttackTarget()->getPositionX() > a*unit->getPositionX())
 		{
 			unit->changeState<UnitState_WalkAndSeek>();

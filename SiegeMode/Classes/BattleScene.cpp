@@ -3,6 +3,7 @@
 #include "UnitManager.h"
 #include "SimpleAudioEngine.h"
 #include "SummonButton.h"
+#include <array>
 
 Scene* BattleScene::createScene()
 {
@@ -53,7 +54,7 @@ bool BattleScene::init()
 	// set background image
 	auto backgroundSpr = Sprite::create("SpriteSource/background/backgroundHigher.png");
 	backgroundSpr->setAnchorPoint(Vec2(0, 0));
-	this->addChild(backgroundSpr,ZORDER_BACKGROUND);
+	this->addChild(backgroundSpr,DEF::ZORDER_BACKGROUND);
 	backgroundSpr->getTexture()->setAliasTexParameters();
 
 	/////////////////////////////
@@ -61,8 +62,6 @@ bool BattleScene::init()
 
 	// add a label shows "Hello World"
 	// create and initialize a label
-
-	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/hit.wav");
@@ -80,29 +79,14 @@ bool BattleScene::init()
 	this->addChild(label, 3);
 
 
-//  	auto rt = RenderTexture::create(640, 400);
-//  	BlendFunc blend;
-//  	blend.src = GL_ONE_MINUS_SRC_ALPHA;
-//  	blend.dst = GL_ONE_MINUS_SRC_COLOR;
-//  	testUnit->setBlendFunc(blend);
-//  	rt->beginWithClear(0, 0, 0, 0);
-//  		testUnit->visit();
-//  	rt->end();
-//  	addChild(rt);
-	
-// 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
-// 
-// 
-// 	auto testListener = EventListenerTouchOneByOne::create();
-// 	testListener->setSwallowTouches(true);
-// 	testListener->onTouchBegan = CC_CALLBACK_2(BattleScene::onSprTouchBegan, this);
-// 	dispatcher->addEventListenerWithSceneGraphPriority(testListener, this);
-
 	auto btn = SummonButton::create(Vec2(800, 75), "swordman");
 	addChild(btn);
 	auto btn2 = SummonButton::create(Vec2(960, 75), "bowman");
 	addChild(btn2);
 
+	//플래그맨 두기.
+	UnitManager::getInstance()->summonUnit("flagman", Vec2(30, 250), DEF::PLAYER_RED);
+	UnitManager::getInstance()->summonUnit("flagman", Vec2(DEF::SCREEN_WIDTH-30,250), DEF::PLAYER_BLUE);
 
 	this->scheduleUpdate();
 	return true;
@@ -118,45 +102,24 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 #endif
 }
 
-bool BattleScene::onSprTouchBegan(Touch* touch, Event* event)
-{
-	static bool isRed = true;
-	auto target = event->getCurrentTarget();
-	Point pos = target->convertToNodeSpace(touch->getLocation());
-	Rect rect = Rect(0, 180, this->getContentSize().width, 200);
-	if (rect.containsPoint(pos))
-	{
-		UnitManager::getInstance()->summonUnit("swordman", pos, isRed ? PLAYER_RED : PLAYER_BLUE);
-		isRed = !isRed;
-	}
-	return false;
-}
-
-/*
-bool BattleScene::onMouseTouchBegan(EventMouse* event)
-{
-	Point pos = event->getLocationInView();
-	Rect rect = Rect(0, 180, this->getContentSize().width, 200);
-	if (rect.containsPoint(pos))
-	{
-		static PLAYER_KIND currentPlayer = PLAYER_RED;
-		if (event->getMouseButton() == 0)
-			currentPlayer = PLAYER_RED;
-		else if (event->getMouseButton() == 1)
-			currentPlayer = PLAYER_BLUE;
-		else
-		{
-			UnitManager::getInstance()->summonUnit("bowman", pos, currentPlayer);
-			return false;
-		}
-		UnitManager::getInstance()->summonUnit("swordman", pos, currentPlayer);
-	}
-
-	return false;
-}
-*/
-
 void BattleScene::update(float delta)
 {
+	static auto sumDelta = 0.f;
+	static auto frequency = 1.f;
+
+	sumDelta += delta;
+	if (sumDelta >= frequency)
+	{
+		frequency = RandomHelper::random_real(2.f, 4.f);
+		auto randX = RandomHelper::random_real((float)DEF::SCREEN_WIDTH - 100, (float)DEF::SCREEN_WIDTH);
+		auto randY = RandomHelper::random_real(DEF::FIGHTING_ZONE.getMinY(), DEF::FIGHTING_ZONE.getMaxY());
+		static std::array<std::string,(size_t)2> names = {"swordman","bowman"};
+
+		auto randIt =names.begin();
+		std::advance(randIt, std::rand() % names.size());
+
+		UnitManager::getInstance()->summonUnit(*randIt, Vec2(randX,randY), DEF::PLAYER_BLUE);
+		sumDelta = 0.f;
+	}
 
 }

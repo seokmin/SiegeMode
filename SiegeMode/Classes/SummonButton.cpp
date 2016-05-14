@@ -9,18 +9,23 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 {
 	auto newInst = SummonButton::create();
 	newInst->setPosition(pos);
-	newInst->setGlobalZOrder(ZORDER_UI);
+	newInst->setGlobalZOrder(DEF::ZORDER_UI);
 
 	auto newFrame = Sprite::create("SpriteSource/UI/unit_frame.png");
 	auto newUnit = Sprite::create("SpriteSource/UI/" + unitName + ".png");
+	auto newCover = Sprite::create("SpriteSource/UI/framecover.png");
 
+	newCover->setLocalZOrder(newFrame->getLocalZOrder() + 2);
 	newUnit->setLocalZOrder(newFrame->getLocalZOrder() + 1);
-	newUnit->setGlobalZOrder(ZORDER_UI);
-	newFrame->setGlobalZOrder(ZORDER_UI);
+	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
+	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
+	newCover->setGlobalZOrder(DEF::ZORDER_UI);
 	newInst->addChild(newFrame);
 	newInst->addChild(newUnit);
+	newInst->addChild(newCover);
 	newFrame->getTexture()->setAliasTexParameters();
 	newUnit->getTexture()->setAliasTexParameters();
+	newCover->getTexture()->setAliasTexParameters();
 
 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
@@ -28,27 +33,42 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	listener->onTouchBegan = CC_CALLBACK_2(SummonButton::onSprTouchBegan, newInst);
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, newInst);
 
+	newInst->setFrameCover(newCover);
 	newInst->setFrame(newFrame);
 	newInst->setUnit(newUnit);
-	newInst->setAnchorPoint(Vec2(0.f,0.f));
+	newInst->setAnchorPoint(Vec2(0.f, 0.f));
 	newInst->setUnitName(unitName);
+	newInst->scheduleUpdate();
+
+	newCover->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+	newCover->setPositionY(newFrame->getContentSize().height / -2.f);
+	newCover->setOpacity(255 * 0.7f);
+	newCover->setScaleY(0.f);
 	return newInst;
+}
+
+void SummonButton::update(float delta)
+{
+	auto coolTime = 5.f;
+	if (_frameCover->getScaleY() > 0.f)
+		_frameCover->setScaleY(_frameCover->getScaleY() - delta / coolTime);
 }
 
 bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
 	//소환체크
 
-	if (_selectedUnitName != "")
+	if (_selectedUnitName == _unitName && _frameCover->getScaleY() <= 0.f)
 	{
 
 		Point pos = touch->getLocation();
-		Rect rect = Rect(0, 180, getParent()->getContentSize().width, 200);
+		Rect rect = DEF::FIGHTING_ZONE;
 		if (rect.containsPoint(pos))
 		{
-			UnitManager::getInstance()->summonUnit(_selectedUnitName, pos, _isRed ? PLAYER_RED : PLAYER_BLUE);
-			_selectedUnitName = "";
-			_isRed = !_isRed;
+			UnitManager::getInstance()->summonUnit(_selectedUnitName, pos, _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
+			//_selectedUnitName = "";
+			//_isRed = !_isRed;
+			_frameCover->setScaleY(1.f);
 			return true;
 		}
 	}
@@ -62,8 +82,8 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 		runAction(
 			EaseElasticOut::create(
 				Sequence::create(
-					ScaleTo::create(0.6, 1.1),
-					ScaleTo::create(0.4, 1.00),
+					ScaleTo::create(0.3f, 1.05f),
+					ScaleTo::create(0.4f, 1.00f),
 					nullptr)));
 
 		// ------ 오버레이 효과 ------
@@ -76,9 +96,10 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 		overlay->setBlendFunc(add);
 
 		overlay->runAction(
-			ScaleTo::create(0.4, getScale() * 1.2));
+			Sequence::create(
+				ScaleTo::create(0.4f, getScale() * 1.2f), RemoveSelf::create(true), nullptr));
 		overlay->runAction(
-			FadeOut::create(0.4));
+			FadeOut::create(0.4f));
 		overlay->setPosition(getPosition());
 
 		getParent()->addChild(overlay);

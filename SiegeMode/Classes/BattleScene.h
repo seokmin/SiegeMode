@@ -9,8 +9,6 @@ public:
     
     // a selector callback
     void menuCloseCallback(Ref* pSender);
-    
-	bool onSprTouchBegan(Touch* touch, Event* event);
 /*	bool onMouseTouchBegan(EventMouse* event);*/
 
 	void update(float delta);

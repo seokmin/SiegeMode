@@ -2,6 +2,7 @@
 #include "UnitManager.h"
 #include "Swordman.h"
 #include "Bowman.h"
+#include "Flagman.h"
 
 
 UnitManager* UnitManager::_instance = nullptr;
@@ -13,7 +14,7 @@ UnitManager* UnitManager::getInstance()
 	return _instance;
 }
 
-void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ownerPlayer)
+void UnitManager::summonUnit(std::string unitName, Vec2 position, DEF::PLAYER_KIND ownerPlayer)
 {
 	static int tagid = 1;
 	Unit* newUnit = nullptr;
@@ -24,6 +25,10 @@ void UnitManager::summonUnit(std::string unitName, Vec2 position, PLAYER_KIND ow
 	else if (unitName == "bowman")
 	{
 		newUnit = Bowman::create(ownerPlayer);
+	}
+	else if (unitName == "flagman")
+	{
+		newUnit = Flagman::create(ownerPlayer);
 	}
 
 	newUnit->setTag(++tagid);

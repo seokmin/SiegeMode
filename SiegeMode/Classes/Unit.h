@@ -5,7 +5,7 @@
 
 //Unit 자식 클래스를 위한 CREATE_FUNC
 #define CREATE_FUNC_UNIT(__TYPE__) \
-static __TYPE__* create(PLAYER_KIND ownerPlayer) \
+static __TYPE__* create(DEF::PLAYER_KIND ownerPlayer) \
 { \
     __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
     if (pRet && pRet->init(ownerPlayer)) \
@@ -33,7 +33,7 @@ class Unit :
 	public Sprite
 {
 public:
-	virtual bool init(PLAYER_KIND playerKind);
+	virtual bool init(DEF::PLAYER_KIND playerKind);
 	virtual void		update(float delta) override;
 	template<typename T_STATE>
 	void				changeState();
@@ -51,7 +51,7 @@ public:
 	CC_SYNTHESIZE(float, _sightRange, SightRange);
 	CC_SYNTHESIZE(int, _health, Health);
 	CC_SYNTHESIZE(unsigned, _attackPower, AttackPower);
-	CC_SYNTHESIZE_READONLY(PLAYER_KIND, _ownerPlayer, OwnerPlayer);
+	CC_SYNTHESIZE_READONLY(DEF::PLAYER_KIND, _ownerPlayer, OwnerPlayer);
 	CC_SYNTHESIZE(float, _attackDelay, AttackDelay);
 	CC_SYNTHESIZE(bool, _isDead, IsDead);
 	CC_SYNTHESIZE(float, _attackAccuracy, AttackAccuracy);

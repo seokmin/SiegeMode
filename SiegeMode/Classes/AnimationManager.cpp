@@ -47,7 +47,7 @@ void AnimationManager::addAnimation(std::string actorName, std::string animName,
 		return;
 	}
 	Vector<SpriteFrame*> animFrames(frameCount);
-	for (auto i = 1; i <= frameCount; ++i)
+	for (auto i = 1u; i <= frameCount; ++i)
 	{
 		auto frame = SpriteFrame::create(fileName, Rect((i - 1)*width, 0, width, height));
 		animFrames.pushBack(frame);
