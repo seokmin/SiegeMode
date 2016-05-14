@@ -67,9 +67,9 @@ bool BattleScene::init()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/hit.wav");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/stab.wav");
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3", true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.7f);
 	this->addChild(UnitManager::getInstance()->getUnitList(),2);
-
 	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
 
 	// position the label on the center of the screen
