@@ -13,7 +13,8 @@ bool Swordman::init(PLAYER_KIND playerKind)
 	_sightRange = 100.f;
 	_attackDelay = 0.1f;
 	_attackPower = 20;
-	_health = 50;
+	_maxHealth = 70;
+	_health = _maxHealth;
 	_attackAccuracy = 1.f;
 	this->setUnitName("swordman");
 	//this->setTexture("SpriteSource/swordman/swordman_walk_1.png");

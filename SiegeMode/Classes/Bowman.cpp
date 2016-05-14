@@ -7,13 +7,14 @@ bool Bowman::init(PLAYER_KIND playerKind)
 {
 	if (!Unit::init(playerKind))
 		return false;
-	_attackSpeed = 1.f;
+	_attackSpeed = 2.f;
 	_moveSpeed = 30.f;
 	_attackRange = 450.f;
 	_sightRange = 500.f;
 	_attackDelay = 0.4f;
 	_attackPower = 12;
-	_health = 30;
+	_maxHealth = 40;
+	_health = _maxHealth;
 	_attackAccuracy = 0.75f;
 	_arrowSpeed = 1500.f;
 

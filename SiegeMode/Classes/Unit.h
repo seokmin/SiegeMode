@@ -41,7 +41,7 @@ public:
 
 	int					_tagAttackTarget = -1;
 	Unit*				getAttackTarget();
-	void setAttackTarget(int targetTag);
+	void				setAttackTarget(int targetTag);
 
 	CC_SYNTHESIZE(UnitState*, _state, State);
 	CC_SYNTHESIZE(std::string, _unitName, UnitName);
@@ -69,6 +69,9 @@ public:
 	virtual void		onExit() override { Node::onExit(); }
 	//디버그용
 	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
+	CC_SYNTHESIZE(Sprite*, _healthBar, HealthBar);
+	CC_SYNTHESIZE(int, _maxHealth, MaxHealth);
+	virtual void		setAnchorPoint(const Vec2& anchor) override;
 private:
 };
 

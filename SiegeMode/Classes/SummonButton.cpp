@@ -58,6 +58,31 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 	if (rect.containsPoint(pos))
 	{
 		_selectedUnitName = _unitName;
+		// ------- 통통 튀는 효과 ------
+		runAction(
+			EaseElasticOut::create(
+				Sequence::create(
+					ScaleTo::create(0.6, 1.1),
+					ScaleTo::create(0.4, 1.00),
+					nullptr)));
+
+		// ------ 오버레이 효과 ------
+		auto overlay = Sprite::createWithTexture(_frame->getTexture());
+
+		// 밝게 빛나는 효과를 주기 위해 블렌딩을 설정한다.
+		BlendFunc add;
+		add.dst = GL_ONE;
+		add.src = GL_SRC_ALPHA;
+		overlay->setBlendFunc(add);
+
+		overlay->runAction(
+			ScaleTo::create(0.4, getScale() * 1.2));
+		overlay->runAction(
+			FadeOut::create(0.4));
+		overlay->setPosition(getPosition());
+
+		getParent()->addChild(overlay);
+
 		return true;
 	}
 	return false;
