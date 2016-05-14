@@ -8,7 +8,9 @@ void UnitState_WalkAndSeek::startState(Unit* unit)
 	auto moveDirection = unit->getOwnerPlayer() == DEF::PLAYER_BLUE ? -1 : 1;
 	unit->startAnimate("walk", true);
 	unit->moveBy(Vec2(moveDirection, 0), 0.f);
+#if _DEBUG_LABEL
 	unit->getDebugLabel()->setString("walking!");
+#endif
 }
 
 void UnitState_WalkAndSeek::runState(Unit* unit, float delta)

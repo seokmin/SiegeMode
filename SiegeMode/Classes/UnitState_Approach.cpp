@@ -8,7 +8,9 @@
 void UnitState_Approach::startState(Unit* unit)
 {
 	unit->startAnimate("walk", true);
+#if _DEBUG_LABEL
 	unit->getDebugLabel()->setString("Approaching!!");
+#endif
 }
 
 void UnitState_Approach::runState(Unit* unit, float delta)

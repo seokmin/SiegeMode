@@ -104,21 +104,31 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 
 void BattleScene::update(float delta)
 {
+	static auto freqDelta = 0.f;
 	static auto sumDelta = 0.f;
-	static auto frequency = 1.f;
+	static auto	frequency = 2.f;
 
+	freqDelta += delta;
 	sumDelta += delta;
+
+	auto saturated_sin = sin(sumDelta * 20.f * 3.141592f);
+	//if (saturated_sin < 0.f) saturated_sin = 0.f;
 	if (sumDelta >= frequency)
 	{
-		frequency = RandomHelper::random_real(2.f, 4.f);
-		auto randX = RandomHelper::random_real((float)DEF::SCREEN_WIDTH - 100, (float)DEF::SCREEN_WIDTH);
+		frequency = RandomHelper::random_real(1.25f + saturated_sin, 4.f + saturated_sin);
 		auto randY = RandomHelper::random_real(DEF::FIGHTING_ZONE.getMinY(), DEF::FIGHTING_ZONE.getMaxY());
+
+		//랜덤으로 하나 고른다.
 		static std::array<std::string,(size_t)2> names = {"swordman","bowman"};
-
 		auto randIt =names.begin();
-		std::advance(randIt, std::rand() % names.size());
+		std::advance(randIt, RandomHelper::random_int(0u, names.size() - 1));
+		if (*randIt == "bowman")
+		{
+			randIt = names.begin();
+			std::advance(randIt, RandomHelper::random_int(0u, names.size() - 1));
+		}
 
-		UnitManager::getInstance()->summonUnit(*randIt, Vec2(randX,randY), DEF::PLAYER_BLUE);
+		UnitManager::getInstance()->summonUnit(*randIt, Vec2(DEF::SCREEN_WIDTH,randY), DEF::PLAYER_BLUE);
 		sumDelta = 0.f;
 	}
 

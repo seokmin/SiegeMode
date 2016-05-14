@@ -6,13 +6,15 @@
 bool Unit::init(DEF::PLAYER_KIND playerKind)
 {
 	this->Sprite::init();
+	
+#if _DEBUG_LABEL
 	//디버그용 라벨 셋팅
 	_debugLabel = Label::createWithSystemFont("", "", 15);
 	_debugLabel->setTextColor(Color4B(255, 0, 0, 255));
 	_debugLabel->setScale(1.f / 2.f);
 	this->addChild(_debugLabel);
 	//셋팅끝
-
+#endif
 	//체력바 셋팅
 	_healthBar = Sprite::create("SpriteSource/UI/healthbar.png");
 	_healthBar->setOpacity(0.7 * 255);

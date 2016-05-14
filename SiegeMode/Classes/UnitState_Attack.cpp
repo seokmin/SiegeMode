@@ -7,7 +7,9 @@
 
 void UnitState_Attack::startState(Unit* unit)
 {
+#if _DEBUG_LABEL
 	unit->getDebugLabel()->setString("Attacking!!");
+#endif
 	if (unit->getAttackTarget() == nullptr)
 	{
 		unit->changeState<UnitState_WalkAndSeek>();

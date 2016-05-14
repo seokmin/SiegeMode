@@ -67,12 +67,14 @@ public:
 	virtual void		beHit(unsigned attackPower);
 	void				scheduleBeHit(unsigned attackPower, float delay);
 	virtual void		onExit() override { Node::onExit(); }
-	//디버그용
-	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
 	CC_SYNTHESIZE(Sprite*, _healthBar, HealthBar);
 	CC_SYNTHESIZE(int, _maxHealth, MaxHealth);
 	virtual void		setAnchorPoint(const Vec2& anchor) override;
 private:
+	//디버그용
+#if _DEBUG_LABEL
+	CC_SYNTHESIZE(Label*, _debugLabel, DebugLabel);
+#endif
 };
 
 template<typename T_STATE>

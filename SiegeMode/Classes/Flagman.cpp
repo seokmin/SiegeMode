@@ -19,7 +19,7 @@ bool Flagman::init(DEF::PLAYER_KIND playerKind)
 	_sightRange = 0.f;
 	_attackDelay = 0.f;
 	_attackPower = 0.f;
-	_maxHealth = 200;
+	_maxHealth = 500;
 	_health = _maxHealth;
 	_attackAccuracy = 0.f;
 	setAnchorPoint(Vec2(15.f / 23.f, 3.f / 57.f));
@@ -39,6 +39,7 @@ void Flagman::kill()
 		endingMsg = "You Lose...";
 	auto endingLabel = Label::createWithTTF(endingMsg, "fonts/Marker Felt.ttf", 100);
 	endingLabel->setPosition(DEF::SCREEN_WIDTH / 2.f, DEF::SCREEN_HEIGHT / 2.f);
+	endingLabel->setGlobalZOrder(DEF::ZORDER_UI + 1);
 	getParent()->getParent()->addChild(endingLabel);
 	Director::getInstance()->pause();
 	

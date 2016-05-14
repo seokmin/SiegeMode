@@ -49,7 +49,12 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 
 void SummonButton::update(float delta)
 {
-	auto coolTime = 5.f;
+	auto coolTime = _unitName == "swordman" ? 11.f : 6.f;
+
+	if (_selectedUnitName == _unitName)
+		_frame->setColor(Color3B::GREEN);
+	else
+		_frame->setColor(Color3B::WHITE);
 	if (_frameCover->getScaleY() > 0.f)
 		_frameCover->setScaleY(_frameCover->getScaleY() - delta / coolTime);
 }
@@ -63,9 +68,13 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 
 		Point pos = touch->getLocation();
 		Rect rect = DEF::FIGHTING_ZONE;
+		if (_unitName == "swordman")
+			rect = Rect(rect.origin.x,rect.origin.y+50.f,(float)DEF::SCREEN_WIDTH,rect.size.height - 50);
 		if (rect.containsPoint(pos))
 		{
-			UnitManager::getInstance()->summonUnit(_selectedUnitName, pos, _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
+			UnitManager::getInstance()->summonUnit(_selectedUnitName, Vec2(0,pos.y), _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
+			if (_unitName == "swordman")
+				UnitManager::getInstance()->summonUnit(_selectedUnitName, Vec2(0, pos.y - 50), _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
 			//_selectedUnitName = "";
 			//_isRed = !_isRed;
 			_frameCover->setScaleY(1.f);

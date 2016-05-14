@@ -8,11 +8,11 @@ bool Bowman::init(DEF::PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 	_attackSpeed = 2.f;
-	_moveSpeed = 30.f;
-	_attackRange = 450.f;
-	_sightRange = 500.f;
+	_moveSpeed = 40.f;
+	_attackRange = 300.f;
+	_sightRange = 400.f;
 	_attackDelay = 0.4f;
-	_attackPower = 12;
+	_attackPower = 20;
 	_maxHealth = 40;
 	_health = _maxHealth;
 	_attackAccuracy = 0.75f;
@@ -49,7 +49,7 @@ void Bowman::attackOnce()
 }
 void Bowman::moveTo(Vec2 destination)
 {
-	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	this->setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
 	Unit::moveTo(destination);
 }
 
@@ -77,6 +77,6 @@ void Bowman::shootArrow(Vec2 targetPos)
 
 void Bowman::moveBy(Vec2 directionVec, float duration)
 {
-	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	this->setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
 	Unit::moveBy(directionVec, duration);
 }

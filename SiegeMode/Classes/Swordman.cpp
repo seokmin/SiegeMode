@@ -8,12 +8,12 @@ bool Swordman::init(DEF::PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 	_attackSpeed = 1.f;
-	_moveSpeed = 30.f;
+	_moveSpeed = 35.f;
 	_attackRange = 40.f;
 	_sightRange = 100.f;
 	_attackDelay = 0.1f;
-	_attackPower = 20;
-	_maxHealth = 70;
+	_attackPower = 30;
+	_maxHealth = 150;
 	_health = _maxHealth;
 	_attackAccuracy = 1.f;
 	this->setUnitName("swordman");
