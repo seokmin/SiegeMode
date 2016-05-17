@@ -88,6 +88,8 @@ bool BattleScene::init()
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(30, 250), DEF::PLAYER_RED);
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(DEF::SCREEN_WIDTH-30,250), DEF::PLAYER_BLUE);
 
+	UnitManager::getInstance()->summonUnit("bowman", Vec2(DEF::SCREEN_WIDTH - 200, 250), DEF::PLAYER_RED);
+
 	this->scheduleUpdate();
 	return true;
 }

@@ -33,7 +33,7 @@ class Unit :
 	public Sprite
 {
 public:
-	virtual bool init(DEF::PLAYER_KIND playerKind);
+	virtual bool		init(DEF::PLAYER_KIND playerKind);
 	virtual void		update(float delta) override;
 	template<typename T_STATE>
 	void				changeState();
@@ -56,7 +56,7 @@ public:
 	CC_SYNTHESIZE(bool, _isDead, IsDead);
 	CC_SYNTHESIZE(float, _attackAccuracy, AttackAccuracy);
 
-	Unit* scanTarget();
+	virtual Unit*		scanTarget();
 	//x에 가중치를 둔 거리를 구한다.
 	float				getDistanceForRange(Vec2 range);
 	Vector<Unit*>		getEnemyUnitsUnderSight();

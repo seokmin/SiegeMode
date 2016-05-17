@@ -34,6 +34,7 @@ bool Unit::init(DEF::PLAYER_KIND playerKind)
 
 
 //마땅한 타겟이 없으면 nullptr 반환
+//Unit클래스의 기본설정은 가장 가까운 놈을 반환
 Unit* Unit::scanTarget()
 {
 	auto candidates = getEnemyUnitsUnderSight();
