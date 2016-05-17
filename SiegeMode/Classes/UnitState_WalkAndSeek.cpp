@@ -21,10 +21,10 @@ void UnitState_WalkAndSeek::runState(Unit* unit, float delta)
 		unit->kill();
 		return;
 	}
-	auto nearestTarget = unit->scanNearestTarget();
-	if (nearestTarget && nearestTarget->getPosition().getDistance(unit->getPosition()) <= unit->getSightRange())
+	auto nearestTarget = unit->scanTarget();
+	if (nearestTarget)
 	{
-		unit->setAttackTarget(nearestTarget->getTag());
+		unit->setAttackTargetByTag(nearestTarget->getTag());
 		unit->changeState<UnitState_Approach>();
 	}
 }

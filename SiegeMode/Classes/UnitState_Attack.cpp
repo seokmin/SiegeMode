@@ -24,10 +24,13 @@ void UnitState_Attack::runState(Unit* unit, float delta)
 
 	if (_elapsedTimeFromLastAttack >= unit->getAttackSpeed())
 	{
-		//Å¸°ÙÀÌ Á×¾ú°Å³ª, ³ª¸¦ Áö³ªÃÆÀ¸¸é ´Ù½Ã °È´Â´Ù.
+		//Å¸°ÙÀÌ Á×¾ú°Å³ª, ³ª¸¦ Áö³ªÃÆ°Å³ª, ¹üÀ§¸¦ ¹ş¾î³µÀ¸¸é ´Ù½Ã °È´Â´Ù.
 
 		auto a = unit->getOwnerPlayer() == DEF::PLAYER_BLUE ? 1 : -1;
-		if (unit->getAttackTarget() == nullptr || a*unit->getAttackTarget()->getPositionX() > a*unit->getPositionX())
+		if (unit->getAttackTarget() == nullptr
+			|| a*unit->getAttackTarget()->getPositionX() > a*unit->getPositionX()
+			|| unit->getDistanceForRange(unit->getAttackTarget()->getPosition()) > unit->getAttackRange()
+			)
 		{
 			unit->changeState<UnitState_WalkAndSeek>();
 			return;

@@ -41,7 +41,7 @@ public:
 
 	int					_tagAttackTarget = -1;
 	Unit*				getAttackTarget();
-	void				setAttackTarget(int targetTag);
+	void				setAttackTargetByTag(int targetTag);
 
 	CC_SYNTHESIZE(UnitState*, _state, State);
 	CC_SYNTHESIZE(std::string, _unitName, UnitName);
@@ -56,7 +56,10 @@ public:
 	CC_SYNTHESIZE(bool, _isDead, IsDead);
 	CC_SYNTHESIZE(float, _attackAccuracy, AttackAccuracy);
 
-	Unit*				scanNearestTarget();
+	Unit* scanTarget();
+	//x에 가중치를 둔 거리를 구한다.
+	float				getDistanceForRange(Vec2 range);
+	Vector<Unit*>		getEnemyUnitsUnderSight();
 	virtual void		kill();
 	virtual void		moveTo(Vec2 destination);
 	virtual void		moveBy(Vec2 directionVec, float duration);

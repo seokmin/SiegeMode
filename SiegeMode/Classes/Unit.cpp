@@ -32,38 +32,61 @@ bool Unit::init(DEF::PLAYER_KIND playerKind)
 	return true;
 }
 
-Unit* Unit::scanNearestTarget()
-{
-	auto unitList = UnitManager::getInstance()->getUnitList();
 
-	auto minDistance = FLT_MAX;
-	Unit* nearestUnit = nullptr;
-	for (auto i : unitList->getChildren())
+//마땅한 타겟이 없으면 nullptr 반환
+Unit* Unit::scanTarget()
+{
+	auto candidates = getEnemyUnitsUnderSight();
+	
+	if (candidates.size() == 0)
+		return nullptr;
+	
+
+	Unit* currentTarget = nullptr;
+	auto minDist = FLT_MAX;
+	
+	//나보다 뒤에있는 놈은 잘라내기 위해
+	auto sign = _ownerPlayer == DEF::PLAYER_RED ? 1 : -1;
+	for (auto i : candidates)
 	{
-		auto currentTargetUnit = static_cast<Unit*>(i);
-		if (currentTargetUnit->getOwnerPlayer() == this->getOwnerPlayer())
+		if(sign * (i->getPositionX() - getPositionX()) < 0)
 			continue;
-		auto a = _ownerPlayer == DEF::PLAYER_BLUE ? 1 : -1;
-		if (a*currentTargetUnit->getPositionX() > a*getPositionX())
-			continue;
-		auto distance = i->getPosition().getDistance(this->getPosition());
-		if (minDistance > distance)
+		auto tempDist = this->getDistanceForRange(i->getPosition());
+		if (minDist > tempDist)
 		{
-			minDistance = distance;
-			nearestUnit = currentTargetUnit;
+			minDist = tempDist;
+			currentTarget = i;
 		}
 	}
-	return nearestUnit;
+	return currentTarget;
 }
 
+//단순히 range값을 반지름으로 가진 원형으로 유닛간의 거리를 검사하면 상하폭이 너무 넓다.
+//상하폭을 2.5배 줄인 타원꼴로 거리를 구한다.
+float Unit::getDistanceForRange(Vec2 range)
+{
+	auto convertedVec = this->getPosition() - range;
+	convertedVec.y = convertedVec.y * 2.5;
+
+	return convertedVec.getLength();
+}
+
+Vector<Unit*> Unit::getEnemyUnitsUnderSight()
+{
+	auto compareFunc = [](Unit* me, Unit* other)
+	{
+		if (me->getOwnerPlayer() == other->getOwnerPlayer())
+			return false;
+		if (me->getDistanceForRange(other->getPosition()) <= me->getSightRange())
+			return true;
+		return false;
+	};
+	auto returnVec = UnitManager::getInstance()->findUnitByCondition(
+		this, compareFunc);
+	return returnVec;
+}
 void Unit::kill()
 {
-	// 	runAction(
-	// 		Sequence::create(
-	// 			DelayTime::create(0.01f),
-	// 			CallFunc::create(
-	// 				[=]() {removeFromParentAndCleanup(true); }
-	// 	), nullptr));
 	if (!_isDead)
 	{
 		this->unscheduleUpdate();
@@ -173,7 +196,7 @@ Unit* Unit::getAttackTarget()
 	return UnitManager::getInstance()->getUnitByTag(_tagAttackTarget);
 }
 
-void Unit::setAttackTarget(int targetTag)
+void Unit::setAttackTargetByTag(int targetTag)
 {
 	if (UnitManager::getInstance()->getUnitByTag(targetTag))
 		_tagAttackTarget = targetTag;

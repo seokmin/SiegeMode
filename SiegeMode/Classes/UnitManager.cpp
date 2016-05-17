@@ -46,6 +46,20 @@ Unit* UnitManager::getUnitByTag(int tag)
 	return static_cast<Unit*>(_unitList->getChildByTag(tag));
 }
 
+Vector<Unit*> UnitManager::findUnitByCondition(Unit* caller, bool(*compare)(Unit* caller, Unit* other))
+{
+	auto children = _unitList->getChildren();
+	Vector<Unit*> returnVec;
+	for (auto i : children)
+	{
+		auto currentUnit = static_cast<Unit*>(i);
+		//비교후 저장
+		if (compare(caller, currentUnit))
+			returnVec.pushBack(currentUnit);
+	}
+	return returnVec;
+}
+
 UnitManager::UnitManager()
 {
 	_unitList = Node::create();
