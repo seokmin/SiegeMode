@@ -58,6 +58,9 @@
     <ClCompile Include="..\Classes\UnitState_Stay.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Balistar.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UnitState_Stay.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Balistar.h">
+      <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "Swordman.h"
 #include "Bowman.h"
 #include "Flagman.h"
+#include "Balistar.h"
 
 
 UnitManager* UnitManager::_instance = nullptr;
@@ -29,6 +30,10 @@ void UnitManager::summonUnit(std::string unitName, Vec2 position, DEF::PLAYER_KI
 	else if (unitName == "flagman")
 	{
 		newUnit = Flagman::create(ownerPlayer);
+	}
+	else if (unitName == "balistar")
+	{
+		newUnit = Balistar::create(ownerPlayer);
 	}
 
 	newUnit->setTag(++tagid);

@@ -79,16 +79,16 @@ bool BattleScene::init()
 	this->addChild(label, 3);
 
 
-	auto btn = SummonButton::create(Vec2(800, 75), "swordman");
+	auto btn = SummonButton::create(Vec2(640, 75), "swordman");
 	addChild(btn);
-	auto btn2 = SummonButton::create(Vec2(960, 75), "bowman");
+	auto btn2 = SummonButton::create(Vec2(800, 75), "bowman");
 	addChild(btn2);
+	auto btn3 = SummonButton::create(Vec2(960, 75), "balistar");
+	addChild(btn3);
 
 	//플래그맨 두기.
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(30, 250), DEF::PLAYER_RED);
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(DEF::SCREEN_WIDTH-30,250), DEF::PLAYER_BLUE);
-
-	UnitManager::getInstance()->summonUnit("bowman", Vec2(DEF::SCREEN_WIDTH - 200, 250), DEF::PLAYER_RED);
 
 	this->scheduleUpdate();
 	return true;

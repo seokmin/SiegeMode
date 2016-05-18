@@ -184,6 +184,13 @@ void Unit::setAnchorPoint(const Vec2& anchor)
 		Sprite::setAnchorPoint(Vec2(1.f - anchor.x,anchor.y));
 }
 
+bool Unit::isRightTarget(Unit* target)
+{
+	if (getDistanceForRange(getAttackTarget()->getPosition()) <= getAttackRange())
+		return true;
+	return false;
+}
+
 void Unit::update(float delta)
 {
 	_healthBar->setPosition(_contentSize.width * _anchorPoint.x,0.f);

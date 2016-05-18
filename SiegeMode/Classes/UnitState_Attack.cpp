@@ -32,7 +32,8 @@ void UnitState_Attack::runState(Unit* unit, float delta)
 		{//타겟이 유효해야함
 			if (a*(unit->getAttackTarget()->getPositionX() - unit->getPositionX()) >= 0)
 			{//타겟이 내 뒤로 가면 안됨
-				if (unit->getDistanceForRange(unit->getAttackTarget()->getPosition()) <= unit->getAttackRange())
+				if(unit->isRightTarget(unit->getAttackTarget()))
+				//if (unit->getDistanceForRange(unit->getAttackTarget()->getPosition()) <= unit->getAttackRange())
 				{//타겟이 내 공격범위 안에 들어있어야됨
 					unit->attackOnce();
 					_elapsedTimeFromLastAttack = 0.0;

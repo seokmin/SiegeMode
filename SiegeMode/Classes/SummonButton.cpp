@@ -3,7 +3,6 @@
 #include "UnitManager.h"
 
 std::string SummonButton::_selectedUnitName = "";
-bool SummonButton::_isRed = true;
 
 SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 {
@@ -17,9 +16,9 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 
 	newCover->setLocalZOrder(newFrame->getLocalZOrder() + 2);
 	newUnit->setLocalZOrder(newFrame->getLocalZOrder() + 1);
-	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
-	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
-	newCover->setGlobalZOrder(DEF::ZORDER_UI);
+// 	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
+// 	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
+// 	newCover->setGlobalZOrder(DEF::ZORDER_UI);
 	newInst->addChild(newFrame);
 	newInst->addChild(newUnit);
 	newInst->addChild(newCover);
@@ -31,6 +30,8 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = CC_CALLBACK_2(SummonButton::onSprTouchBegan, newInst);
+	listener->onTouchEnded = CC_CALLBACK_2(SummonButton::onSprTouchEnd, newInst);
+	listener->onTouchMoved = CC_CALLBACK_2(SummonButton::onSprTouchMoved, newInst);
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, newInst);
 
 	newInst->setFrameCover(newCover);
@@ -44,12 +45,25 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	newCover->setPositionY(newFrame->getContentSize().height / -2.f);
 	newCover->setOpacity(255 * 0.7f);
 	newCover->setScaleY(0.f);
+
+	auto path = "SpriteSource/UI/" + unitName + "_preview.png";
+	newInst->setUnitPreview(Sprite::create(path));
+	newInst->getUnitPreview()->setVisible(false);
+	newInst->getUnitPreview()->getTexture()->setAliasTexParameters();
+	newInst->addChild(newInst->getUnitPreview());
+	newInst->getUnitPreview()->setFlippedX(true);
 	return newInst;
 }
 
 void SummonButton::update(float delta)
 {
-	auto coolTime = _unitName == "swordman" ? 11.f : 6.f;
+	static float coolTime;
+	if (_unitName == "swordman")
+		coolTime = 6.f;
+	else if (_unitName == "bowman")
+		coolTime = 8.f;
+	else if (_unitName == "balistar")
+		coolTime = 30.f;
 
 	if (_selectedUnitName == _unitName)
 		_frame->setColor(Color3B::GREEN);
@@ -59,29 +73,46 @@ void SummonButton::update(float delta)
 		_frameCover->setScaleY(_frameCover->getScaleY() - delta / coolTime);
 }
 
+void SummonButton::onSprTouchEnd(Touch* touch, Event* event)
+{
+	Point pos = touch->getLocation() + Vec2(0,50);
+	if (_isSummonAble == true)
+		UnitManager::getInstance()->summonUnit(_unitName, pos, DEF::PLAYER_RED);
+	_isSummonAble = false;
+	_isSummonMode = false;
+	_unitPreview->setVisible(false);
+}
+
+
+
+void SummonButton::onSprTouchMoved(Touch* touch, Event* event)
+{
+	if (_isSummonMode == false)
+		return;
+	auto pos = touch->getLocation() + Vec2(0, 50);
+	Rect rect = DEF::FIGHTING_ZONE;
+	rect.size.width = DEF::SCREEN_WIDTH / 3.f;
+	if (rect.containsPoint(pos))
+	{
+		_isSummonAble = true;
+	}
+	else
+		_isSummonAble = false;
+	_unitPreview->setPosition(pos - _position + Vec2(0,20));
+	showUnitPreview(pos);
+}
+
+void SummonButton::showUnitPreview(Vec2 position)
+{
+	if (_isSummonAble == true)
+		_unitPreview->setColor(Color3B::GREEN);
+	else
+		_unitPreview->setColor(Color3B::RED);
+
+}
+
 bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
-	//社発端滴
-
-	if (_selectedUnitName == _unitName && _frameCover->getScaleY() <= 0.f)
-	{
-
-		Point pos = touch->getLocation();
-		Rect rect = DEF::FIGHTING_ZONE;
-		if (_unitName == "swordman")
-			rect = Rect(rect.origin.x,rect.origin.y+50.f,(float)DEF::SCREEN_WIDTH,rect.size.height - 50);
-		if (rect.containsPoint(pos))
-		{
-			UnitManager::getInstance()->summonUnit(_selectedUnitName, Vec2(0,pos.y), _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
-			if (_unitName == "swordman")
-				UnitManager::getInstance()->summonUnit(_selectedUnitName, Vec2(0, pos.y - 50), _isRed ? DEF::PLAYER_RED : DEF::PLAYER_BLUE);
-			//_selectedUnitName = "";
-			//_isRed = !_isRed;
-			_frameCover->setScaleY(1.f);
-			return true;
-		}
-	}
-
 	Point pos = _frame->convertToNodeSpace(touch->getLocation());
 	Rect rect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
 	if (rect.containsPoint(pos))
@@ -115,5 +146,21 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 
 		return true;
 	}
+
+	//社発端滴
+	pos = touch->getLocation() + Vec2(0, 50);
+	if (_selectedUnitName == _unitName && _frameCover->getScaleY() <= 0.f)
+	{
+		Rect rect = DEF::FIGHTING_ZONE;
+
+		if (rect.containsPoint(pos))
+		{
+			_unitPreview->setVisible(true);
+			_isSummonMode = true;
+			return true;
+		}
+	}
+
+	
 	return false;
 }

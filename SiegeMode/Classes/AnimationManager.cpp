@@ -55,7 +55,7 @@ void AnimationManager::addAnimation(std::string actorName, std::string animName,
 
 	auto anim = Animation::createWithSpriteFrames(animFrames,interval);
 	anim->setDelayPerUnit(interval);
-
+	
 
 	for (auto i : anim->getFrames())
 	{

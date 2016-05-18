@@ -73,6 +73,7 @@ public:
 	CC_SYNTHESIZE(Sprite*, _healthBar, HealthBar);
 	CC_SYNTHESIZE(int, _maxHealth, MaxHealth);
 	virtual void		setAnchorPoint(const Vec2& anchor) override;
+	virtual bool		isRightTarget(Unit* target);
 private:
 	//디버그용
 #if _DEBUG_LABEL
