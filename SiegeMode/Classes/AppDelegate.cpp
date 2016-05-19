@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "AppDelegate.h"
-#include "BattleScene.h"
+#include "MainScene.h"
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(DEF::SCREEN_WIDTH, DEF::SCREEN_HEIGHT);
 
@@ -52,7 +52,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    auto scene = BattleScene::createScene();
+    auto scene = MainScene::createScene();
 
     director->runWithScene(scene);
 
