@@ -78,7 +78,6 @@ bool BattleScene::init()
 	// add the label as a child to this layer
 	this->addChild(label, 3);
 
-
 	auto btn = SummonButton::create(Vec2(640, 75), "swordman");
 	addChild(btn);
 	auto btn2 = SummonButton::create(Vec2(800, 75), "bowman");
@@ -117,7 +116,7 @@ void BattleScene::update(float delta)
 	//if (saturated_sin < 0.f) saturated_sin = 0.f;
 	if (sumDelta >= frequency)
 	{
-		frequency = RandomHelper::random_real(1.25f + saturated_sin, 4.f + saturated_sin);
+		frequency = RandomHelper::random_real(3.25f + saturated_sin, 6.f + saturated_sin);
 		auto randY = RandomHelper::random_real(DEF::FIGHTING_ZONE.getMinY(), DEF::FIGHTING_ZONE.getMaxY());
 
 		//랜덤으로 하나 고른다.

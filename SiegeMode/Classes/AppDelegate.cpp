@@ -43,41 +43,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    // turn on display FPS
     director->setDisplayStats(true);
 
-    // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.f / 60);
 
-    // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
-    //Size frameSize = glview->getFrameSize();
-    // if the frame's height is larger than the height of medium size.
-//     if (frameSize.height > resolutionSize3.height)
-//     {        
-//         director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize4.height, designResolutionSize.width / resolutionSize4.width));
-//     }
-//     // if the frame's height is larger than the height of small size.
-//     else if (frameSize.height > resolutionSize2.height)
-//     {        
-//         director->setContentScaleFactor(MIN(designResolutionSize.height/ resolutionSize3.height, designResolutionSize.width/resolutionSize3.width));
-//     }
-// 	else if (frameSize.height > resolutionSize1.height)
-// 	{
-// 		director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize2.height, designResolutionSize.width / resolutionSize2.width));
-// 	}
-//     // if the frame's height is smaller than the height of medium size.
-//     else
-//     {        
-//         director->setContentScaleFactor(MIN(designResolutionSize.height / resolutionSize1.height, designResolutionSize.width / resolutionSize1.width));
-//     }
+
 
     register_all_packages();
 
-    // create a scene. it's an autorelease object
     auto scene = BattleScene::createScene();
 
-    // run
     director->runWithScene(scene);
 
     return true;

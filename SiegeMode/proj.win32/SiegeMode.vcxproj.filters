@@ -13,6 +13,12 @@
     <Filter Include="Unit">
       <UniqueIdentifier>{be144e82-690c-4c83-a260-6eb01bde012f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{42df1541-6567-45a8-8a9a-02d80c375ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitState">
+      <UniqueIdentifier>{c52668a7-987e-49b6-9335-c7f791feacb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,15 +29,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\pch.cpp" />
     <ClCompile Include="..\Classes\AnimationManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitState_Approach.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitState_Attack.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UnitState_WalkAndSeek.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Bowman.cpp">
@@ -46,20 +43,32 @@
     <ClCompile Include="..\Classes\UnitManager.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BattleScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\SummonButton.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Flagman.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UnitState_Stay.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Balistar.cpp">
       <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_Approach.cpp">
+      <Filter>UnitState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_Attack.cpp">
+      <Filter>UnitState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_Stay.cpp">
+      <Filter>UnitState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UnitState_WalkAndSeek.cpp">
+      <Filter>UnitState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,18 +83,6 @@
     <ClInclude Include="..\Classes\AnimationManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UnitState.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitState_Approach.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitState_Attack.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UnitState_WalkAndSeek.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Bowman.h">
       <Filter>Unit</Filter>
     </ClInclude>
@@ -98,20 +95,35 @@
     <ClInclude Include="..\Classes\UnitManager.h">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BattleScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SummonButton.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Flagman.h">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UnitState_Stay.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Balistar.h">
       <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState.h">
+      <Filter>UnitState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_Approach.h">
+      <Filter>UnitState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_Attack.h">
+      <Filter>UnitState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_Stay.h">
+      <Filter>UnitState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UnitState_WalkAndSeek.h">
+      <Filter>UnitState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,9 +16,6 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 
 	newCover->setLocalZOrder(newFrame->getLocalZOrder() + 2);
 	newUnit->setLocalZOrder(newFrame->getLocalZOrder() + 1);
-	// 	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
-	// 	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
-	// 	newCover->setGlobalZOrder(DEF::ZORDER_UI);
 	newInst->addChild(newFrame);
 	newInst->addChild(newUnit);
 	newInst->addChild(newCover);
@@ -52,6 +49,12 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	newInst->getUnitPreview()->getTexture()->setAliasTexParameters();
 	newInst->addChild(newInst->getUnitPreview());
 	newInst->getUnitPreview()->setFlippedX(true);
+
+
+	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
+	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
+	newCover->setGlobalZOrder(DEF::ZORDER_UI);
+	newInst->getUnitPreview()->setGlobalZOrder(DEF::ZORDER_UI);
 	return newInst;
 }
 
