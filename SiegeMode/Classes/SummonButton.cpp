@@ -16,9 +16,9 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 
 	newCover->setLocalZOrder(newFrame->getLocalZOrder() + 2);
 	newUnit->setLocalZOrder(newFrame->getLocalZOrder() + 1);
-// 	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
-// 	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
-// 	newCover->setGlobalZOrder(DEF::ZORDER_UI);
+	// 	newUnit->setGlobalZOrder(DEF::ZORDER_UI);
+	// 	newFrame->setGlobalZOrder(DEF::ZORDER_UI);
+	// 	newCover->setGlobalZOrder(DEF::ZORDER_UI);
 	newInst->addChild(newFrame);
 	newInst->addChild(newUnit);
 	newInst->addChild(newCover);
@@ -75,9 +75,12 @@ void SummonButton::update(float delta)
 
 void SummonButton::onSprTouchEnd(Touch* touch, Event* event)
 {
-	Point pos = touch->getLocation() + Vec2(0,50);
+	Point pos = touch->getLocation() + Vec2(0, 50);
 	if (_isSummonAble == true)
+	{
 		UnitManager::getInstance()->summonUnit(_unitName, pos, DEF::PLAYER_RED);
+		_frameCover->setScaleY(1.f);
+	}
 	_isSummonAble = false;
 	_isSummonMode = false;
 	_unitPreview->setVisible(false);
@@ -93,12 +96,10 @@ void SummonButton::onSprTouchMoved(Touch* touch, Event* event)
 	Rect rect = DEF::FIGHTING_ZONE;
 	rect.size.width = DEF::SCREEN_WIDTH / 3.f;
 	if (rect.containsPoint(pos))
-	{
 		_isSummonAble = true;
-	}
 	else
 		_isSummonAble = false;
-	_unitPreview->setPosition(pos - _position + Vec2(0,20));
+	_unitPreview->setPosition(pos - _position + Vec2(0, 20));
 	showUnitPreview(pos);
 }
 
@@ -113,6 +114,9 @@ void SummonButton::showUnitPreview(Vec2 position)
 
 bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
+	if (_frameCover->getScaleY() > 0.f)
+		return false;
+
 	Point pos = _frame->convertToNodeSpace(touch->getLocation());
 	Rect rect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
 	if (rect.containsPoint(pos))
@@ -143,7 +147,10 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 		overlay->setPosition(getPosition());
 
 		getParent()->addChild(overlay);
-
+		_unitPreview->setVisible(true);
+		pos = touch->getLocation() + Vec2(0, 50);
+		_unitPreview->setPosition(pos);
+		_isSummonMode = true;
 		return true;
 	}
 
@@ -156,11 +163,15 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 		if (rect.containsPoint(pos))
 		{
 			_unitPreview->setVisible(true);
+			_unitPreview->setPosition(pos);
+			rect.size.width = DEF::SCREEN_WIDTH / 3.f;
+			if (rect.containsPoint(pos))
+				_isSummonAble = true;
 			_isSummonMode = true;
 			return true;
 		}
 	}
 
-	
+
 	return false;
 }

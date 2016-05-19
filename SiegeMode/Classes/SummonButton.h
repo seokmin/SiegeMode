@@ -19,5 +19,5 @@ private:
 	bool				_isSummonAble = false;
 	bool				_isSummonMode = false;
 	void				onSprTouchMoved(Touch* touch, Event* event);
-	void showUnitPreview(Vec2 position);
+	void				showUnitPreview(Vec2 position);
 };
