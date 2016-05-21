@@ -65,6 +65,12 @@ Vector<Unit*> UnitManager::findUnitByCondition(Unit* caller, bool(*compare)(Unit
 	return returnVec;
 }
 
+void UnitManager::deleteInstance()
+{
+	delete _instance;
+	_instance = nullptr;
+}
+
 UnitManager::UnitManager()
 {
 	_unitList = Node::create();

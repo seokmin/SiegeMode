@@ -39,10 +39,10 @@ bool BattleScene::init()
 
 	// add a "close" icon to exit the progress. it's an autorelease object
 	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
+		"SpriteSource/UI/exit_button.png",
+		"SpriteSource/UI/exit_button_clicked.png",
 		CC_CALLBACK_1(BattleScene::menuCloseCallback, this));
-
+	closeItem->setScale(0.75f);
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
 
@@ -96,8 +96,9 @@ bool BattleScene::init()
 
 void BattleScene::menuCloseCallback(Ref* pSender)
 {
-	Director::getInstance()->end();
-
+	UnitManager::getInstance()->deleteInstance();
+	Director::getInstance()->popScene();
+	
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);
 #endif

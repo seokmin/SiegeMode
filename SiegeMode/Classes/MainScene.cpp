@@ -52,7 +52,7 @@ bool MainScene::init()
 
 //	Keyboard Event
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Sound/10-time-2-kill.mp3",true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3",true);
 
 	return true;
 }

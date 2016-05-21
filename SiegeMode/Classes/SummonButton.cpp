@@ -117,8 +117,6 @@ void SummonButton::showUnitPreview(Vec2 position)
 
 bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
-	if (_frameCover->getScaleY() > 0.f)
-		return false;
 
 	Point pos = _frame->convertToNodeSpace(touch->getLocation());
 	Rect rect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
@@ -150,17 +148,24 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 		overlay->setPosition(getPosition());
 
 		getParent()->addChild(overlay);
+
+
+		if (_frameCover->getScaleY() > 0.f)
+			return false;
+
 		_unitPreview->setVisible(true);
 		pos = touch->getLocation() + Vec2(0, 50);
 		_unitPreview->setPosition(pos);
 		_isSummonMode = true;
 		return true;
 	}
-
+	if (_frameCover->getScaleY() > 0.f)
+		return false;
 	//소환체크
 	pos = touch->getLocation() + Vec2(0, 50);
 	if (_selectedUnitName == _unitName && _frameCover->getScaleY() <= 0.f)
 	{
+
 		Rect rect = DEF::FIGHTING_ZONE;
 
 		if (rect.containsPoint(pos))
