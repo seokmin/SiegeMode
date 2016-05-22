@@ -19,6 +19,9 @@
     <Filter Include="UnitState">
       <UniqueIdentifier>{c52668a7-987e-49b6-9335-c7f791feacb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{2abf64f8-6287-409a-add0-adcf506ef16b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\jsoncpp.cpp">
+      <Filter>Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +131,13 @@
     <ClInclude Include="..\Classes\MainScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="def_units.h" />
+    <ClInclude Include="..\Classes\json\json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\json\json-forwards.h">
+      <Filter>Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
@@ -133,5 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\Resources\Data\unit_spec.json">
+      <Filter>Json</Filter>
+    </None>
   </ItemGroup>
 </Project>

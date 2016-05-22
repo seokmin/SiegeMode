@@ -37,22 +37,17 @@ bool MainScene::init()
 
 	MenuItemSprite* menu_play = MenuItemSprite::create(start_btn, start_btn_clicked, CC_CALLBACK_1(MainScene::MenuClickCallback, this));
 	MenuItemSprite* menu_exit = MenuItemSprite::create(exit_btn, exit_btn_clicked, CC_CALLBACK_1(MainScene::MenuCloseCallback, this));
-// 
-// 	Sprite* credit_btn = Sprite::createWithSpriteFrameName(FILENAME_IMG_BUTTON_CREDIT);
-// 	Sprite* credit_btn_clicked = Sprite::createWithSpriteFrameName(FILENAME_IMG_BUTTON_CREDIT_CLICKED);
-// 	MenuItemSprite* menu_credit = MenuItemSprite::create(credit_btn, credit_btn_clicked, CC_CALLBACK_0(MainScene::ShowCredit, this));
 
-	auto mainMenu = Menu::create(menu_play, menu_exit, /*menu_credit,*/ nullptr);
+	auto mainMenu = Menu::create(menu_play, menu_exit,nullptr);
 	menu_play->setPosition(visibleSize.width/2, visibleSize.height/2-100);
 	menu_exit->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 200);
-/*	menu_credit->setPosition(visibleSize.width * 7 / 8, visibleSize.height * 1 / 8);*/
 
 	mainMenu->setPosition(Vec2::ZERO);
 	this->addChild(mainMenu);
 
 //	Keyboard Event
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3",true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/32-army-of-drums.mp3",true);
 
 	return true;
 }

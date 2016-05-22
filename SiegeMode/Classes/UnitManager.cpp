@@ -5,7 +5,6 @@
 #include "Flagman.h"
 #include "Balistar.h"
 
-
 UnitManager* UnitManager::_instance = nullptr;
 
 UnitManager* UnitManager::getInstance()
@@ -67,6 +66,7 @@ Vector<Unit*> UnitManager::findUnitByCondition(Unit* caller, bool(*compare)(Unit
 
 void UnitManager::deleteInstance()
 {
+	_unitList->release();
 	delete _instance;
 	_instance = nullptr;
 }
@@ -75,4 +75,9 @@ UnitManager::UnitManager()
 {
 	_unitList = Node::create();
 	_unitList->retain();
+
+	auto tmpData = FileUtils::getInstance()->getStringFromFile("Data/unit_spec.json");
+
+	Json::Reader reader;
+	reader.parse(tmpData, _specData);
 }

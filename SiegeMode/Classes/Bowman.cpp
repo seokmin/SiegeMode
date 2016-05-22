@@ -2,23 +2,14 @@
 #include "Bowman.h"
 #include "UnitState_WalkAndSeek.h"
 #include "AnimationManager.h"
+#include "UnitManager.h"
 
 bool Bowman::init(DEF::PLAYER_KIND playerKind)
 {
+	setUnitName("bowman");
 	if (!Unit::init(playerKind))
 		return false;
-	_attackSpeed = 2.f;
-	_moveSpeed = 40.f;
-	_attackRange = 300.f;
-	_sightRange = 400.f;
-	_attackDelay = 0.4f;
-	_attackPower = 20;
-	_maxHealth = 40;
-	_health = _maxHealth;
-	_attackAccuracy = 0.75f;
-	_arrowSpeed = 1500.f;
 
-	this->setUnitName("bowman");
 	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/bowman/bowman_walk_red.png", 30, 28, 6);
 	else
@@ -73,6 +64,15 @@ void Bowman::shootArrow(Vec2 targetPos)
 
 	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime, targetPos), DelayTime::create(0.05f), RemoveSelf::create(true), nullptr));
 
+}
+
+void Bowman::readSpecFromData()
+{
+	Unit::readSpecFromData();
+	auto specData = UnitManager::getInstance()->getSpecData();
+	auto currentUnitData = specData.get(_unitName, "failed");
+	auto getData = [&currentUnitData](auto key, auto defaultVal) {return currentUnitData.get(key, defaultVal); };
+	setArrowSpeed(getData("arrowSpeed", 0.f).asFloat());
 }
 
 void Bowman::moveBy(Vec2 directionVec, float duration)

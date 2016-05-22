@@ -1,0 +1,45 @@
+{
+  "balistar": {
+    "accuracy": 0.95,
+    "arrowSpeed": 1000.0,
+    "attackDelay": 0.4,
+    "attackPower": 38,
+    "attackRange": 500.0,
+    "attackRangeMin": 100.0,
+    "attackSpeed": 3.0,
+    "maxHealth": 100,
+    "moveSpeed": 0.0,
+    "sightRange": 500.0
+  },
+  "bowman": {
+    "accuracy": 0.75,
+    "arrowSpeed": 1500.0,
+    "attackDelay": 0.4,
+    "attackPower": 20,
+    "attackRange": 300.0,
+    "attackSpeed": 2.0,
+    "maxHealth": 40,
+    "moveSpeed": 40.0,
+    "sightRange": 400.0
+  },
+  "flagman": {
+    "attackDelay": 0.0,
+    "accuracy": 0.0,
+    "attackPower": 0,
+    "attackRange": 0.0,
+    "attackSpeed": 0.0,
+    "maxHealth": 500,
+    "moveSpeed": 0.0,
+    "sightRange": 0.0
+  },
+  "swordman": {
+    "accuracy": 1.0,
+    "attackDelay": 0.1,
+    "attackPower": 30,
+    "attackRange": 40.0,
+    "attackSpeed": 1.0,
+    "maxHealth": 150,
+    "moveSpeed": 35.0,
+    "sightRange": 100.0
+  }
+}

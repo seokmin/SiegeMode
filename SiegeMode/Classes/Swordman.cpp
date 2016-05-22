@@ -5,19 +5,9 @@
 
 bool Swordman::init(DEF::PLAYER_KIND playerKind)
 {
+	this->setUnitName("swordman");
 	if (!Unit::init(playerKind))
 		return false;
-	_attackSpeed = 1.f;
-	_moveSpeed = 35.f;
-	_attackRange = 40.f;
-	_sightRange = 100.f;
-	_attackDelay = 0.1f;
-	_attackPower = 30;
-	_maxHealth = 150;
-	_health = _maxHealth;
-	_attackAccuracy = 1.f;
-	this->setUnitName("swordman");
-	//this->setTexture("SpriteSource/swordman/swordman_walk_1.png");
 	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/swordman/swordman_walk_red.png", 32, 29, 6);
 	else

@@ -2,31 +2,21 @@
 #include "Balistar.h"
 #include "UnitState_WalkAndSeek.h"
 #include "AnimationManager.h"
+#include "UnitManager.h"
 
 bool Balistar::init(DEF::PLAYER_KIND playerKind)
 {
+	this->setUnitName("balistar");
 	if (!Unit::init(playerKind))
 		return false;
-	_attackSpeed = 3.f;
-	_moveSpeed = 0.f;
-	_attackRange = 450.f;
-	_sightRange = 500.f;
-	_attackDelay = 0.4f;
-	_attackPower = 38;
-	_maxHealth = 100;
-	_health = _maxHealth;
-	_attackAccuracy = 0.95f;
-	_arrowSpeed = 1000.f;
-	_attackRangeMin = 100.f;
 
-	this->setUnitName("balistar");
 	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/balistar/balistar_walk_red.png", 67, 51, 1);
 	else
 		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/balistar/balistar_walk_blue.png", 67, 51, 1);
 
 	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/balistar/balistar_attack_red.png", 67,51, 2);
+		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/balistar/balistar_attack_red.png", 67, 51, 2);
 	else
 		AnimationManager::getInstance()->addAnimation(_unitName, "attack_blue", 0.2f, "SpriteSource/balistar/balistar_attack_blue.png", 67, 51, 2);
 
@@ -62,7 +52,7 @@ void Balistar::shootArrow(Vec2 targetPos)
 	Sprite* arrow = Sprite::create("SpriteSource/balistar/balistar_arrow.png");
 	auto parent = getParent()->getParent();
 	parent->addChild(arrow);
-	
+
 	arrow->setPosition(getPosition() + Vec2(0, 60));
 
 	arrow->getTexture()->setAliasTexParameters();
@@ -74,6 +64,16 @@ void Balistar::shootArrow(Vec2 targetPos)
 
 	arrow->runAction(Sequence::create(MoveTo::create(_arrowTime, targetPos), DelayTime::create(0.05f), RemoveSelf::create(true), nullptr));
 
+}
+
+void Balistar::readSpecFromData()
+{
+	Unit::readSpecFromData();
+	auto specData = UnitManager::getInstance()->getSpecData();
+	auto currentUnitData = specData.get(_unitName, "failed");
+	auto getData = [&currentUnitData](auto key, auto defaultVal) {return currentUnitData.get(key, defaultVal); };
+	setArrowSpeed(getData("arrowSpeed", 0.f).asFloat());
+	setAttackRangeMin(getData("attackRangeMin", 0.f).asFloat());
 }
 
 void Balistar::moveBy(Vec2 directionVec, float duration)

@@ -12,6 +12,8 @@ public:
 	CREATE_FUNC_UNIT(Bowman);
 	void shootArrow(Vec2 targetPos);
 	CC_SYNTHESIZE(float, _arrowSpeed, ArrowSpeed);
+protected:
+	virtual void readSpecFromData() override;
 private:
 	float _arrowTime;
 

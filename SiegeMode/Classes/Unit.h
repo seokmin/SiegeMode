@@ -44,7 +44,10 @@ public:
 	void				setAttackTargetByTag(int targetTag);
 
 	CC_SYNTHESIZE(UnitState*, _state, State);
-	CC_SYNTHESIZE(std::string, _unitName, UnitName);
+	std::string _unitName;
+	void		setUnitName(std::string var) { _unitName = var; setName(var); }
+	std::string getUnitName(){ return _unitName; }
+
 	CC_SYNTHESIZE(float, _attackRange, AttackRange);
 	CC_SYNTHESIZE(float, _attackSpeed, AttackSpeed);
 	CC_SYNTHESIZE(float, _moveSpeed, MoveSpeed);
@@ -74,6 +77,8 @@ public:
 	CC_SYNTHESIZE(int, _maxHealth, MaxHealth);
 	virtual void		setAnchorPoint(const Vec2& anchor) override;
 	virtual bool		isRightTarget(Unit* target);
+protected:
+	virtual void		readSpecFromData();
 private:
 	//디버그용
 #if _DEBUG_LABEL

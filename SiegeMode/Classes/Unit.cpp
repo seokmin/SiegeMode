@@ -2,11 +2,12 @@
 #include "Unit.h"
 #include "UnitManager.h"
 #include "AnimationManager.h"
+#include "json/json.h"
 
 bool Unit::init(DEF::PLAYER_KIND playerKind)
 {
 	this->Sprite::init();
-	
+	readSpecFromData();
 #if _DEBUG_LABEL
 	//디버그용 라벨 셋팅
 	_debugLabel = Label::createWithSystemFont("", "", 15);
@@ -189,6 +190,22 @@ bool Unit::isRightTarget(Unit* target)
 	if (getDistanceForRange(getAttackTarget()->getPosition()) <= getAttackRange())
 		return true;
 	return false;
+}
+
+void Unit::readSpecFromData()
+{
+	auto specData = UnitManager::getInstance()->getSpecData();
+	auto currentUnitData = specData.get(_unitName,"failed");
+	auto getData = [&currentUnitData](auto key, auto defaultVal) {return currentUnitData.get(key, defaultVal); };
+	setAttackDelay(getData("attackDelay", 0.f).asFloat());
+	setAttackAccuracy(getData("accuracy", 0.f).asFloat());
+	setAttackPower(getData("attackPower", 0).asInt());
+	setAttackRange(getData("attackRange", 0.f).asFloat());
+	setAttackSpeed(getData("attackSpeed", 0.f).asFloat());
+	setMaxHealth(getData("maxHealth", 0).asInt());
+	setHealth(getMaxHealth());
+	setMoveSpeed(getData("moveSpeed", 0.f).asFloat());
+	setSightRange(getData("sightRange", 0.f).asFloat());
 }
 
 void Unit::update(float delta)

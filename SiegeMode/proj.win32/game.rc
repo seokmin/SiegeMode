@@ -2,27 +2,27 @@
 //
 #include "resource.h"
 
-#define APSTUDIO_READONLY_SYMBOLS
+#define APSTUDIOREADONLYSYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#define APSTUDIO_HIDDEN_SYMBOLS
+#define APSTUDIOHIDDENSYMBOLS
 #include "windows.h"
-#undef APSTUDIO_HIDDEN_SYMBOLS
+#undef APSTUDIOHIDDENSYMBOLS
 /////////////////////////////////////////////////////////////////////////////
-#undef APSTUDIO_READONLY_SYMBOLS
+#undef APSTUDIOREADONLYSYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
 // English (U.S.) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
+#if !defined(AFXRESOURCEDLL) || defined(AFXTARGENU)
+#ifdef WIN32
+LANGUAGE LANGENGLISH, SUBLANGENGLISHUS
+#pragma codepage(1252)
+#endif //WIN32
 
-#ifdef APSTUDIO_INVOKED
+#ifdef APSTUDIOINVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
 // TEXTINCLUDE
@@ -33,7 +33,7 @@ BEGIN
     "resource.h\0"
 END
 
-#endif    // APSTUDIO_INVOKED
+#endif    // APSTUDIOINVOKED
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -42,18 +42,18 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-GLFW_ICON           ICON                    "res\\game.ico"
+GLFWICON           ICON                    "res\\game.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
-VS_VERSION_INFO VERSIONINFO
+VSVERSIONINFO VERSIONINFO
  FILEVERSION 1,0,0,1
  PRODUCTVERSION 1,0,0,1
  FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
+#ifdef DEBUG
  FILEFLAGS 0x1L
 #else
  FILEFLAGS 0x0L
@@ -83,4 +83,4 @@ BEGIN
 END
 
 /////////////////////////////////////////////////////////////////////////////
-#endif // !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#endif // !defined(AFXRESOURCEDLL) || defined(AFXTARGENU)
