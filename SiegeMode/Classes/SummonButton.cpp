@@ -7,6 +7,8 @@ Rect SummonButton::g_summonableZone = Rect(DEF::FIGHTING_ZONE.origin,Size(DEF::F
 
 SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 {
+	g_selectedUnitName = "";
+
 	auto newInst = SummonButton::create();
 	newInst->setPosition(pos);
 	newInst->setGlobalZOrder(DEF::ZORDER_UI);
@@ -88,7 +90,7 @@ void SummonButton::onSprTouchEnd(Touch* touch, Event* event)
 
 void SummonButton::onSprTouchMoved(Touch* touch, Event* event)
 {
-	if (_isSummonMode == false)
+	if (g_selectedUnitName != _unitName)
 		return;
 	updateSummonPoint(touch);
 	updateUnitPreviewColor();
@@ -142,7 +144,8 @@ bool SummonButton::isSummonAble()
 		return false;
 	if (!g_summonableZone.containsPoint(_summonPoint))
 		return false;
-
+	if (g_selectedUnitName != _unitName)
+		return false;
 	return true;
 }
 
@@ -162,17 +165,16 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 	{
 		g_selectedUnitName = _unitName;
 		showOverlay();
-		_unitPreview->setPosition(_summonPoint);
-		_isSummonMode = true;
 		return true;
 	}
-	if (_frameCover->getScaleY() > 0.f)
+	if (!DEF::FIGHTING_ZONE.containsPoint(_summonPoint))
 		return false;
 	//소환체크
-	if (isSummonAble())
+	if (g_selectedUnitName == _unitName)
 	{
 		updateUnitPreviewColor();
 		_unitPreview->setVisible(true);
+		_unitPreview->setPosition(_summonPoint - _position + Vec2(0,20));
 		return true;
 	}
 	return false;

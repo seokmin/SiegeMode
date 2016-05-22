@@ -4,6 +4,7 @@
 #include "SimpleAudioEngine.h"
 #include "SummonButton.h"
 #include <array>
+#include "MainScene.h"
 
 Scene* BattleScene::createScene()
 {
@@ -63,9 +64,7 @@ bool BattleScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/hit.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/stab.wav");
+
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3", true);
 	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.7f);
 	this->addChild(UnitManager::getInstance()->getUnitList(),2);
@@ -97,7 +96,8 @@ bool BattleScene::init()
 void BattleScene::menuCloseCallback(Ref* pSender)
 {
 	UnitManager::getInstance()->deleteInstance();
-	Director::getInstance()->popScene();
+	auto newScene = MainScene::createScene();
+	Director::getInstance()->replaceScene(newScene);
 	Director::getInstance()->resume();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);

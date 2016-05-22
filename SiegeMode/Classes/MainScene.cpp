@@ -47,7 +47,11 @@ bool MainScene::init()
 	this->addChild(mainMenu);
 
 //	Keyboard Event
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/hit.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/stab.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sound/10-time-2-kill.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sound/32-army-of-drums.mp3");
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/32-army-of-drums.mp3",true);
 	
 	AnimationManager::getInstance();
@@ -57,7 +61,7 @@ bool MainScene::init()
 void MainScene::MenuClickCallback(cocos2d::Ref* pSender)
 {
 	auto gameScene = BattleScene::createScene();
-	Director::getInstance()->pushScene(gameScene);
+	Director::getInstance()->replaceScene(gameScene);
 }
 
 void MainScene::MenuCloseCallback(cocos2d::Ref* pSender)

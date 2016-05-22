@@ -15,7 +15,6 @@ private:
 	CC_SYNTHESIZE(Sprite*, _unitPreview, UnitPreview);
 	bool				onSprTouchBegan(Touch* touch, Event* event);
 	void				onSprTouchEnd(Touch* touch, Event* event);
-	bool				_isSummonMode = false;
 	void				onSprTouchMoved(Touch* touch, Event* event);
 	void				updateUnitPreviewColor();
 	void				showOverlay();
