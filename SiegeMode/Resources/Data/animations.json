@@ -1,0 +1,92 @@
+{
+  "swordman": [
+    {
+      "animName": "walk_red",
+      "interval": 0.1,
+      "width": 32,
+      "height": 29,
+      "nFrame": 6
+    },
+    {
+      "animName": "walk_blue",
+      "interval": 0.1,
+      "width": 32,
+      "height": 29,
+      "nFrame": 6
+    },
+    {
+      "animName": "attack_red",
+      "interval": 0.1,
+      "width": 43,
+      "height": 30,
+      "nFrame": 6
+    },
+    {
+      "animName": "attack_blue",
+      "interval": 0.1,
+      "width": 43,
+      "height": 30,
+      "nFrame": 6
+    }
+  ],
+  "bowman": [
+    {
+      "animName": "walk_red",
+      "interval": 0.1,
+      "width": 30,
+      "height": 28,
+      "nFrame": 6
+    },
+    {
+      "animName": "walk_blue",
+      "interval": 0.1,
+      "width": 30,
+      "height": 28,
+      "nFrame": 6
+    },
+    {
+      "animName": "attack_red",
+      "interval": 0.1,
+      "width": 35,
+      "height": 28,
+      "nFrame": 5
+    },
+    {
+      "animName": "attack_blue",
+      "interval": 0.1,
+      "width": 35,
+      "height": 28,
+      "nFrame": 5
+    }
+  ],
+  "balistar": [
+    {
+      "animName": "walk_red",
+      "interval": 0.1,
+      "width": 67,
+      "height": 51,
+      "nFrame": 1
+    },
+    {
+      "animName": "walk_blue",
+      "interval": 0.1,
+      "width": 67,
+      "height": 51,
+      "nFrame": 1
+    },
+    {
+      "animName": "attack_red",
+      "interval": 0.2,
+      "width": 67,
+      "height": 51,
+      "nFrame": 2
+    },
+    {
+      "animName": "attack_blue",
+      "interval": 0.2,
+      "width": 67,
+      "height": 51,
+      "nFrame": 2
+    }
+  ]
+}

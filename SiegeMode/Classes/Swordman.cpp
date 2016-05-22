@@ -8,16 +8,6 @@ bool Swordman::init(DEF::PLAYER_KIND playerKind)
 	this->setUnitName("swordman");
 	if (!Unit::init(playerKind))
 		return false;
-	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/swordman/swordman_walk_red.png", 32, 29, 6);
-	else
-		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/swordman/swordman_walk_blue.png", 32, 29, 6);
-
-	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.1f, "SpriteSource/swordman/swordman_attack_red.png", 43, 30, 6);
-	else
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_blue", 0.1f, "SpriteSource/swordman/swordman_attack_blue.png", 43, 30, 6);
-
 	this->changeState<UnitState_WalkAndSeek>();
 	return true;
 }

@@ -3,6 +3,7 @@
 #include "MainScene.h"
 #include "SimpleAudioEngine.h"
 #include "definition.h"
+#include "AnimationManager.h"
 
 Scene* MainScene::createScene()
 {
@@ -48,7 +49,8 @@ bool MainScene::init()
 //	Keyboard Event
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/32-army-of-drums.mp3",true);
-
+	
+	AnimationManager::getInstance();
 	return true;
 }
 

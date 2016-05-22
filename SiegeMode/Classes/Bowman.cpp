@@ -10,16 +10,6 @@ bool Bowman::init(DEF::PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 
-	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "walk_red", 0.1f, "SpriteSource/bowman/bowman_walk_red.png", 30, 28, 6);
-	else
-		AnimationManager::getInstance()->addAnimation(_unitName, "walk_blue", 0.1f, "SpriteSource/bowman/bowman_walk_blue.png", 30, 28, 6);
-
-	if (this->getOwnerPlayer() == DEF::PLAYER_RED)
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_red", 0.2f, "SpriteSource/bowman/bowman_attack_red.png", 35, 28, 5);
-	else
-		AnimationManager::getInstance()->addAnimation(_unitName, "attack_blue", 0.2f, "SpriteSource/bowman/bowman_attack_blue.png", 35, 28, 3);
-
 	this->changeState<UnitState_WalkAndSeek>();
 	return true;
 }
