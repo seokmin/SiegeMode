@@ -1,6 +1,7 @@
 #pragma once
 #include "UnitState.h"
 
+// 그냥 가만히 있는 상태
 class UnitState_Stay : public UnitState
 {
 public:

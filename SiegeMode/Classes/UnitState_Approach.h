@@ -1,6 +1,7 @@
 #pragma once
 #include "UnitState.h"
 
+// 타겟에게 사정거리가 닿을 때까지 접근하는 상태
 class UnitState_Approach : public UnitState
 {
 public:

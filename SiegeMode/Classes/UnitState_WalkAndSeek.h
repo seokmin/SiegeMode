@@ -1,6 +1,7 @@
 #pragma once
 #include "UnitState.h"
 
+// 걸어다니면서 공격대상을 탐색
 class UnitState_WalkAndSeek : public UnitState
 {
 public:

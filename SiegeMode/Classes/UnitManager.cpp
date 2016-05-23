@@ -53,6 +53,7 @@ Vector<Unit*> UnitManager::findUnitByCondition(Unit* caller, std::function<bool(
 	return returnVec;
 }
 
+// 게임을 종료할 때 지워주어야 함
 void UnitManager::deleteInstance()
 {
 	_unitList->release();

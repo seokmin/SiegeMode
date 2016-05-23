@@ -8,75 +8,44 @@
 
 Scene* BattleScene::createScene()
 {
-	// 'scene' is an autorelease object
 	auto scene = Scene::create();
-
-	// 'layer' is an autorelease object
 	auto layer = BattleScene::create();
-
-	// add layer as a child to scene
 	scene->addChild(layer);
 
-	// return the scene
 	return scene;
 }
 
-// on "init" you need to initialize your instance
 bool BattleScene::init()
 {
-	//////////////////////////////
-	// 1. super init first
 	if (!LayerColor::initWithColor(Color4B(120, 120, 120, 120)))
-	{
 		return false;
-	}
 
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	// --배경 이미지------------------------------------------
+	auto backgroundSpr = Sprite::create("SpriteSource/background/backgroundHigher.png");
+	backgroundSpr->setAnchorPoint(Vec2(0, 0));
+	addChild(backgroundSpr,DEF::ZORDER_BACKGROUND);
+	backgroundSpr->getTexture()->setAliasTexParameters();
+	addChild(UnitManager::getInstance()->getUnitList(),2);
+	// --배경 음악--------------------------------------------
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3", true);
+	// --레이블 설정------------------------------------------
+	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
+	label->setPosition(Vec2(DEF::SCREEN_WIDTH/ 2,DEF::SCREEN_HEIGHT - label->getContentSize().height));
+	addChild(label, 3);
 
-	/////////////////////////////
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	//    you may modify it.
-
-	// add a "close" icon to exit the progress. it's an autorelease object
+	// 게임 종료 버튼-----------------------------------------
 	auto closeItem = MenuItemImage::create(
 		"SpriteSource/UI/exit_button.png",
 		"SpriteSource/UI/exit_button_clicked.png",
 		CC_CALLBACK_1(BattleScene::menuCloseCallback, this));
 	closeItem->setScale(0.75f);
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height / 2));
-
-	// create menu, it's an autorelease object
+	closeItem->setPosition(Vec2(DEF::SCREEN_WIDTH - closeItem->getContentSize().width / 2,
+		+ closeItem->getContentSize().height / 2));
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu, 1);
 
-	// set background image
-	auto backgroundSpr = Sprite::create("SpriteSource/background/backgroundHigher.png");
-	backgroundSpr->setAnchorPoint(Vec2(0, 0));
-	addChild(backgroundSpr,DEF::ZORDER_BACKGROUND);
-	backgroundSpr->getTexture()->setAliasTexParameters();
-
-	/////////////////////////////
-	// 3. add your codes below...
-
-	// add a label shows "Hello World"
-	// create and initialize a label
-
-
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3", true);
-	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.7f);
-	addChild(UnitManager::getInstance()->getUnitList(),2);
-	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
-
-	// position the label on the center of the screen
-	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
-		origin.y + visibleSize.height - label->getContentSize().height));
-
-	// add the label as a child to this layer
-	addChild(label, 3);
-
+	// --각 유닛들 소환 버튼----------------------------------
 	auto btn = SummonButton::create(Vec2(640, 75), "swordman");
 	addChild(btn);
 	auto btn2 = SummonButton::create(Vec2(800, 75), "bowman");
@@ -84,7 +53,8 @@ bool BattleScene::init()
 	auto btn3 = SummonButton::create(Vec2(960, 75), "balistar");
 	addChild(btn3);
 
-	//플래그맨 두기.
+
+	// --플래그맨 두기----------------------------------------
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(30, 250), DEF::PLAYER_RED);
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(DEF::SCREEN_WIDTH-30,250), DEF::PLAYER_BLUE);
 
@@ -92,7 +62,7 @@ bool BattleScene::init()
 	return true;
 }
 
-
+// 게임 종료(메인화면으로 돌아감)
 void BattleScene::menuCloseCallback(Ref* pSender)
 {
 	UnitManager::getInstance()->deleteInstance();
@@ -104,8 +74,10 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 #endif
 }
 
+// 매 프레임 호출
 void BattleScene::update(float delta)
 {
+	// 급조한 유닛 웨이브
 	static auto freqDelta = 0.f;
 	static auto sumDelta = 0.f;
 	static auto	frequency = 2.f;
@@ -114,7 +86,6 @@ void BattleScene::update(float delta)
 	sumDelta += delta;
 
 	auto saturated_sin = sin(sumDelta * 20.f * 3.141592f);
-	//if (saturated_sin < 0.f) saturated_sin = 0.f;
 	if (sumDelta >= frequency)
 	{
 		frequency = RandomHelper::random_real(3.25f + saturated_sin, 6.f + saturated_sin);
@@ -133,5 +104,5 @@ void BattleScene::update(float delta)
 		UnitManager::getInstance()->summonUnit(*randIt, Vec2(DEF::SCREEN_WIDTH,randY), DEF::PLAYER_BLUE);
 		sumDelta = 0.f;
 	}
-
+	// 유닛웨이브 끝
 }

@@ -16,8 +16,9 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	newInst->setUnitName(unitName);
 	newInst->scheduleUpdate();
 
+	// 자식 스프라이트들에 대한 일괄작업
 	auto tempFactory = [=](std::string fileName, int zorder) {
-		static auto zOrigin = 0;
+		constexpr auto zOrigin = 0;
 		auto tempSpr = Sprite::create(fileName);
 		tempSpr->setLocalZOrder(zOrigin + zorder);
 		tempSpr->getTexture()->setAliasTexParameters();
@@ -25,6 +26,10 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 		newInst->addChild(tempSpr);
 		return tempSpr;
 	};
+	// newFrame		: 테두리 상자
+	// newCover		: 쿨타임 표시할 덮개
+	// newUnitImage : 해당 유닛 이미지
+	// 이하는 구현이 바뀌지 않는 이상 바뀔 일이 없는 문자 리터럴들이므로 그냥 사용
 	auto newFrame = tempFactory("SpriteSource/UI/unit_frame.png", 0);
 	auto newCover = tempFactory("SpriteSource/UI/framecover.png", 2);
 	auto newUnitImage = tempFactory("SpriteSource/UI/" + unitName + ".png", 1);
@@ -45,6 +50,7 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	newInst->getUnitPreview()->setGlobalZOrder(DEF::ZORDER_UI);
 
 
+	// 터치콜백 등록
 	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
@@ -53,11 +59,14 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 	listener->onTouchMoved = CC_CALLBACK_2(SummonButton::onSprTouchMoved, newInst);
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, newInst);
 
+
 	return newInst;
 }
 
+// 매 프레임 호출
 void SummonButton::update(float delta)
 {
+	// 쿨타임을 어떻게 깔끔하게 바꿀 수 있을까
 	static float coolTime;
 	if (_unitName == "swordman")
 		coolTime = 6.f;
@@ -66,28 +75,33 @@ void SummonButton::update(float delta)
 	else if (_unitName == "balistar")
 		coolTime = 30.f;
 
+	// 해당 버튼 선택여부 표시
 	if (g_selectedUnitName == _unitName)
 		_frame->setColor(Color3B::GREEN);
 	else
 		_frame->setColor(Color3B::WHITE);
+
+	// 쿨타임이 아직 돌고 있으면 조금 줄여준다.
 	if (_frameCover->getScaleY() > 0.f)
 		_frameCover->setScaleY(_frameCover->getScaleY() - delta / coolTime);
+
 	updateUnitPreviewColor();
 }
 
+// 터치를 뗀 순간 소환
 void SummonButton::onSprTouchEnd(Touch* touch, Event* event)
 {
 	Point pos = touch->getLocation() + Vec2(0, 50);
 	if (isSummonAble())
 	{
 		UnitManager::getInstance()->summonUnit(_unitName, pos, DEF::PLAYER_RED);
+		// 쿨타임 돌기 시작
 		_frameCover->setScaleY(1.f);
 	}
 	_unitPreview->setVisible(false);
 }
 
-
-
+// 움직이면 따라다님
 void SummonButton::onSprTouchMoved(Touch* touch, Event* event)
 {
 	if (g_selectedUnitName != _unitName)
@@ -100,15 +114,16 @@ void SummonButton::onSprTouchMoved(Touch* touch, Event* event)
 
 void SummonButton::updateUnitPreviewColor()
 {
-	if (isSummonAble())
+	if (isSummonAble())// 소환 가능시 초록색
 		_unitPreview->setColor(Color3B::GREEN);
-	else if (g_summonableZone.containsPoint(_summonPoint))
+	else if (g_summonableZone.containsPoint(_summonPoint))// 쿨타임이면 주황색
 		_unitPreview->setColor(Color3B::ORANGE);
-	else
+	else// 소환불가지역이면 빨간색
 		_unitPreview->setColor(Color3B::RED);
 
 }
 
+// 클릭 효과
 void SummonButton::showOverlay()
 {
 	// ------- 통통 튀는 효과 ------
@@ -138,26 +153,29 @@ void SummonButton::showOverlay()
 	getParent()->addChild(overlay);
 }
 
+// 소환 가능한지 판별
 bool SummonButton::isSummonAble()
 {
-	if (_frameCover->getScaleY() > 0.f)
+	if (_frameCover->getScaleY() > 0.f)// 쿨타임
 		return false;
-	if (!g_summonableZone.containsPoint(_summonPoint))
+	if (!g_summonableZone.containsPoint(_summonPoint))// 소환가능한지역인지
 		return false;
-	if (g_selectedUnitName != _unitName)
+	if (g_selectedUnitName != _unitName)// 현재 선택된 놈이 나인지
 		return false;
 	return true;
 }
 
+// 소환하고싶은 포인트 갱신
 void SummonButton::updateSummonPoint(Touch* touch)
 {
-
 	_summonPoint = touch->getLocation() + Vec2(0, 50);
 }
 
+// 터치 시작
 bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
 
+	//버튼이 클릭되었는지 확인
 	Point pos = _frame->convertToNodeSpace(touch->getLocation());
 	updateSummonPoint(touch);
 	Rect currentFrameRect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
@@ -169,7 +187,8 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 	}
 	if (!DEF::FIGHTING_ZONE.containsPoint(_summonPoint))
 		return false;
-	//소환체크
+
+	// 현재 선택된놈이 내가 맞으면 화면에 보여준다
 	if (g_selectedUnitName == _unitName)
 	{
 		updateUnitPreviewColor();

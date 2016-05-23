@@ -1,19 +1,16 @@
 #pragma once
 
+// À¯´Ö ¾Ö´Ï¸ÞÀÌ¼ÇÀ» °ü¸®
+// ½Ì±ÛÅæ
 class AnimationManager
 {
 public:
-
-
-	Animation*	getAnimation(std::string actorName, std::string animName);
-	void		addAnimation(std::string actorName, std::string animName, float interval, std::initializer_list<std::string> frameName);
-	void		addAnimation(std::string actorName, std::string animName, float interval, std::string fileName, unsigned width, unsigned height, unsigned frameCount);
-
+	Animation*					getAnimation(std::string actorName, std::string animName);
+	void						addAnimation(std::string actorName, std::string animName, float interval, std::string fileName, unsigned width, unsigned height, unsigned frameCount);
 	static AnimationManager*	getInstance();
 private:
-	
-	Map<std::string, Animation*> _animationMap;
+	Map<std::string, Animation*>	_animationMap;
+	static AnimationManager*		_instance;
 	AnimationManager();
-	static AnimationManager* _instance;
 
 };

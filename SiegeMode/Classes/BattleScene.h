@@ -1,5 +1,6 @@
 #pragma once
 
+// ∏ﬁ¿Œ ∞‘¿”æ¿
 class BattleScene : public LayerColor
 {
 public:
@@ -7,12 +8,9 @@ public:
 
     virtual bool init();
     
-    // a selector callback
     void menuCloseCallback(Ref* pSender);
-/*	bool onMouseTouchBegan(EventMouse* event);*/
 
 	void update(float delta);
-    // implement the "static create()" method manually
     CREATE_FUNC(BattleScene);
 
 private:

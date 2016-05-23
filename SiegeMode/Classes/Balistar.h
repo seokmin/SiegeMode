@@ -19,7 +19,7 @@ public:
 	CC_SYNTHESIZE(float, _arrowSpeed, ArrowSpeed);
 	CC_SYNTHESIZE(float, _attackRangeMin, AttackRangeMin);
 protected:
-	void	readSpecFromData() override;
+	void			readSpecFromData() override;
 private:
 	float _arrowTime;
 
