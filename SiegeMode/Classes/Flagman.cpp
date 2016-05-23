@@ -23,7 +23,7 @@ bool Flagman::init(DEF::PLAYER_KIND playerKind)
 void Flagman::kill()
 {
 	// 승리-패배 조건
-	std::string endingMsg;
+	auto endingMsg = "";
 	if (_ownerPlayer == DEF::PLAYER_BLUE)
 		endingMsg = "You Win!!!";
 	else
