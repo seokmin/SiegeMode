@@ -14,6 +14,7 @@ bool Flagman::init(DEF::PLAYER_KIND playerKind)
 		setTexture("SpriteSource/flagman/flagman_walk_blue.png");
 
 	setAnchorPoint(Vec2(15.f / 23.f, 3.f / 57.f));
+	// 가만히 있는다
 	changeState<UnitState_Stay>();
 	getTexture()->setAliasTexParameters();
 	return true;
@@ -21,6 +22,7 @@ bool Flagman::init(DEF::PLAYER_KIND playerKind)
 
 void Flagman::kill()
 {
+	// 승리-패배 조건
 	std::string endingMsg;
 	if (_ownerPlayer == DEF::PLAYER_BLUE)
 		endingMsg = "You Win!!!";
@@ -30,6 +32,7 @@ void Flagman::kill()
 	endingLabel->setPosition(DEF::SCREEN_WIDTH / 2.f, DEF::SCREEN_HEIGHT / 2.f);
 	endingLabel->setGlobalZOrder(DEF::ZORDER_UI + 1);
 	getParent()->getParent()->addChild(endingLabel);
+	// 게임 정지
 	Director::getInstance()->pause();
 	
 }

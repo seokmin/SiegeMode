@@ -97,7 +97,6 @@ Unit* Balistar::scanTarget()
 			currentTarget = i;
 		}
 	}
-
 	return currentTarget;
 }
 
