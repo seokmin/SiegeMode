@@ -24,7 +24,7 @@ bool MainScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	CCSprite * background = CCSprite::create("SpriteSource/background/title.png");
+	auto * background = Sprite::create("SpriteSource/background/title.png");
 	background->setScaleX((visibleSize.width / background->getContentSize().width) * 1);
 	background->setScaleY((visibleSize.height / background->getContentSize().height) * 1);
 	background->setAnchorPoint(Point(0,0));

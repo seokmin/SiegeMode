@@ -50,6 +50,7 @@ Unit* UnitManager::getUnitByTag(int tag)
 	return static_cast<Unit*>(_unitList->getChildByTag(tag));
 }
 
+
 Vector<Unit*> UnitManager::findUnitByCondition(Unit* caller, bool(*compare)(Unit* caller, Unit* other))
 {
 	auto children = _unitList->getChildren();
