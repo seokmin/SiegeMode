@@ -15,7 +15,8 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-*/Release.win32/*
+Release.win32
+assets
 x64/
 x86/
 build/
@@ -286,3 +287,5 @@ $RECYCLE.BIN/
 *.lnk
 SiegeMode/proj.win32/Debug.win32/
 *.VC.opendb
+SiegeMode/proj.android/libs/armeabi/libcocos2dcpp.so
+SiegeMode/proj.android/libs/armeabi/libcocos2dcpp.so
