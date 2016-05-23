@@ -2709,11 +2709,11 @@ bool Value::CZString::operator<(const CZString& other) const {
   if (!cstr_) return index_ < other.index_;
   //return strcmp(cstr_, other.cstr_) < 0;
   // Assume both are strings.
-  unsigned this_len = this->storage_.length_;
+  unsigned this_len = storage_.length_;
   unsigned other_len = other.storage_.length_;
   unsigned min_len = std::min(this_len, other_len);
-  JSON_ASSERT(this->cstr_ && other.cstr_);
-  int comp = memcmp(this->cstr_, other.cstr_, min_len);
+  JSON_ASSERT(cstr_ && other.cstr_);
+  int comp = memcmp(cstr_, other.cstr_, min_len);
   if (comp < 0) return true;
   if (comp > 0) return false;
   return (this_len < other_len);
@@ -2723,11 +2723,11 @@ bool Value::CZString::operator==(const CZString& other) const {
   if (!cstr_) return index_ == other.index_;
   //return strcmp(cstr_, other.cstr_) == 0;
   // Assume both are strings.
-  unsigned this_len = this->storage_.length_;
+  unsigned this_len = storage_.length_;
   unsigned other_len = other.storage_.length_;
   if (this_len != other_len) return false;
-  JSON_ASSERT(this->cstr_ && other.cstr_);
-  int comp = memcmp(this->cstr_, other.cstr_, this_len);
+  JSON_ASSERT(cstr_ && other.cstr_);
+  int comp = memcmp(cstr_, other.cstr_, this_len);
   return comp == 0;
 }
 
@@ -2971,7 +2971,7 @@ bool Value::operator<(const Value& other) const {
     unsigned other_len;
     char const* this_str;
     char const* other_str;
-    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
+    decodePrefixedString(allocated_, value_.string_, &this_len, &this_str);
     decodePrefixedString(other.allocated_, other.value_.string_, &other_len, &other_str);
     unsigned min_len = std::min(this_len, other_len);
     JSON_ASSERT(this_str && other_str);
@@ -3027,7 +3027,7 @@ bool Value::operator==(const Value& other) const {
     unsigned other_len;
     char const* this_str;
     char const* other_str;
-    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
+    decodePrefixedString(allocated_, value_.string_, &this_len, &this_str);
     decodePrefixedString(other.allocated_, other.value_.string_, &other_len, &other_str);
     if (this_len != other_len) return false;
     JSON_ASSERT(this_str && other_str);
@@ -3052,7 +3052,7 @@ const char* Value::asCString() const {
   if (value_.string_ == 0) return 0;
   unsigned this_len;
   char const* this_str;
-  decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
+  decodePrefixedString(allocated_, value_.string_, &this_len, &this_str);
   return this_str;
 }
 
@@ -3063,7 +3063,7 @@ unsigned Value::getCStringLength() const {
   if (value_.string_ == 0) return 0;
   unsigned this_len;
   char const* this_str;
-  decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
+  decodePrefixedString(allocated_, value_.string_, &this_len, &this_str);
   return this_len;
 }
 #endif
@@ -3072,7 +3072,7 @@ bool Value::getString(char const** str, char const** cend) const {
   if (type_ != stringValue) return false;
   if (value_.string_ == 0) return false;
   unsigned length;
-  decodePrefixedString(this->allocated_, this->value_.string_, &length, str);
+  decodePrefixedString(allocated_, value_.string_, &length, str);
   *cend = *str + length;
   return true;
 }
@@ -3086,7 +3086,7 @@ JSONCPP_STRING Value::asString() const {
     if (value_.string_ == 0) return "";
     unsigned this_len;
     char const* this_str;
-    decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
+    decodePrefixedString(allocated_, value_.string_, &this_len, &this_str);
     return JSONCPP_STRING(this_str, this_len);
   }
   case booleanValue:

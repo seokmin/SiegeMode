@@ -131,7 +131,6 @@
     <ClInclude Include="..\Classes\MainScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="def_units.h" />
     <ClInclude Include="..\Classes\json\json.h">
       <Filter>Json</Filter>
     </ClInclude>

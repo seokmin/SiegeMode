@@ -10,13 +10,15 @@ bool Bowman::init(DEF::PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 
-	this->changeState<UnitState_WalkAndSeek>();
+	changeState<UnitState_WalkAndSeek>();
 	return true;
 }
 
+// 원래의 attackOnce는 근거리용이므로 원거리용으로 새로 작성
+// 복붙 수준이고, 추후 코드 개선방법 생각중
 void Bowman::attackOnce()
 {
-	this->setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
+	setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
 
 	runAction(Sequence::create(
 		DelayTime::create(_attackDelay), CallFuncN::create(
@@ -28,21 +30,28 @@ void Bowman::attackOnce()
 	if (RandomHelper::random_real(0.f, 1.f) <= _attackAccuracy)
 		getAttackTarget()->scheduleBeHit(_attackPower, _attackDelay + _arrowTime);
 }
+
 void Bowman::moveTo(Vec2 destination)
 {
-	this->setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
+	setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
 	Unit::moveTo(destination);
 }
 
+// 화살 한 발을 쏜다
 void Bowman::shootArrow(Vec2 targetPos)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bow_release.wav");
 	auto direction = _ownerPlayer == DEF::PLAYER_RED ? -1 : 1;
+
+	// 맞는 느낌을 위해서 상수로 맞춘다
 	targetPos += Vec2(direction * 10, 25);
+
+
 	Sprite* arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
 	auto parent = getParent()->getParent();
-	parent->addChild(arrow);
+	parent->addChild(arrow);// 화면에 addchild해야 유닛이 죽어도 화살이 남음
 	
+	// 쏘는 느낌을 위해서 상수로 맞춘다
 	arrow->setPosition(getPosition() + Vec2(0, 20));
 
 	arrow->getTexture()->setAliasTexParameters();
@@ -56,6 +65,7 @@ void Bowman::shootArrow(Vec2 targetPos)
 
 }
 
+// Bowman에서 추가로 정의한 스펙을 뽑아온다
 void Bowman::readSpecFromData()
 {
 	Unit::readSpecFromData();
@@ -67,6 +77,6 @@ void Bowman::readSpecFromData()
 
 void Bowman::moveBy(Vec2 directionVec, float duration)
 {
-	this->setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
+	setAnchorPoint(Vec2(14.f / 30.f, 3.f / 30.f));
 	Unit::moveBy(directionVec, duration);
 }

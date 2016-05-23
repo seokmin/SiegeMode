@@ -9,13 +9,13 @@ bool Flagman::init(DEF::PLAYER_KIND playerKind)
 	if (!Unit::init(playerKind))
 		return false;
 	if (_ownerPlayer == DEF::PLAYER_RED)
-		this->setTexture("SpriteSource/flagman/flagman_walk_red.png");
+		setTexture("SpriteSource/flagman/flagman_walk_red.png");
 	else
-		this->setTexture("SpriteSource/flagman/flagman_walk_blue.png");
+		setTexture("SpriteSource/flagman/flagman_walk_blue.png");
 
 	setAnchorPoint(Vec2(15.f / 23.f, 3.f / 57.f));
-	this->changeState<UnitState_Stay>();
-	this->getTexture()->setAliasTexParameters();
+	changeState<UnitState_Stay>();
+	getTexture()->setAliasTexParameters();
 	return true;
 }
 

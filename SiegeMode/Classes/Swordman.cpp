@@ -5,28 +5,28 @@
 
 bool Swordman::init(DEF::PLAYER_KIND playerKind)
 {
-	this->setUnitName("swordman");
+	setUnitName("swordman");
 	if (!Unit::init(playerKind))
 		return false;
-	this->changeState<UnitState_WalkAndSeek>();
+	changeState<UnitState_WalkAndSeek>();
 	return true;
 }
 
 void Swordman::moveTo(Vec2 destination)
 {
-	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
 	Unit::moveTo(destination);
 }
 
 void Swordman::moveBy(Vec2 directionVec, float duration)
 {
-	this->setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
+	setAnchorPoint(Vec2(20.f / 32.f, 4.f / 29.f));
 	Unit::moveBy(directionVec, duration);
 }
 
 void Swordman::attackOnce()
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/stab.wav");
-	this->setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
+	setAnchorPoint(Vec2(25.f / 43.f, 5.f / 30.f));
 	Unit::attackOnce();
 }

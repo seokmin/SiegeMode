@@ -50,12 +50,12 @@ bool BattleScene::init()
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
+	addChild(menu, 1);
 
 	// set background image
 	auto backgroundSpr = Sprite::create("SpriteSource/background/backgroundHigher.png");
 	backgroundSpr->setAnchorPoint(Vec2(0, 0));
-	this->addChild(backgroundSpr,DEF::ZORDER_BACKGROUND);
+	addChild(backgroundSpr,DEF::ZORDER_BACKGROUND);
 	backgroundSpr->getTexture()->setAliasTexParameters();
 
 	/////////////////////////////
@@ -67,7 +67,7 @@ bool BattleScene::init()
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Sound/10-time-2-kill.mp3", true);
 	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.7f);
-	this->addChild(UnitManager::getInstance()->getUnitList(),2);
+	addChild(UnitManager::getInstance()->getUnitList(),2);
 	auto label = Label::createWithTTF("SiegeMode! - prototype", "fonts/Marker Felt.ttf", 24);
 
 	// position the label on the center of the screen
@@ -75,7 +75,7 @@ bool BattleScene::init()
 		origin.y + visibleSize.height - label->getContentSize().height));
 
 	// add the label as a child to this layer
-	this->addChild(label, 3);
+	addChild(label, 3);
 
 	auto btn = SummonButton::create(Vec2(640, 75), "swordman");
 	addChild(btn);
@@ -88,7 +88,7 @@ bool BattleScene::init()
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(30, 250), DEF::PLAYER_RED);
 	UnitManager::getInstance()->summonUnit("flagman", Vec2(DEF::SCREEN_WIDTH-30,250), DEF::PLAYER_BLUE);
 
-	this->scheduleUpdate();
+	scheduleUpdate();
 	return true;
 }
 

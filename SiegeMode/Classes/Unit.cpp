@@ -113,6 +113,7 @@ void Unit::kill()
 }
 
 // destination까지 움직인다.
+// 파생클래스에서 재정의해서 anchorPoint를 맞춰주어야 함
 void Unit::moveTo(Vec2 destination)
 {
 	stopMove();
@@ -125,6 +126,7 @@ void Unit::moveTo(Vec2 destination)
 // directionVec 방향으로 지정한 시간만큼 움직인다.
 // duration에 0을 넣으면 무한반복
 // directionVec은 정규화되어있지 않아도 됨
+// 파생클래스에서 재정의해서 anchorPoint를 맞춰주어야 함
 void Unit::moveBy(Vec2 directionVec, float duration)
 {
 	// 멈추기 예약

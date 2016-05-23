@@ -30,6 +30,7 @@ enum ACTION_KIND {
 	ACTION_NOT_CALLFUNC
 };
 
+// 근거리 유닛을 기본으로 하여 작성됨
 class Unit : public Sprite
 {
 public:
@@ -93,11 +94,11 @@ void Unit::changeState()
 {
 	if (_state)
 	{
-		this->getState()->endState(this);
-		this->removeComponent(_state);
+		getState()->endState(this);
+		removeComponent(_state);
 	}
 	auto state = T_STATE::create();
-	this->setState(state);
-	this->getState()->startState(this);
-	this->addComponent(state);
+	setState(state);
+	getState()->startState(this);
+	addComponent(state);
 }

@@ -20,7 +20,7 @@ bool MainScene::init()
 	{
 		return false;
 	}
-	this->setName("MainScene");
+	setName("MainScene");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -28,7 +28,7 @@ bool MainScene::init()
 	background->setScaleX((visibleSize.width / background->getContentSize().width) * 1);
 	background->setScaleY((visibleSize.height / background->getContentSize().height) * 1);
 	background->setAnchorPoint(Point(0,0));
-	this->addChild(background);
+	addChild(background);
 
 	Sprite* start_btn = Sprite::create("SpriteSource/UI/start_button.png");
 	Sprite* start_btn_clicked = Sprite::create("SpriteSource/UI/start_button_clicked.png");
@@ -44,7 +44,7 @@ bool MainScene::init()
 	menu_exit->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 200);
 
 	mainMenu->setPosition(Vec2::ZERO);
-	this->addChild(mainMenu);
+	addChild(mainMenu);
 
 //	Keyboard Event
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/bow_release.wav");

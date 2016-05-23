@@ -6,16 +6,16 @@
 
 bool Balistar::init(DEF::PLAYER_KIND playerKind)
 {
-	this->setUnitName("balistar");
+	setUnitName("balistar");
 	if (!Unit::init(playerKind))
 		return false;
-	this->changeState<UnitState_WalkAndSeek>();
+	changeState<UnitState_WalkAndSeek>();
 	return true;
 }
 
 void Balistar::attackOnce()
 {
-	this->setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
+	setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
 
 	runAction(Sequence::create(
 		DelayTime::create(_attackDelay), CallFuncN::create(
@@ -29,7 +29,7 @@ void Balistar::attackOnce()
 }
 void Balistar::moveTo(Vec2 destination)
 {
-	this->setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
+	setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
 	Unit::moveTo(destination);
 }
 
@@ -67,7 +67,7 @@ void Balistar::readSpecFromData()
 
 void Balistar::moveBy(Vec2 directionVec, float duration)
 {
-	this->setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
+	setAnchorPoint(Vec2(29.f / 67.f, 5.f / 51.f));
 	Unit::moveBy(directionVec, duration);
 }
 
@@ -90,7 +90,7 @@ Unit* Balistar::scanTarget()
 	{
 		if (sign * (i->getPositionX() - getPositionX()) < 0)
 			continue;
-		auto tempDist = this->getDistanceForRange(i->getPosition());
+		auto tempDist = getDistanceForRange(i->getPosition());
 		if (maxDist < tempDist)
 		{
 			maxDist = tempDist;
