@@ -47,7 +47,7 @@ void Bowman::shootArrow(Vec2 targetPos)
 	targetPos += Vec2(direction * 10, 25);
 
 
-	Sprite* arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
+	auto arrow = Sprite::create("SpriteSource/bowman/bowman_arrow.png");
 	auto parent = getParent()->getParent();
 	parent->addChild(arrow);// 화면에 addchild해야 유닛이 죽어도 화살이 남음
 	

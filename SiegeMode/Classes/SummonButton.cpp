@@ -51,7 +51,7 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 
 
 	// 터치콜백 등록
-	EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+	auto dispatcher = Director::getInstance()->getEventDispatcher();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = CC_CALLBACK_2(SummonButton::onSprTouchBegan, newInst);
@@ -67,7 +67,7 @@ SummonButton* SummonButton::create(Vec2 pos, std::string unitName)
 void SummonButton::update(float delta)
 {
 	// 쿨타임을 어떻게 깔끔하게 바꿀 수 있을까
-	static float coolTime;
+	static auto coolTime = 0.f;
 	if (_unitName == "swordman")
 		coolTime = 6.f;
 	else if (_unitName == "bowman")
@@ -91,7 +91,7 @@ void SummonButton::update(float delta)
 // 터치를 뗀 순간 소환
 void SummonButton::onSprTouchEnd(Touch* touch, Event* event)
 {
-	Point pos = touch->getLocation() + Vec2(0, 50);
+	auto pos = touch->getLocation() + Vec2(0, 50);
 	if (isSummonAble())
 	{
 		UnitManager::getInstance()->summonUnit(_unitName, pos, DEF::PLAYER_RED);
@@ -176,9 +176,9 @@ bool SummonButton::onSprTouchBegan(Touch* touch, Event* event)
 {
 
 	//버튼이 클릭되었는지 확인
-	Point pos = _frame->convertToNodeSpace(touch->getLocation());
+	auto pos = _frame->convertToNodeSpace(touch->getLocation());
 	updateSummonPoint(touch);
-	Rect currentFrameRect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
+	auto currentFrameRect = Rect(0, 0, _frame->getContentSize().width, _frame->getContentSize().height);
 	if (currentFrameRect.containsPoint(pos))
 	{
 		g_selectedUnitName = _unitName;
