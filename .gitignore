@@ -17,6 +17,7 @@
 [Rr]eleases/
 Release.win32
 assets
+armeabi
 x64/
 x86/
 build/
