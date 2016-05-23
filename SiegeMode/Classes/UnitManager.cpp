@@ -20,7 +20,7 @@ UnitManager* UnitManager::getInstance()
 void UnitManager::summonUnit(std::string unitName, Vec2 position, DEF::PLAYER_KIND ownerPlayer)
 {
 	// 태그 기반으로 유닛목록을 관리한다
-	static int tagid = 1;
+	static auto tagid = 1;
 	Unit* newUnit = nullptr;
 	
 	if (unitName == "swordman")			newUnit = Swordman::create	(ownerPlayer);
