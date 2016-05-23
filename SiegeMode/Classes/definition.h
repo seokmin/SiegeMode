@@ -10,7 +10,6 @@ namespace DEF
 
 	enum ZORDER_KIND
 	{
-
 		ZORDER_BACKGROUND	= 0,
 		ZORDER_UNIT			= 1,
 		ZORDER_EFFECT		= 2,
@@ -23,5 +22,5 @@ namespace DEF
 		SCREEN_HEIGHT = 720
 	};
 
-	const Rect FIGHTING_ZONE = Rect(0.f, 180.f, DEF::SCREEN_WIDTH, 200.f);
+	const auto FIGHTING_ZONE = Rect(0.f, 180.f, DEF::SCREEN_WIDTH, 200.f);
 };
