@@ -18,3 +18,4 @@
     - Cocos2d-x 3.10 기반
     - Android 모바일 기기를 타겟 플랫폼으로 작성
     - windows10, Android 6.0.1에서 작동 확인하였으나, windows에서 모든 기능이 정상적으로 작동 보장 안됨
+    - windows 버전과 Android 버전 빌드는 C++ Project Release 1.0 디렉토리에서 찾을 수 있음
