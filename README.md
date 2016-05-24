@@ -1,6 +1,6 @@
 # SiegeMode! - ProtoType Release 1.0
 
-##플레이 영상
+##플레이 영상(링크)
 [![Youtoube Link](https://img.youtube.com/vi/pZyd_xR8-HM/0.jpg)](https://www.youtube.com/watch?v=pZyd_xR8-HM)
 
 ##스크린샷
