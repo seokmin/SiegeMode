@@ -10,6 +10,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+/cocos2d/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

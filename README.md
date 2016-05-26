@@ -18,4 +18,8 @@
     - Cocos2d-x 3.10 기반
     - Android 모바일 기기를 타겟 플랫폼으로 작성
     - windows10, Android 6.0.1에서 작동 확인하였으나, windows에서 모든 기능이 정상적으로 작동 보장 안됨
-    - windows 버전과 Android 버전 빌드는 C++ Project Release 1.0 디렉토리에서 찾을 수 있음
+    
+##How to Build
+    1. cocos2d.zip의 압축을 푼다.
+    2. cocos2d폴더 안의 download-deps.py를 실행한다. (python 2.7버전 필요)
+    3. proj.win32 폴더의 비주얼 스튜디오 솔루션 파일을 열어 빌드
