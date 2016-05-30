@@ -63,7 +63,6 @@ public:
 	void						setUnitName(std::string var) { _unitName = var; setName(var); }
 	std::string					getUnitName() { return _unitName; }
 
-
 	CC_SYNTHESIZE(UnitState*, _state, State);
 	CC_SYNTHESIZE(float, _attackRange, AttackRange);
 	CC_SYNTHESIZE(float, _attackSpeed, AttackSpeed);

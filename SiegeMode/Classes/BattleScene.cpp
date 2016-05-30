@@ -88,18 +88,13 @@ void BattleScene::update(float delta)
 	auto saturated_sin = sin(sumDelta * 20.f * 3.141592f);
 	if (sumDelta >= frequency)
 	{
-		frequency = RandomHelper::random_real(3.25f + saturated_sin, 6.f + saturated_sin);
+		frequency = RandomHelper::random_real(3.25f + saturated_sin, 4.5f + saturated_sin);
 		auto randY = RandomHelper::random_real(DEF::FIGHTING_ZONE.getMinY(), DEF::FIGHTING_ZONE.getMaxY());
 
 		//랜덤으로 하나 고른다.
 		static std::array<std::string,(size_t)2> names = {"swordman","bowman"};
 		auto randIt =names.begin();
 		std::advance(randIt, RandomHelper::random_int(0u, names.size() - 1));
-		if (*randIt == "bowman")
-		{
-			randIt = names.begin();
-			std::advance(randIt, RandomHelper::random_int(0u, names.size() - 1));
-		}
 
 		UnitManager::getInstance()->summonUnit(*randIt, Vec2(DEF::SCREEN_WIDTH,randY), DEF::PLAYER_BLUE);
 		sumDelta = 0.f;

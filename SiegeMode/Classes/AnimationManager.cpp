@@ -50,14 +50,8 @@ Animation* AnimationManager::getAnimation(std::string actorName, std::string ani
 void AnimationManager::addAnimation(std::string actorName, std::string animName, float interval, std::string fileName, unsigned width, unsigned height, unsigned nFrame)
 {
 	// 이미 존재하는 조합이면 새로 추가 안함
-#ifdef _DEBUG
-	// 디버그
-	CCASSERT(_animationMap.at(actorName + animName) != nullptr, "이미 존재하는 조합입니다.");
-#else
-	// 릴리즈
 	if (_animationMap.at(actorName + animName) != nullptr)
 		return;
-#endif // _DEBUG
 
 
 	Vector<SpriteFrame*> animFrames(nFrame);
